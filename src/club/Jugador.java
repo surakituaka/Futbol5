@@ -12,6 +12,7 @@ public class Jugador implements Comparable<Jugador> {
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	private Double prioridad;
 	private List<Jugador> amigos = new ArrayList<Jugador>();
+	private IOrden proposicion;
 	
 	
 	public String getNombre() {
@@ -62,6 +63,14 @@ public class Jugador implements Comparable<Jugador> {
 		this.amigos = amigos;
 	}
 	
+	public IOrden getPropocicion() {
+		return proposicion;
+	}
+
+	public void setPropocicion(IOrden propocicion) {
+		this.proposicion = propocicion;
+	}
+
 	public void agregar_amigo(Jugador amigo){
 		this.amigos.add(amigo);
 	}
@@ -80,7 +89,7 @@ public class Jugador implements Comparable<Jugador> {
 		return this.penalizaciones.remove(i);
 	}	
 	
-	public Respuesta Inscribirse_a(Partido partido){
+	public Respuesta inscribirse_a(Partido partido){
 		
 		return getTipo().inscribirse(partido, this);
 	}
@@ -100,6 +109,10 @@ public class Jugador implements Comparable<Jugador> {
 		partido.quitar_jugador(this);
 		reemplazo.setTipo(this.getTipo());
 		partido.agregar_jugador(reemplazo);
+	}
+	
+	public void proponer_jugador(Jugador jugador, Partido partido){
+		this.proposicion.orden(jugador,partido);
 	}
 	
 	
