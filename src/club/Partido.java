@@ -11,6 +11,7 @@ public class Partido {
 	private Date fecha;
 	private String lugar;
 	private IMensajero mensajero;
+	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	
 	public List<Jugador> getJugadores() {
 		return jugadores;
@@ -44,6 +45,14 @@ public class Partido {
 		this.mensajero = mensajero;
 	}
 
+	public List<Calificacion> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(List<Calificacion> calificaciones) {
+		this.calificaciones = calificaciones;
+	}
+
 	public void agregar_jugador(Jugador jugador){
 		
 		this.jugadores.add(jugador);
@@ -62,4 +71,7 @@ public class Partido {
 		return mensajero.enviar_mensaje(emisor, receptor, mensaje);
 	}
 	
+	public void agregar_calificacion(Calificacion calificacion){
+		this.calificaciones.add(calificacion);
+	}
 }

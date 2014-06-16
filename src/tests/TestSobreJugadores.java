@@ -1,9 +1,15 @@
 package tests;
 
 import static org.junit.Assert.*;
+
 import java.util.GregorianCalendar;
+
 import org.junit.Test;
+
+import club.Admin;
 import club.Condicional;
+import club.IOrden;
+import club.OrdenNuevoJugador;
 import club.Penalizacion;
 import club.Solidaria;
 import club.Standar;
@@ -119,6 +125,35 @@ public class TestSobreJugadores {
 		assertTrue(respuesta.getEsta_inscripto());
 	}
 	
+	@Test
+	public void jugador_puede_calificar(){
+		
+		Jugador calificador = new Jugador();
+		Jugador calificado = new Jugador();
+		Partido partido = new Partido();
+		
+		calificador.calificar(calificado, 6, "Jugo bien", partido);
+		
+		assertTrue(partido.getCalificaciones().size()>0);
+	}
+	
+	@Test
+	public void jugador_puede_proponer_amigo(){
+		
+		Jugador jugador = new Jugador();
+		Jugador amigo = new Jugador();
+		Partido partido = new Partido();
+		Admin admin = new Admin();
+		IOrden orden = new OrdenNuevoJugador();
+		
+		((OrdenNuevoJugador) orden).setAdmin(admin);
+		
+		jugador.setPropocicion(orden);
+		
+		jugador.proponer_jugador(amigo, partido);
+		
+		assertTrue(admin.getNuevas_propuestas().containsKey(amigo));
+	}
 	
 	
 }

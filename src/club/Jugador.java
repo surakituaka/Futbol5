@@ -115,6 +115,10 @@ public class Jugador implements Comparable<Jugador> {
 		this.proposicion.orden(jugador,partido);
 	}
 	
+	public void calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
+		partido.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido));
+	}
+	
 	
 	@Override
 	public int compareTo(Jugador jugador) {
