@@ -126,6 +126,36 @@ public class TestSobreJugadores {
 	}
 	
 	@Test
+	public void jugador_es_penalizado_por_no_tener_reemplazo(){
+		
+		Jugador jugador = new Jugador();
+		Partido partido = new Partido();
+		
+		partido.agregar_jugador(jugador);
+		
+		jugador.bajarse_de(partido);
+		
+		assertTrue(jugador.getPenalizaciones().size()==1);
+	}
+	
+	@Test
+	public void jugador_no_es_penalizado(){
+		
+		Jugador jugador = new Jugador();
+		Jugador reemplazo = new Jugador();
+		Partido partido = new Partido();
+		
+		partido.agregar_jugador(jugador);
+		
+		jugador.bajarse_de(partido,reemplazo);
+		
+		assertTrue(jugador.getPenalizaciones().isEmpty());
+		assertTrue((partido.getJugadores().size()==1) && (partido.getJugadores().get(0))==reemplazo);
+	}
+	
+	
+	
+	@Test
 	public void jugador_puede_calificar(){
 		
 		Jugador calificador = new Jugador();
