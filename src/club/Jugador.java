@@ -13,6 +13,7 @@ public class Jugador implements Comparable<Jugador> {
 	private Double prioridad;
 	private List<Jugador> amigos = new ArrayList<Jugador>();
 	private IOrden proposicion;
+	private Integer handicap = null;
 	
 	
 	public String getNombre() {
@@ -71,6 +72,14 @@ public class Jugador implements Comparable<Jugador> {
 		this.proposicion = propocicion;
 	}
 
+	public Integer getHandicap() {
+		return handicap;
+	}
+
+	public void setHandicap(Integer handicap) {
+		this.handicap = handicap;
+	}
+
 	public void agregar_amigo(Jugador amigo){
 		this.amigos.add(amigo);
 	}
@@ -116,7 +125,7 @@ public class Jugador implements Comparable<Jugador> {
 	}
 	
 	public void calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
-		partido.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido));
+		partido.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido,new GregorianCalendar()));
 	}
 	
 	

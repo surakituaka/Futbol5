@@ -1,5 +1,7 @@
 package club;
 
+import java.util.GregorianCalendar;
+
 public class Calificacion {
 	
 	private Jugador calificador;
@@ -7,6 +9,7 @@ public class Calificacion {
 	private Integer calificacion;
 	private String critica;
 	private Partido partido;
+	private GregorianCalendar fecha;
 	
 	public Jugador getCalificador() {
 		return calificador;
@@ -48,13 +51,22 @@ public class Calificacion {
 		this.partido = partido;
 	}
 	
-	public Calificacion(Jugador calificador, Jugador calificado, Integer calificacion, String critica, Partido partido){
+	public GregorianCalendar getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(GregorianCalendar fecha) {
+		this.fecha = fecha;
+	}
+
+	public Calificacion(Jugador calificador, Jugador calificado, Integer calificacion, String critica, Partido partido,GregorianCalendar fecha){
 		super();
 		this.calificador=calificador;
 		this.calificado=calificado;
 		this.calificacion=calificacion;
 		this.critica=critica;
 		this.partido=partido;
+		this.fecha=fecha;
 		
 	}
 }
