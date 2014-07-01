@@ -2,7 +2,9 @@ package club;
 
 public class PromedioUnitario extends Promedio{
 	
-	@SuppressWarnings("unused")
-	private Integer cantidad_partidos = 1; 
 	
+	public PromedioUnitario() {
+		super(1);
+		// TODO Auto-generated constructor stub
+	}	
 }

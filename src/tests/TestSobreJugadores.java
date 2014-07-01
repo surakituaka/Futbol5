@@ -89,13 +89,13 @@ public class TestSobreJugadores {
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
 			j.setTipo(new Standar());
-			j.setPrioridad(10.0);
+//			j.setPrioridad(10.0);
 			partido.getJugadores().add(j);
 		}
 		
 		Jugador jugador = new Jugador();
 		jugador.setTipo(new Standar());
-		jugador.setPrioridad(1.0);
+//		jugador.setPrioridad(1.0);
 		Respuesta respuesta = new Respuesta();
 		
 		respuesta=jugador.getTipo().inscribirse(partido, jugador);
@@ -108,16 +108,21 @@ public class TestSobreJugadores {
 		
 		Partido partido = new Partido();
 		
-		for(int i = 0;i<10;i++){
+		for(int i = 0;i<9;i++){
 			Jugador j = new Jugador();
 			j.setTipo(new Standar());
-			j.setPrioridad(1.0);
+//			j.setPrioridad(1.0);
 			partido.getJugadores().add(j);
 		}
 		
+		Jugador j = new Jugador();
+		j.setTipo(new Solidaria());
+//		j.setPrioridad(1.0);
+		partido.getJugadores().add(j);
+		
 		Jugador jugador = new Jugador();
 		jugador.setTipo(new Standar());
-		jugador.setPrioridad(2.0);
+//		jugador.setPrioridad(2.0);
 		Respuesta respuesta = new Respuesta();
 		
 		respuesta=jugador.getTipo().inscribirse(partido, jugador);

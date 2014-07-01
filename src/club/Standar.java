@@ -20,8 +20,8 @@ public class Standar implements IModalidad{
 		}
 		
 		if(partido.getJugadores().size()==10){
-			Collections.sort(partido.getJugadores());
-			if(jugador.compareTo(partido.getJugadores().get(partido.getJugadores().size()-1)) == 1){
+			Collections.sort(partido.getJugadores(),new OrdenadorJugadoresTipo());
+			if(partido.getJugadores().get(partido.getJugadores().size()-1).getTipo().getInscripcion() !="STANDAR"){
 				partido.quitar_jugador(partido.getJugadores().get(partido.getJugadores().size()-1));;
 				partido.agregar_jugador(jugador);
 				

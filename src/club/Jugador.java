@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Jugador implements Comparable<Jugador> {
+public class Jugador{
 	
 	private String nombre;
 	private String apellido;
 	private IModalidad tipo;
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
-	private Double prioridad;
+	//private Double prioridad;
 	private List<Jugador> amigos = new ArrayList<Jugador>();
 	private IOrden proposicion;
 	private Integer handicap = null;
+	private List<Partido>partidos_jugados = new ArrayList<Partido>();
 	
 	
 	public String getNombre() {
@@ -47,7 +48,7 @@ public class Jugador implements Comparable<Jugador> {
 	public void setPenalizaciones(List<Penalizacion> penalizaciones) {
 		this.penalizaciones = penalizaciones;
 	}
-
+/*
 	public Double getPrioridad() {
 		return prioridad;
 	}
@@ -55,7 +56,7 @@ public class Jugador implements Comparable<Jugador> {
 	public void setPrioridad(Double prioridad) {
 		this.prioridad = prioridad;
 	}
-
+*/
 	public List<Jugador> getAmigos() {
 		return amigos;
 	}
@@ -78,6 +79,14 @@ public class Jugador implements Comparable<Jugador> {
 
 	public void setHandicap(Integer handicap) {
 		this.handicap = handicap;
+	}
+
+	public List<Partido> getPartidos_jugados() {
+		return partidos_jugados;
+	}
+
+	public void setPartidos_jugados(List<Partido> partidos_jugados) {
+		this.partidos_jugados = partidos_jugados;
 	}
 
 	public void agregar_amigo(Jugador amigo){
@@ -129,65 +138,8 @@ public class Jugador implements Comparable<Jugador> {
 	}
 	
 	
-	@Override
-	public int compareTo(Jugador jugador) {
-		
-		final int MAYOR =1;
-		final int MENOR =-1;
-		final int IGUAL=0;
-		
-		if(this == jugador){
-			return IGUAL;
-		}
-		//entre standar
-		if(this.getTipo().getInscripcion().equals("STANDAR") && this.getTipo().getInscripcion().equals("STANDAR") && this.getPrioridad()>jugador.getPrioridad()){
-			return MAYOR;
-		}
-		
-		if(this.getTipo().getInscripcion().equals("STANDAR") && this.getTipo().getInscripcion().equals("STANDAR") && this.getPrioridad()<jugador.getPrioridad()){
-			return MENOR;
-		}
-		
-		//entre condicionales
-		if(this.getTipo().getInscripcion().equals("CONDICIONAL") && this.getTipo().getInscripcion().equals("CONDICIONAL") && this.getPrioridad()>jugador.getPrioridad()){
-			return MAYOR;
-		}
-		
-		if(this.getTipo().getInscripcion().equals("CONDICIONAL") && this.getTipo().getInscripcion().equals("CONDICIONAL") && this.getPrioridad()<jugador.getPrioridad()){
-			return MENOR;
-		}
-		
-		//entre solidarios
-		if(this.getTipo().getInscripcion().equals("SOLIDARIA") && this.getTipo().getInscripcion().equals("SOLIDARIA") && this.getTipo().getFecha().after(jugador.getTipo().getFecha())){
-			return MAYOR;
-		}
-		
-		if(this.getTipo().getInscripcion().equals("SOLIDARIA") && this.getTipo().getInscripcion().equals("SOLIDARIA") && this.getTipo().getFecha().before(jugador.getTipo().getFecha())){
-			return MENOR;
-		}
-		
-		//standar mayor a demas tipos		
-		if((this.getTipo().getInscripcion().equals("STANDAR") && !jugador.getTipo().getInscripcion().equals("STANDAR"))){
-			return MAYOR;
-		}
-		
-		//solidario mayor a condicional
-		if((this.getTipo().getInscripcion().equals("SOLIDARIA")) &&	(jugador.getTipo().getInscripcion().equals("CONDICIONAL"))){
-			return MAYOR;
-		}
-		
-		//solidaria menor a standar
-		if((this.getTipo().getInscripcion().equals("SOLIDARIA")) && (jugador.getTipo().getInscripcion().equals("STANDAR"))){
-			return MENOR;
-		}
-		
-		//condicional menor a todos
-		if((this.getTipo().getInscripcion().equals("CONDICIONAL") && !jugador.getTipo().getInscripcion().equals("CONDICIONAL"))){
-			return MENOR;
-		}
-		
-		return IGUAL;
-		}
+	
+	
 	
 	
 	
