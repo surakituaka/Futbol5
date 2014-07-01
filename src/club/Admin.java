@@ -1,5 +1,6 @@
 package club;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,14 @@ public class Admin {
 		rta.setMensaje(mensaje);
 		this.nuevas_propuestas.remove(jugador);
 		return rta;
+	}
+	
+	public void organizar_equipo(Partido partido, CriterioOrden[] criterios){
+		Collections.sort(partido.getJugadores(),new CriterioCompuesto(criterios));
+	}
+	
+	public void dividir_equipos(Partido partido, IGeneradorEquipos generador){
+		generador.generar_equipos(partido);
 	}
 	
 	

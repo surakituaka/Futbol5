@@ -2,7 +2,7 @@ package club;
 
 import java.util.Collections;
 
-public class Handicap extends CriterioEspecifico{
+public class Handicap extends CriterioOrden{
 
 	@Override
 	public void ordenar(Partido partido) {

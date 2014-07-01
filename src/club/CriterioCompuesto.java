@@ -2,21 +2,20 @@ package club;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CriterioCompuesto implements ICriterioOrden, Comparator<Jugador> {
+public class CriterioCompuesto extends CriterioOrden{
 	
-	private List<CriterioEspecifico> criterios = new ArrayList<CriterioEspecifico>();
+	private List<CriterioOrden> criterios = new ArrayList<CriterioOrden>();
 	private Map<Jugador, ArrayList<Integer>> promedios = new HashMap<Jugador,ArrayList<Integer>>();
 	
-	public List<CriterioEspecifico> getCriterios() {
+	public List<CriterioOrden> getCriterios() {
 		return criterios;
 	}
 
-	public void setCriterios(List<CriterioEspecifico> criterios) {
+	public void setCriterios(List<CriterioOrden> criterios) {
 		this.criterios = criterios;
 	}
 
@@ -34,10 +33,11 @@ public class CriterioCompuesto implements ICriterioOrden, Comparator<Jugador> {
 		for (Jugador jugador : partido.getJugadores()) {
 			promedios.put(jugador, new ArrayList<Integer>());
 		}
-		for (CriterioEspecifico criterio : this.getCriterios()) {
+		
+		for (CriterioOrden criterio : this.getCriterios()) {
 			Collections.sort(partido.getJugadores(), criterio);
 			for (Jugador jugador : partido.getJugadores()) {
-				promedios.get(jugador).add(partido.getJugadores().indexOf(jugador));
+				promedios.get(jugador).add(partido.getJugadores().indexOf(jugador)+1);
 			}
 			
 		}
@@ -62,5 +62,13 @@ public class CriterioCompuesto implements ICriterioOrden, Comparator<Jugador> {
 		return 0;
 	}
 
+	
+	public CriterioCompuesto(CriterioOrden[] criterios){
+		super();
+		for (CriterioOrden criterio : criterios) {
+			getCriterios().add(criterio);
+		}
+	}
+	
 	
 }

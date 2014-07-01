@@ -2,7 +2,7 @@ package club;
 
 import java.util.Collections;
 
-public class Promedio extends CriterioEspecifico{
+public class Promedio extends CriterioOrden{
 	
 	private Integer cantidad_partidos;
 	
