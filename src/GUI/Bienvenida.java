@@ -1,20 +1,21 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
 
 public class Bienvenida extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3499068278467828908L;
 	private JPanel contentPane;
 
 	/**
@@ -44,7 +45,7 @@ public class Bienvenida extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel Label1A = new JLabel("No ha pulsado nada a\u00FAn...");
+		final JLabel Label1A = new JLabel("No ha pulsado nada a\u00FAn...");
 		Label1A.setBounds(10, 11, 157, 41);
 		contentPane.add(Label1A);
 		JButton btnNewButton = new JButton("Pulsador");
