@@ -54,6 +54,12 @@ public class MainJugador extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnEditarDatosPersonales = new JButton("Datos Personales");
+		btnEditarDatosPersonales.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DatosPersonales pantalla_datosUsuario = new DatosPersonales();
+				pantalla_datosUsuario.setVisible(true);	
+			}
+		});
 		btnEditarDatosPersonales.setBounds(315, 75, 237, 41);
 		contentPane.add(btnEditarDatosPersonales);
 		
