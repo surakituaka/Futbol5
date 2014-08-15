@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class Inscribirse extends JDialog {
 
 	private static final long serialVersionUID = 4024067139818249946L;
-	private static MainJugador pantalla_principal;
+	private static MainJugador pantalla_jugador;
 	private static JRadioButton botonStandar;
 	private static JRadioButton botonCondicional;
 	private static JRadioButton botonSolidaria;
@@ -28,7 +28,7 @@ public class Inscribirse extends JDialog {
 		setTitle("Inscribirse a un Partido");
 		setBounds(100, 100, 356, 265);
 		getContentPane().setLayout(null);
-		pantalla_principal = caller;
+		pantalla_jugador = caller;
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
@@ -42,6 +42,7 @@ public class Inscribirse extends JDialog {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				pantalla_jugador.setEnabled(true);
 				dispose();
 			}
 		});
@@ -56,7 +57,7 @@ public class Inscribirse extends JDialog {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Puestos Disponibles: X");
+		JLabel lblNewLabel = new JLabel("Puestos Disponibles:");
 		lblNewLabel.setForeground(Color.RED);
 		lblNewLabel.setBounds(10, 11, 149, 14);
 		panel.add(lblNewLabel);
@@ -99,6 +100,15 @@ public class Inscribirse extends JDialog {
 		panel.add(botonSolidaria);
 		
 		JButton btnInscribirse = new JButton("Inscribirse");
+		btnInscribirse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// TODO Validar la Inscripción y Guardarla
+				
+				pantalla_jugador.setEnabled(true);
+				dispose();
+			}
+		});
 		btnInscribirse.setBounds(10, 193, 89, 23);
 		getContentPane().add(btnInscribirse);
 

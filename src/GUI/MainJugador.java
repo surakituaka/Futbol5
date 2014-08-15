@@ -47,7 +47,7 @@ public class MainJugador extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Inscribirse pantalla_inscripcion = new Inscribirse(pantalla_jugador);
 				pantalla_inscripcion.setVisible(true);
-				//pantalla_jugador.setVisible(false);
+				pantalla_jugador.setEnabled(false);
 			}
 		});
 		btnNewButton.setBounds(10, 75, 237, 41);
@@ -56,8 +56,9 @@ public class MainJugador extends JFrame {
 		JButton btnEditarDatosPersonales = new JButton("Datos Personales");
 		btnEditarDatosPersonales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DatosPersonales pantalla_datosUsuario = new DatosPersonales();
+				DatosPersonales pantalla_datosUsuario = new DatosPersonales(pantalla_jugador);
 				pantalla_datosUsuario.setVisible(true);	
+				pantalla_jugador.setEnabled(false);
 			}
 		});
 		btnEditarDatosPersonales.setBounds(315, 75, 237, 41);
