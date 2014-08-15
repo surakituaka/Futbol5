@@ -67,12 +67,22 @@ public class MainJugador extends JFrame {
 		JButton btnBajaDeUn = new JButton("Baja de un Partido");
 		btnBajaDeUn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				BajaJugador pantalla_bajaJugador = new BajaJugador(pantalla_jugador);
+				pantalla_bajaJugador.setVisible(true);	
+				pantalla_jugador.setEnabled(false);				
 			}
 		});
 		btnBajaDeUn.setBounds(10, 149, 237, 41);
 		contentPane.add(btnBajaDeUn);
 		
 		JButton btnPenalizaciones = new JButton("Proponer Amigos");
+		btnPenalizaciones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ProponerAmigos pantalla_propuesta = new ProponerAmigos(pantalla_jugador);
+				pantalla_propuesta.setVisible(true);
+				pantalla_jugador.setEnabled(false);
+			}
+		});
 		btnPenalizaciones.setBounds(315, 149, 237, 41);
 		contentPane.add(btnPenalizaciones);
 		

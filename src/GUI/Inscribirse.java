@@ -12,6 +12,9 @@ import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JTextField;
 
 public class Inscribirse extends JDialog {
 
@@ -20,19 +23,26 @@ public class Inscribirse extends JDialog {
 	private static JRadioButton botonStandar;
 	private static JRadioButton botonCondicional;
 	private static JRadioButton botonSolidaria;
+	private JTextField campoCondicion;
 	
 	public Inscribirse(MainJugador caller) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    public void windowClosing(WindowEvent winEvt) {
+		        // Perhaps ask user if they want to save any unsaved files first.
+		        pantalla_jugador.setEnabled(true); 
+		    }
+		});
 		setResizable(false);
 		
 		setTitle("Inscribirse a un Partido");
-		setBounds(100, 100, 356, 265);
+		setBounds(100, 100, 394, 265);
 		getContentPane().setLayout(null);
 		pantalla_jugador = caller;
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(163, 11, 167, 20);
+		comboBox.setBounds(163, 11, 215, 20);
 		getContentPane().add(comboBox);
 		
 		JLabel lblPartidos = new JLabel("Partidos Disponibles");
@@ -46,14 +56,14 @@ public class Inscribirse extends JDialog {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(241, 193, 89, 23);
+		btnCancelar.setBounds(289, 193, 89, 23);
 		getContentPane().add(btnCancelar);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setForeground(new Color(0, 0, 0));
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 63, 320, 119);
+		panel.setBounds(10, 63, 368, 119);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -85,7 +95,7 @@ public class Inscribirse extends JDialog {
 			}
 		});
 		botonCondicional.setBackground(Color.LIGHT_GRAY);
-		botonCondicional.setBounds(116, 59, 109, 23);
+		botonCondicional.setBounds(116, 59, 90, 23);
 		panel.add(botonCondicional);
 		
 		botonSolidaria = new JRadioButton("Solidaria");
@@ -98,6 +108,15 @@ public class Inscribirse extends JDialog {
 		botonSolidaria.setBackground(Color.LIGHT_GRAY);
 		botonSolidaria.setBounds(116, 85, 109, 23);
 		panel.add(botonSolidaria);
+		
+		campoCondicion = new JTextField();
+		campoCondicion.setBounds(252, 59, 106, 20);
+		panel.add(campoCondicion);
+		campoCondicion.setColumns(10);
+		
+		JLabel lblCondicion = new JLabel("Condicion:");
+		lblCondicion.setBounds(252, 36, 66, 14);
+		panel.add(lblCondicion);
 		
 		JButton btnInscribirse = new JButton("Inscribirse");
 		btnInscribirse.addActionListener(new ActionListener() {

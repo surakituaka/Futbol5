@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 
 
@@ -77,6 +79,19 @@ public class Login extends JFrame {
 		campoUsuario.setColumns(10);
 		
 		campoContrasenia = new JPasswordField();
+		campoContrasenia.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+				if(e.getKeyChar()==KeyEvent.VK_ENTER){
+					btnLogin.doClick();
+				}
+			}
+			public void keyPressed(KeyEvent e) {
+				//Do Nothing
+			}
+			public void keyReleased(KeyEvent e) {
+				//Do Nothing
+			}
+		});
 		campoContrasenia.setBounds(111, 33, 86, 20);
 		contentPane.add(campoContrasenia);
 		
@@ -91,6 +106,8 @@ public class Login extends JFrame {
 					main_jugador = new MainJugador(login_interface);
 					main_jugador.setVisible(true);
 				}
+				campoUsuario.setText(null);
+				campoContrasenia.setText(null);
 				login_interface.setVisible(false);
 			}
 		});

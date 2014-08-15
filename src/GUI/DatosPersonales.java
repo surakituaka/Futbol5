@@ -7,6 +7,7 @@ import javax.swing.border.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 
 public class DatosPersonales extends JDialog {
 	/**
@@ -20,7 +21,7 @@ public class DatosPersonales extends JDialog {
 	private JTextField campo_email;
 	private JPasswordField campo_password;
 	private JPasswordField campo_confirmarPass;
-	
+	private static DatosPersonales yo;
 	private static MainJugador pantalla_jugador;
 
 	/**
@@ -31,6 +32,13 @@ public class DatosPersonales extends JDialog {
 	 * Create the frame.
 	 */
 	public DatosPersonales(MainJugador player_class) {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    public void windowClosing(WindowEvent winEvt) {
+		        // Perhaps ask user if they want to save any unsaved files first.
+		        pantalla_jugador.setEnabled(true); 
+		    }
+		});
 		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Datos Personales");
@@ -105,6 +113,7 @@ public class DatosPersonales extends JDialog {
 		campo_email.setColumns(10);
 		campo_email.setBounds(163, 72, 139, 20);
 		getContentPane().add(campo_email);
+		yo = this;
 		
 		// TODO Levantar los datos de la DB
 		
@@ -132,7 +141,8 @@ public class DatosPersonales extends JDialog {
 		JButton btnPenalizaciones = new JButton("Penalizaciones");
 		btnPenalizaciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PenalizacionesPopup pantalla_penalizaciones = new PenalizacionesPopup();
+				PenalizacionesPopup pantalla_penalizaciones = new PenalizacionesPopup(yo);
+				yo.setEnabled(false);
 				pantalla_penalizaciones.setVisible(true);
 			}
 		});
