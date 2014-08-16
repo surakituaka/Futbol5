@@ -30,7 +30,7 @@ public class TestSobreJugadores {
 		
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertTrue(respuesta.getEsta_inscripto());
 	}
@@ -45,7 +45,7 @@ public class TestSobreJugadores {
 		
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertTrue(respuesta.getEsta_inscripto());
 	}
@@ -60,7 +60,7 @@ public class TestSobreJugadores {
 		
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertTrue(respuesta.getEsta_inscripto());
 	}
@@ -75,7 +75,7 @@ public class TestSobreJugadores {
 		jugador.agregar_penalizacion(new Penalizacion(new GregorianCalendar(), "porque si"));
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertFalse(respuesta.getEsta_inscripto());
 	}
@@ -98,9 +98,45 @@ public class TestSobreJugadores {
 //		jugador.setPrioridad(1.0);
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertFalse(respuesta.getEsta_inscripto());
+	}
+	
+	@Test
+	public void no_entra_nadie_porque_hay_10_standars() {
+		
+		Partido partido = new Partido();
+		
+		for(int i = 0;i<15;i++){
+			Jugador j = new Jugador();
+			j.setTipo(new Standar());
+//			j.setPrioridad(10.0);
+			j.inscribirse_a(partido);
+		}
+		
+		assertTrue(partido.getJugadores().size()==10);
+	}
+	
+	@Test
+	public void todos_entrar_porque_hay_9_standars() {
+		
+		Partido partido = new Partido();
+		
+		for(int i = 0;i<9;i++){
+			Jugador j = new Jugador();
+			j.setTipo(new Standar());
+//			j.setPrioridad(10.0);
+			j.inscribirse_a(partido);
+		}
+		for(int i = 0;i<9;i++){
+			Jugador j = new Jugador();
+			j.setTipo(new Solidaria());
+//			j.setPrioridad(10.0);
+			j.inscribirse_a(partido);
+		}
+		
+		assertTrue(partido.getJugadores().size()==18);
 	}
 	
 	@Test
@@ -125,7 +161,7 @@ public class TestSobreJugadores {
 //		jugador.setPrioridad(2.0);
 		Respuesta respuesta = new Respuesta();
 		
-		respuesta=jugador.getTipo().inscribirse(partido, jugador);
+		respuesta=jugador.inscribirse_a(partido);
 		
 		assertTrue(respuesta.getEsta_inscripto());
 	}
@@ -187,7 +223,7 @@ public class TestSobreJugadores {
 		
 		jugador.proponer_jugador(amigo, partido);
 		
-		assertTrue(admin.getNuevas_propuestas().containsKey(amigo));
+		assertTrue(admin.getNuevas_propuestas().size()==1);
 	}
 	
 	

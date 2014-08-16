@@ -1,6 +1,7 @@
 package club;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Jugador{
 	private IOrden proposicion;
 	private Integer handicap = null;
 	private List<Partido>partidos_jugados = new ArrayList<Partido>();
+	private Partido inscripto = null;
 	
 	
 	public String getNombre() {
@@ -89,6 +91,14 @@ public class Jugador{
 		this.partidos_jugados = partidos_jugados;
 	}
 
+	public Partido getInscripto() {
+		return inscripto;
+	}
+
+	public void setInscripto(Partido inscripto) {
+		this.inscripto = inscripto;
+	}
+
 	public void agregar_amigo(Jugador amigo){
 		this.amigos.add(amigo);
 	}
@@ -109,7 +119,35 @@ public class Jugador{
 	
 	public Respuesta inscribirse_a(Partido partido){
 		
-		return getTipo().inscribirse(partido, this);
+		Respuesta respuesta = new Respuesta();
+		
+		if(!getPenalizaciones().isEmpty() || !(getInscripto()==null)){
+			respuesta.setEsta_inscripto(false);
+			respuesta.setMensaje("El jugador esta penalizado. No puede jugar.");
+			return respuesta;
+		}
+		
+		Collections.sort(partido.getJugadores(),new OrdenadorJugadoresTipo());
+		
+		if(partido.getJugadores().size()>=10 && partido.getJugadores().get(9).getTipo().getInscripcion().equals("STANDAR")){
+			
+			respuesta.setEsta_inscripto(false);
+			respuesta.setMensaje("El jugador no ha sido inscipto, no hay mas cupos.");
+			return respuesta;
+		}
+			partido.agregar_jugador(this);
+			
+			setInscripto(partido);
+			
+			for(Jugador amigo:getAmigos()){
+				partido.enviar_mensaje("partido", amigo.getNombre(), "tu amigo "+getNombre()+" ingreso a un partido");
+			}
+			
+			respuesta.setEsta_inscripto(true);
+			respuesta.setMensaje("El jugador esta inscripto.");
+			return respuesta;
+		
+		//return getTipo().inscribirse(partido, this);
 	}
 	
 	public void bajarse_de(Partido partido){
@@ -129,8 +167,8 @@ public class Jugador{
 		partido.agregar_jugador(reemplazo);
 	}
 	
-	public void proponer_jugador(Jugador jugador, Partido partido){
-		this.proposicion.orden(jugador,partido);
+	public void proponer_jugador(Jugador amigo, Partido partido){
+		this.proposicion.orden(amigo,partido,this);
 	}
 	
 	public void calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){

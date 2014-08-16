@@ -51,14 +51,10 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) &&	(jugador2.getTipo().getInscripcion().equals("CONDICIONAL"))){
 			return MAYOR;
 		}
-		//solidario menor a standar
-		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) &&	(jugador2.getTipo().getInscripcion().equals("STANDAR"))){
-			return MAYOR;
-		}
 		
 		//solidaria menor a standar
 		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) && (jugador2.getTipo().getInscripcion().equals("STANDAR"))){
-			return MENOR;
+			return MAYOR;
 		}
 		
 		//condicional menor a todos

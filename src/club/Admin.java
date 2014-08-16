@@ -1,22 +1,22 @@
 package club;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Set;
 
 public class Admin {
 	
-	private Map<Jugador,Partido>nuevas_propuestas = new HashMap<Jugador,Partido>();
+	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	private Set<Partido> partidos_validados = new HashSet<Partido>();
 	
 	
-	public Map<Jugador,Partido> getNuevas_propuestas() {
+	public List<Propuesta> getNuevas_propuestas() {
 		return nuevas_propuestas;
 	}
 
-	public void setNuevas_propuestas(Map<Jugador,Partido> nuevas_propuestas) {
+	public void setNuevas_propuestas(List<Propuesta> nuevas_propuestas) {
 		this.nuevas_propuestas = nuevas_propuestas;
 	}
 	
@@ -28,21 +28,21 @@ public class Admin {
 		this.partidos_validados = partidos_validados;
 	}
 
-	public void agregar_propuesta(Jugador jugador, Partido partido){
-		this.nuevas_propuestas.put(jugador, partido);
+	public void agregar_propuesta(Propuesta propuesta){
+		this.nuevas_propuestas.add(propuesta);
 	}
 	
-	public void aprobar_propuesta(Jugador jugador, IModalidad tipo){
-		jugador.setTipo(tipo);
-		Partido partido = this.nuevas_propuestas.get(jugador);
-		jugador.inscribirse_a(partido);
+	public void aprobar_propuesta(Propuesta propuesta){
+		propuesta.getJugador().agregar_amigo(propuesta.getAmigo());
+		propuesta.getAmigo().agregar_amigo(propuesta.getJugador());
+		propuesta.getAmigo().inscribirse_a(propuesta.getPartido());
 	}
 	
-	public Respuesta rechazar_propuesta(Jugador jugador, String mensaje){
+	public Respuesta rechazar_propuesta(Propuesta propuesta, String mensaje){
 		Respuesta rta = new Respuesta();
 		rta.setEsta_inscripto(false);
 		rta.setMensaje(mensaje);
-		this.nuevas_propuestas.remove(jugador);
+		this.nuevas_propuestas.remove(propuesta);
 		return rta;
 	}
 	

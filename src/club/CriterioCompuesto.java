@@ -53,10 +53,10 @@ public class CriterioCompuesto extends CriterioOrden{
 		}
 		j1 = j1/promedios.get(jugador1).size();
 		j2 = j2/promedios.get(jugador2).size();
-		if(j1>j2){
+		if(j1<j2){
 			return 1;
 		}
-		if(j1<j2){
+		if(j1>j2){
 			return -1;
 		}
 		return 0;

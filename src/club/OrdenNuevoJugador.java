@@ -13,8 +13,13 @@ public class OrdenNuevoJugador implements IOrden{
 	}
 
 	@Override
-	public void orden(Jugador jugador, Partido partido) {
-		this.admin.agregar_propuesta(jugador,partido);
+	public void orden(Jugador amigo, Partido partido, Jugador jugador) {
+		Propuesta propuesta = new Propuesta();
+		propuesta.setAmigo(amigo);
+		propuesta.setPartido(partido);
+		propuesta.setJugador(jugador);
+		
+		this.admin.agregar_propuesta(propuesta);
 	}
 
 }
