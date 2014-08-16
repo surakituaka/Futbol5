@@ -43,9 +43,7 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					login_interface = new Login();
-					login_interface.setVisible(true);
-					
-					
+					login_interface.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -103,6 +101,9 @@ public class Login extends JFrame {
 					main_admin.setVisible(true);					
 				}
 				else {
+					
+					// TODO Chequear si es un usuario en la DB
+					
 					main_jugador = new MainJugador(login_interface);
 					main_jugador.setVisible(true);
 				}
@@ -127,6 +128,9 @@ public class Login extends JFrame {
 	}
 	
 	private boolean usarIsAdmin() {
+		
+		// TODO Definir despues cuales son los admins
+		
 		String usuario = campoUsuario.getText();
 		String password = new String(campoContrasenia.getPassword());
 		return (usuario.equals(admin_user) && password.equals(admin_pass));

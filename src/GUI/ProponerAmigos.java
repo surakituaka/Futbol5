@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class ProponerAmigos extends JDialog {
 
@@ -26,7 +29,7 @@ public class ProponerAmigos extends JDialog {
 		    }
 		});
 		setTitle("Proponer Amigos");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 369, 300);
 		getContentPane().setLayout(null);
 		pantalla_jugador = caller;
 		
@@ -37,9 +40,20 @@ public class ProponerAmigos extends JDialog {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(335, 236, 89, 23);
+		btnCancelar.setBounds(253, 228, 89, 23);
 		getContentPane().add(btnCancelar);
+		
+		JButton btnProponer = new JButton("Proponer");
+		btnProponer.setBounds(10, 228, 89, 23);
+		getContentPane().add(btnProponer);
+		
+		JLabel lblAmigosNoJugadores = new JLabel("Amigos No Jugadores");
+		lblAmigosNoJugadores.setBounds(10, 11, 112, 14);
+		getContentPane().add(lblAmigosNoJugadores);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(174, 8, 168, 20);
+		getContentPane().add(comboBox);
 
 	}
-
 }

@@ -24,6 +24,7 @@ public class BajaJugador extends JDialog {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	public BajaJugador(MainJugador caller) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {

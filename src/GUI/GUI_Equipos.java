@@ -8,17 +8,18 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class GUI_Partido extends JDialog {
+public class GUI_Equipos extends JDialog {
 
-	private static final long serialVersionUID = 6057447328239256306L;
+	private static final long serialVersionUID = 5894712599675922771L;
 	private final JPanel contentPanel = new JPanel();
 	private static MainAdmin pantalla_admin;
+
 	/**
 	 * Create the dialog.
 	 */
-	public GUI_Partido(MainAdmin caller) {
+	public GUI_Equipos(MainAdmin caller) {
 		setResizable(false);
-		setTitle("Gestionar Partidos");
+		setTitle("Gestionar Equipos");
 		pantalla_admin = caller;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -31,7 +32,7 @@ public class GUI_Partido extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 	}
 
 }

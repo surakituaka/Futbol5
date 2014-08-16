@@ -15,7 +15,8 @@ import javax.swing.border.EmptyBorder;
 public class MainAdmin extends JFrame {
 	private static final long serialVersionUID = 828297704025213357L;
 	private JPanel contentPane;
-	private Login pantalla_login;
+	private static Login pantalla_login;
+	private static MainAdmin yo;
 
 	
 	public MainAdmin(Login login_caller) {
@@ -29,31 +30,45 @@ public class MainAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		pantalla_login = login_caller;
+		yo = this;
 		
-		JLabel lblNewLabel = new JLabel("Panel de Administraci\u00F3n");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(10, 11, 272, 53);
-		contentPane.add(lblNewLabel);
+		JLabel Titulo = new JLabel("Panel de Administraci\u00F3n");
+		Titulo.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		Titulo.setBounds(10, 11, 272, 53);
+		contentPane.add(Titulo);
 		
-		JButton btnNewButton = new JButton("Organizar nuevo Partido");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnPartidos = new JButton("Partidos");
+		btnPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				GUI_Partido pantalla_gestion_partidos = new GUI_Partido(yo);
+				pantalla_gestion_partidos.setVisible(true);
+				yo.setEnabled(false);
 			}
 		});
-		btnNewButton.setBounds(62, 75, 149, 29);
-		contentPane.add(btnNewButton);
+		btnPartidos.setBounds(48, 75, 178, 29);
+		contentPane.add(btnPartidos);
 		
-		JButton btnEditarDatosPersonales = new JButton("Equipos");
-		btnEditarDatosPersonales.setBounds(62, 155, 149, 29);
-		contentPane.add(btnEditarDatosPersonales);
-		
-		JButton btnBajaDeUn = new JButton("Gesti\u00F3n de Jugadores");
-		btnBajaDeUn.addActionListener(new ActionListener() {
+		JButton btnEquipos = new JButton("Equipos");
+		btnEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				GUI_Equipos pantalla_gestion_equipos = new GUI_Equipos(yo);
+				pantalla_gestion_equipos.setVisible(true);
+				yo.setEnabled(false);
 			}
 		});
-		btnBajaDeUn.setBounds(62, 115, 149, 29);
-		contentPane.add(btnBajaDeUn);
+		btnEquipos.setBounds(48, 155, 178, 29);
+		contentPane.add(btnEquipos);
+		
+		JButton btnGestionJugadores = new JButton("Gesti\u00F3n de Jugadores");
+		btnGestionJugadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Peticion_Jugadores pantalla_gestion_jugadores = new Peticion_Jugadores(yo);
+				pantalla_gestion_jugadores.setVisible(true);
+				yo.setEnabled(false);
+			}
+		});
+		btnGestionJugadores.setBounds(48, 115, 178, 29);
+		contentPane.add(btnGestionJugadores);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
@@ -65,7 +80,7 @@ public class MainAdmin extends JFrame {
 		btnCerrarSesin.setToolTipText("");
 		btnCerrarSesin.setSelectedIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
 		btnCerrarSesin.setIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
-		btnCerrarSesin.setBounds(72, 203, 121, 29);
+		btnCerrarSesin.setBounds(48, 195, 178, 29);
 		contentPane.add(btnCerrarSesin);
 	}
 }
