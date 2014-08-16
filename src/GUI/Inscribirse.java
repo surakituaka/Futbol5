@@ -95,7 +95,7 @@ public class Inscribirse extends JDialog {
 			}
 		});
 		botonCondicional.setBackground(Color.LIGHT_GRAY);
-		botonCondicional.setBounds(116, 59, 90, 23);
+		botonCondicional.setBounds(116, 59, 130, 23);
 		panel.add(botonCondicional);
 		
 		botonSolidaria = new JRadioButton("Solidaria");
