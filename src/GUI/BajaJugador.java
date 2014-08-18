@@ -12,6 +12,10 @@ import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import javax.swing.SwingConstants;
+
+import club.Partido;
 
 public class BajaJugador extends JDialog {
 
@@ -20,7 +24,7 @@ public class BajaJugador extends JDialog {
 	 */
 	private static final long serialVersionUID = 2710989898521557695L;
 	private static MainJugador pantalla_jugador;
-
+	private static JComboBox<String> comboReemplazo;
 	/**
 	 * Create the frame.
 	 */
@@ -35,37 +39,52 @@ public class BajaJugador extends JDialog {
 		});
 		setResizable(false);
 		setTitle("Baja de un Partido");
-		setBounds(100, 100, 322, 184);
+		setBounds(100, 100, 257, 273);
 		getContentPane().setLayout(null);
 		pantalla_jugador = (MainJugador) global.pantalla_anterior;
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(129, 11, 167, 20);
-		getContentPane().add(comboBox);
-		
-		JLabel lblPartidos = new JLabel("Partidos Inscriptos");
-		lblPartidos.setBounds(10, 14, 116, 14);
-		getContentPane().add(lblPartidos);
-
+		JLabel lblDatosDelPartido = new JLabel("Datos del Partido:");
+		lblDatosDelPartido.setBounds(10, 11, 168, 14);
+		getContentPane().add(lblDatosDelPartido);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setForeground(new Color(0, 0, 0));
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 42, 286, 69);
+		panel.setBounds(10, 36, 233, 83);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblTipoDeInscripcin = new JLabel("Reemplazo:");
-		lblTipoDeInscripcin.setBounds(10, 11, 100, 14);
-		panel.add(lblTipoDeInscripcin);
+		Partido partido_inscripto = global.jugador_seleccionado.getInscripto();
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(142, 8, 134, 20);
-		panel.add(comboBox_1);
+		JLabel lblId = new JLabel(("ID: ").concat(partido_inscripto.getId()));
+		lblId.setBounds(10, 11, 210, 14);
+		panel.add(lblId);
+		
+		JLabel lblLugar = new JLabel(("Lugar: ").concat(partido_inscripto.getLugar()));
+		lblLugar.setBounds(10, 36, 210, 14);
+		panel.add(lblLugar);
+		
+		SimpleDateFormat dateformatter = new SimpleDateFormat("dd-MM-yyyy");
+		JLabel lblFecha = new JLabel(("Fecha: ").concat(dateformatter.format(partido_inscripto.getFecha())));
+		lblFecha.setBounds(10, 61, 210, 14);
+		panel.add(lblFecha);
+		
+		JLabel lblestSeguroQue = new JLabel("\u00BFEst\u00E1 seguro que desea Desinscribirse?");
+		lblestSeguroQue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblestSeguroQue.setBounds(10, 175, 233, 14);
+		getContentPane().add(lblestSeguroQue);
+		
+		comboReemplazo = new JComboBox<String>();
+		comboReemplazo.setBounds(99, 130, 144, 20);
+		for (int i = 0;i<global.jugador_seleccionado.getAmigos().size();i++){
+			comboReemplazo.addItem(global.jugador_seleccionado.getAmigos().get(i).getNombre());
+		}
+		getContentPane().add(comboReemplazo);
+		
 		
 		// TODO Cargar los partidos a los que el Jugador se encuentra inscripto
 
+		
+		
+		
 		JButton botonCancelar = new JButton("Cancelar");
 		botonCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -73,12 +92,15 @@ public class BajaJugador extends JDialog {
 				dispose();
 			}
 		});
-		botonCancelar.setBounds(207, 122, 89, 23);
+		botonCancelar.setBounds(154, 200, 89, 23);
 		getContentPane().add(botonCancelar);
 		
 		JButton botonDesinscribirse = new JButton("Desinscribir");
 		botonDesinscribirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Partido partido_inscripto = global.jugador_seleccionado.getInscripto();
+				
+				global.jugador_seleccionado.bajarse_de(partido_inscripto);
 				
 				// TODO Desinscribir al Jugador
 				
@@ -86,8 +108,15 @@ public class BajaJugador extends JDialog {
 				dispose();
 			}
 		});
-		botonDesinscribirse.setBounds(10, 122, 116, 23);
+		botonDesinscribirse.setBounds(10, 200, 116, 23);
 		getContentPane().add(botonDesinscribirse);
+	
+		
+		JLabel lblReemplazo = new JLabel("Reemplazo");
+		lblReemplazo.setBounds(10, 130, 79, 14);
+		getContentPane().add(lblReemplazo);
+		
+		
 
 	}
 }

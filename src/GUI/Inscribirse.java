@@ -173,13 +173,10 @@ public class Inscribirse extends JDialog {
 		checkRecomendarAmigo = new JCheckBox("Recomendar Amigo al Inscribirme");
 		checkRecomendarAmigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(checkRecomendarAmigo.isSelected()) {
+				if(checkRecomendarAmigo.isSelected()) 
 					btnInscribirse.setText("Recomendar Amigo e Inscribirse");
-				}
 				else
 					btnInscribirse.setText("Inscribirse");
-
-				
 			}
 		});
 		checkRecomendarAmigo.setSelected(true);
@@ -189,8 +186,13 @@ public class Inscribirse extends JDialog {
 	}
 	
 	private boolean inscripcionEsValida() {
-	
-		return true;
+		if(comboPartidos.getSelectedItem() != null) {
+			if(botonStandar.isSelected() || botonSolidaria.isSelected())
+				return true;
+			if(botonCondicional.isSelected() && !(campoCondicion.getText().equals("")))
+				return true;
+		}
+		return false;
 	}
 	
 	public void terminate() {

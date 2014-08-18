@@ -59,16 +59,16 @@ public class GUI_Partido extends JDialog {
 						SimpleDateFormat dateformatter = new SimpleDateFormat("dd-MM-yyyy");
 						Date fecha = dateformatter.parse(fecha_string);
 						partido_nuevo.setFecha(fecha);
+						partido_nuevo.setId(nombre_partido);
+						partido_nuevo.setLugar(lugar);
+						global.agregarPartido(partido_nuevo);
+						comboPartidos.addItem(partido_nuevo.getId());
+						pantalla_admin.setEnabled(true);
+						dispose();
 					} catch (ParseException e) {
 						JOptionPane.showMessageDialog(null, "Fecha Ingresada Erronea", "Error al Crear Partido", JOptionPane.ERROR_MESSAGE);
 						//TODO: Tratar que el formato de la fecha sea erroneo
 					}
-					partido_nuevo.setId(nombre_partido);
-					partido_nuevo.setLugar(lugar);
-					global.agregarPartido(partido_nuevo);
-					comboPartidos.addItem(partido_nuevo.getId());
-					pantalla_admin.setEnabled(true);
-					dispose();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Crear Partido", JOptionPane.ERROR_MESSAGE);				
