@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import club.*;
+
 public class MainJugador extends JFrame {
 
 	/**
@@ -19,12 +21,12 @@ public class MainJugador extends JFrame {
 	 */
 	private static final long serialVersionUID = -2861295277923642005L;
 	private JPanel contentPane;
-	private Login pantalla_login;
+	private Principal pantalla_principal;
 	private MainJugador pantalla_jugador;
 	/**
 	 * Create the frame.
 	 */
-	public MainJugador(Login login_caller) {
+	public MainJugador(Principal principal_caller, Jugador jugador) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainJugador.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
@@ -34,7 +36,7 @@ public class MainJugador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		pantalla_login = login_caller;
+		pantalla_principal = principal_caller;
 		pantalla_jugador = this;
 		
 		JLabel lblNewLabel = new JLabel("Organizador de Torneos de Futbol 5");
@@ -56,9 +58,7 @@ public class MainJugador extends JFrame {
 		JButton btnEditarDatosPersonales = new JButton("Datos Personales");
 		btnEditarDatosPersonales.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DatosPersonales pantalla_datosUsuario = new DatosPersonales(pantalla_jugador);
-				pantalla_datosUsuario.setVisible(true);	
-				pantalla_jugador.setEnabled(false);
+				
 			}
 		});
 		btnEditarDatosPersonales.setBounds(315, 75, 237, 41);
@@ -78,9 +78,7 @@ public class MainJugador extends JFrame {
 		JButton btnPenalizaciones = new JButton("Proponer Amigos");
 		btnPenalizaciones.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ProponerAmigos pantalla_propuesta = new ProponerAmigos(pantalla_jugador);
-				pantalla_propuesta.setVisible(true);
-				pantalla_jugador.setEnabled(false);
+				
 			}
 		});
 		btnPenalizaciones.setBounds(315, 149, 237, 41);
@@ -89,7 +87,7 @@ public class MainJugador extends JFrame {
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pantalla_login.setVisible(true);
+				pantalla_principal.setVisible(true);
 				dispose();
 			}
 		});

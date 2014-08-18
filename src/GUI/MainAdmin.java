@@ -11,15 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import club.*;
+
 
 public class MainAdmin extends JFrame {
 	private static final long serialVersionUID = 828297704025213357L;
 	private JPanel contentPane;
-	private static Login pantalla_login;
+	private static Principal pantalla_principal;
 	private static MainAdmin yo;
 
 	
-	public MainAdmin(Login login_caller) {
+	public MainAdmin(Principal principal_caller) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
@@ -29,7 +31,7 @@ public class MainAdmin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		pantalla_login = login_caller;
+		pantalla_principal = principal_caller;
 		yo = this;
 		
 		JLabel Titulo = new JLabel("Panel de Administraci\u00F3n");
@@ -62,9 +64,7 @@ public class MainAdmin extends JFrame {
 		JButton btnGestionJugadores = new JButton("Gesti\u00F3n de Jugadores");
 		btnGestionJugadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Peticion_Jugadores pantalla_gestion_jugadores = new Peticion_Jugadores(yo);
-				pantalla_gestion_jugadores.setVisible(true);
-				yo.setEnabled(false);
+
 			}
 		});
 		btnGestionJugadores.setBounds(48, 115, 178, 29);
@@ -73,7 +73,7 @@ public class MainAdmin extends JFrame {
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pantalla_login.setVisible(true);
+				//pantalla_login.setEnabled(true);
 				dispose();
 			}
 		});
