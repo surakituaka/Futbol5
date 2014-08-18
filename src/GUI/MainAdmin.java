@@ -25,7 +25,7 @@ public class MainAdmin extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 292, 287);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

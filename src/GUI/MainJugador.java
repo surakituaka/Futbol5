@@ -30,8 +30,8 @@ public class MainJugador extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainJugador.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 578, 287);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 428, 188);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -41,48 +41,30 @@ public class MainJugador extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Organizador de Torneos de Futbol 5");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(69, 11, 409, 53);
+		lblNewLabel.setBounds(10, 11, 409, 53);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Inscribirse a un Partido");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnInscripcion = new JButton("Inscribirse a un Partido");
+		btnInscripcion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Inscribirse pantalla_inscripcion = new Inscribirse(pantalla_jugador);
 				pantalla_inscripcion.setVisible(true);
 				pantalla_jugador.setEnabled(false);
 			}
 		});
-		btnNewButton.setBounds(10, 75, 237, 41);
-		contentPane.add(btnNewButton);
+		btnInscripcion.setBounds(10, 75, 182, 29);
+		contentPane.add(btnInscripcion);
 		
-		JButton btnEditarDatosPersonales = new JButton("Datos Personales");
-		btnEditarDatosPersonales.addActionListener(new ActionListener() {
+		JButton btnCalificar = new JButton("Calificar");
+		btnCalificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Calificar pantalla_calificacion = new Calificar(pantalla_jugador);
+				pantalla_calificacion.setVisible(true);
+				pantalla_jugador.setEnabled(false);
 			}
 		});
-		btnEditarDatosPersonales.setBounds(315, 75, 237, 41);
-		contentPane.add(btnEditarDatosPersonales);
-		
-		JButton btnBajaDeUn = new JButton("Baja de un Partido");
-		btnBajaDeUn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				BajaJugador pantalla_bajaJugador = new BajaJugador(pantalla_jugador);
-				pantalla_bajaJugador.setVisible(true);	
-				pantalla_jugador.setEnabled(false);				
-			}
-		});
-		btnBajaDeUn.setBounds(10, 149, 237, 41);
-		contentPane.add(btnBajaDeUn);
-		
-		JButton btnPenalizaciones = new JButton("Proponer Amigos");
-		btnPenalizaciones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-		btnPenalizaciones.setBounds(315, 149, 237, 41);
-		contentPane.add(btnPenalizaciones);
+		btnCalificar.setBounds(237, 75, 182, 29);
+		contentPane.add(btnCalificar);
 		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
@@ -94,7 +76,7 @@ public class MainJugador extends JFrame {
 		btnCerrarSesin.setToolTipText("");
 		btnCerrarSesin.setSelectedIcon(new ImageIcon(MainJugador.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
 		btnCerrarSesin.setIcon(new ImageIcon(MainJugador.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
-		btnCerrarSesin.setBounds(417, 218, 135, 29);
+		btnCerrarSesin.setBounds(284, 120, 135, 29);
 		contentPane.add(btnCerrarSesin);
 	}
 }

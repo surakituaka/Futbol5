@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JTextField;
+import javax.swing.JCheckBox;
 
 public class Inscribirse extends JDialog {
 
@@ -24,8 +25,12 @@ public class Inscribirse extends JDialog {
 	private static JRadioButton botonCondicional;
 	private static JRadioButton botonSolidaria;
 	private JTextField campoCondicion;
+	private static JCheckBox checkRecomendarAmigo;
+	private static JButton btnInscribirse;
+	private static Inscribirse yo;
 	
 	public Inscribirse(MainJugador caller) {
+		yo = this;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
@@ -36,7 +41,7 @@ public class Inscribirse extends JDialog {
 		setResizable(false);
 		
 		setTitle("Inscribirse a un Partido");
-		setBounds(100, 100, 394, 265);
+		setBounds(100, 100, 394, 279);
 		getContentPane().setLayout(null);
 		pantalla_jugador = caller;
 		
@@ -56,7 +61,7 @@ public class Inscribirse extends JDialog {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(289, 193, 89, 23);
+		btnCancelar.setBounds(289, 219, 89, 23);
 		getContentPane().add(btnCancelar);
 		
 		JPanel panel = new JPanel();
@@ -118,18 +123,51 @@ public class Inscribirse extends JDialog {
 		lblCondicion.setBounds(252, 36, 66, 14);
 		panel.add(lblCondicion);
 		
-		JButton btnInscribirse = new JButton("Inscribirse");
+		btnInscribirse = new JButton("Recomendar Amigo e Inscribirme");
 		btnInscribirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				// TODO Validar la Inscripción y Guardarla
-				
-				pantalla_jugador.setEnabled(true);
-				dispose();
+				if(inscripcionEsValida()){
+					
+					//TODO: Inscribir a partido
+					if(checkRecomendarAmigo.isSelected()) {
+						RecomendacionPopup pantalla_recomendacion = new RecomendacionPopup(yo);
+						pantalla_recomendacion.setVisible(true);
+						yo.setEnabled(false);
+					}
+					else {
+						pantalla_jugador.setEnabled(true);
+						dispose();
+					}					
+				}
 			}
 		});
-		btnInscribirse.setBounds(10, 193, 89, 23);
+		btnInscribirse.setBounds(10, 219, 269, 23);
 		getContentPane().add(btnInscribirse);
+		
+		checkRecomendarAmigo = new JCheckBox("Recomendar Amigo al Inscribirme");
+		checkRecomendarAmigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(checkRecomendarAmigo.isSelected()) {
+					btnInscribirse.setText("Recomendar Amigo e Inscribirse");
+				}
+				else
+					btnInscribirse.setText("Inscribirse");
 
+				
+			}
+		});
+		checkRecomendarAmigo.setSelected(true);
+		checkRecomendarAmigo.setBounds(10, 189, 280, 23);
+		getContentPane().add(checkRecomendarAmigo);
+
+	}
+	
+	private boolean inscripcionEsValida() {
+	
+		return true;
+	}
+	
+	public void terminate() {
+		dispose();
 	}
 }
