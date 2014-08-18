@@ -24,8 +24,8 @@ public class BajaJugador extends JDialog {
 	/**
 	 * Create the frame.
 	 */
-	@SuppressWarnings("rawtypes")
-	public BajaJugador(MainJugador caller) {
+
+	public BajaJugador(final GlobalParameters global) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
@@ -37,7 +37,7 @@ public class BajaJugador extends JDialog {
 		setTitle("Baja de un Partido");
 		setBounds(100, 100, 322, 184);
 		getContentPane().setLayout(null);
-		pantalla_jugador = caller;
+		pantalla_jugador = (MainJugador) global.pantalla_anterior;
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(129, 11, 167, 20);

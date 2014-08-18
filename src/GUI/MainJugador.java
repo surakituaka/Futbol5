@@ -22,6 +22,7 @@ public class MainJugador extends JFrame {
 	private JPanel contentPane;
 	private Principal pantalla_principal;
 	private MainJugador pantalla_jugador;
+	private final JButton btnInscripcion;
 	/**
 	 * Create the frame.
 	 */
@@ -45,11 +46,23 @@ public class MainJugador extends JFrame {
 		titulo.setBounds(10, 11, 409, 53);
 		contentPane.add(titulo);
 		
-		JButton btnInscripcion = new JButton("Inscribirse a un Partido");
+		btnInscripcion = new JButton();
+		if(globales.jugador_seleccionado.estaInscripto())
+			seInscribio();
+		else
+			NoseInscribio();
+			
+			
 		btnInscripcion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inscribirse pantalla_inscripcion = new Inscribirse(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
-				pantalla_inscripcion.setVisible(true);
+				if(globales.jugador_seleccionado.estaInscripto()) {
+					BajaJugador pantalla_baja = new BajaJugador(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
+					pantalla_baja.setVisible(true);	
+				}
+				else {
+					Inscribirse pantalla_inscripcion = new Inscribirse(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
+					pantalla_inscripcion.setVisible(true);				
+				}
 				pantalla_jugador.setEnabled(false);
 			}
 		});
@@ -80,4 +93,11 @@ public class MainJugador extends JFrame {
 		btnCerrarSesin.setBounds(284, 120, 135, 29);
 		contentPane.add(btnCerrarSesin);
 	}
+	public void seInscribio() {
+		btnInscripcion.setText("Darse de Baja del Partido");
+	}
+	public void NoseInscribio() {
+		btnInscripcion.setText("Inscribirse a un Partido");
+	}
+	
 }

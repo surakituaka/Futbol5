@@ -17,6 +17,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
+import club.Partido;
+
 public class Inscribirse extends JDialog {
 
 	private static final long serialVersionUID = 4024067139818249946L;
@@ -28,6 +30,9 @@ public class Inscribirse extends JDialog {
 	private static JCheckBox checkRecomendarAmigo;
 	private static JButton btnInscribirse;
 	private static Inscribirse yo;
+	private final JComboBox<String> comboPartidos;
+	private Partido partido_actual;
+	private static String label_inscripcion;
 	
 	public Inscribirse(final GlobalParameters global) {
 		yo = this;
@@ -45,10 +50,25 @@ public class Inscribirse extends JDialog {
 		getContentPane().setLayout(null);
 		pantalla_jugador = (MainJugador) global.pantalla_anterior;
 		
-		@SuppressWarnings("rawtypes")
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(163, 11, 215, 20);
-		getContentPane().add(comboBox);
+		comboPartidos = new JComboBox<String>();
+		int i = 0;
+		while(i < global.partidos.size()) {
+			comboPartidos.addItem(global.partidos.get(i).getId());
+			i++;
+		}
+		comboPartidos.setBounds(163, 11, 215, 20);
+		comboPartidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String id_partido = (String) comboPartidos.getSelectedItem();
+				int i = 0;
+				while(i < global.partidos.size()){
+					if(global.partidos.get(i).getId().equals(id_partido))
+						partido_actual = global.partidos.get(i);
+					i++;
+				}
+			}
+		});
+		getContentPane().add(comboPartidos);
 		
 		JLabel lblPartidos = new JLabel("Partidos Disponibles");
 		lblPartidos.setBounds(10, 14, 143, 14);
@@ -86,6 +106,7 @@ public class Inscribirse extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				botonCondicional.setSelected(false);
 				botonSolidaria.setSelected(false);
+				label_inscripcion = botonStandar.getText();
 			}
 		});
 		botonStandar.setBackground(Color.LIGHT_GRAY);
@@ -95,8 +116,9 @@ public class Inscribirse extends JDialog {
 		botonCondicional = new JRadioButton("Condicional");
 		botonCondicional.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					botonStandar.setSelected(false);
-					botonSolidaria.setSelected(false);
+				botonStandar.setSelected(false);
+				botonSolidaria.setSelected(false);
+				label_inscripcion = botonCondicional.getText();
 			}
 		});
 		botonCondicional.setBackground(Color.LIGHT_GRAY);
@@ -108,6 +130,7 @@ public class Inscribirse extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				botonStandar.setSelected(false);
 				botonCondicional.setSelected(false);
+				label_inscripcion = botonSolidaria.getText();
 			}
 		});
 		botonSolidaria.setBackground(Color.LIGHT_GRAY);
@@ -127,8 +150,11 @@ public class Inscribirse extends JDialog {
 		btnInscribirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(inscripcionEsValida()){
-					
+					global.jugador_seleccionado.setTipofromString(label_inscripcion, campoCondicion.getText());
+					global.jugador_seleccionado.inscribirse_a(partido_actual);
 					//TODO: Inscribir a partido
+					
+					pantalla_jugador.seInscribio();
 					if(checkRecomendarAmigo.isSelected()) {
 						RecomendacionPopup pantalla_recomendacion = new RecomendacionPopup(new GlobalParameters(global, global.jugador_seleccionado, null), yo);
 						pantalla_recomendacion.setVisible(true);

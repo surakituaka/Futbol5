@@ -41,6 +41,9 @@ public class RecomendacionPopup extends JDialog {
 		JButton btnRecomendar = new JButton("Recomendar");
 		btnRecomendar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//TODO: Generar Propuesta a Admin
+				
 				pantalla_inscripcion.terminate();
 				dispose();
 			}

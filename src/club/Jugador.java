@@ -175,7 +175,20 @@ public class Jugador{
 		partido.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido,new GregorianCalendar()));
 	}
 	
+	public boolean estaInscripto() {
+		if(this.inscripto == null)
+			return false;
+		return true;
+	}
 	
+	public void setTipofromString(String tipo_string, String condicion) {
+		if(tipo_string.equals("Standar"))
+			this.setTipo(new Standar());
+		if(tipo_string.equals("Condicional")) 
+			this.setTipo(new Condicional(condicion));
+		if(tipo_string.equals("Solidaria"))
+			this.setTipo(new Solidaria());
+	}
 	
 	
 	
