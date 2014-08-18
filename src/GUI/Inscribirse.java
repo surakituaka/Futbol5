@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.BevelBorder;
@@ -166,6 +167,9 @@ public class Inscribirse extends JDialog {
 						dispose();
 					}					
 				}
+				else
+					JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Inscribirse al Partido", JOptionPane.ERROR_MESSAGE);				
+
 			}
 		});
 		btnInscribirse.setBounds(10, 219, 269, 23);

@@ -106,6 +106,7 @@ public class BajaJugador extends JDialog {
 					global.jugador_seleccionado.bajarse_de(partido_inscripto);				
 				pantalla_jugador.setEnabled(true);
 				pantalla_jugador.NoseInscribio();
+				global.jugador_seleccionado.setInscripto(null);
 				dispose();
 			}
 		});
