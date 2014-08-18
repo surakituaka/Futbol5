@@ -57,6 +57,7 @@ public class Inscribirse extends JDialog {
 			i++;
 		}
 		comboPartidos.setBounds(163, 11, 215, 20);
+		partido_actual = global.partidos.get(0);
 		comboPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String id_partido = (String) comboPartidos.getSelectedItem();

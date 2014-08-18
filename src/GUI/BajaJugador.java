@@ -13,8 +13,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
+
 import javax.swing.SwingConstants;
 
+import club.Jugador;
 import club.Partido;
 
 public class BajaJugador extends JDialog {
@@ -100,7 +102,10 @@ public class BajaJugador extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				Partido partido_inscripto = global.jugador_seleccionado.getInscripto();
 				
-				global.jugador_seleccionado.bajarse_de(partido_inscripto);
+				if(comboReemplazo.getSelectedItem() != null)
+					global.jugador_seleccionado.bajarse_de(partido_inscripto, (Jugador) comboReemplazo.getSelectedItem());
+				else
+					global.jugador_seleccionado.bajarse_de(partido_inscripto);
 				
 				// TODO Desinscribir al Jugador
 				
