@@ -41,7 +41,7 @@ public class GUI_Partido extends JDialog {
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
 		        // Perhaps ask user if they want to save any unsaved files first.
-		    	pantalla_admin.setEnabled(true); 
+				pantalla_admin.setEnabled(true);
 		    }
 		});
 		setBounds(100, 100, 204, 148);
@@ -67,7 +67,7 @@ public class GUI_Partido extends JDialog {
 					partido_nuevo.setLugar(lugar);
 					global.agregarPartido(partido_nuevo);
 					comboPartidos.addItem(partido_nuevo.getId());
-					volverAadmin(global);
+					pantalla_admin.setEnabled(true);
 					dispose();
 				}
 				else
@@ -84,6 +84,11 @@ public class GUI_Partido extends JDialog {
 		panel.setLayout(null);
 		
 		comboPartidos = new JComboBox<String>();
+		int i = 0;
+		while(i < global.partidos.size()) {
+			comboPartidos.addItem(global.partidos.get(i).getId());
+			i++;
+		}
 		comboPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String id_partido = (String) comboPartidos.getSelectedItem();
@@ -109,9 +114,5 @@ public class GUI_Partido extends JDialog {
 		panel.add(btnEliminarPartido);
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));	
-	}
-	private void volverAadmin(GlobalParameters global) {
-		pantalla_admin.setEnabled(true);
-		pantalla_admin.actualizarGlobal(global);
 	}
 }

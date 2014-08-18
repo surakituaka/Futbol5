@@ -29,7 +29,7 @@ public class Inscribirse extends JDialog {
 	private static JButton btnInscribirse;
 	private static Inscribirse yo;
 	
-	public Inscribirse(GlobalParameters global) {
+	public Inscribirse(final GlobalParameters global) {
 		yo = this;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -130,7 +130,7 @@ public class Inscribirse extends JDialog {
 					
 					//TODO: Inscribir a partido
 					if(checkRecomendarAmigo.isSelected()) {
-						RecomendacionPopup pantalla_recomendacion = new RecomendacionPopup(yo);
+						RecomendacionPopup pantalla_recomendacion = new RecomendacionPopup(new GlobalParameters(global, global.jugador_seleccionado, null), yo);
 						pantalla_recomendacion.setVisible(true);
 						yo.setEnabled(false);
 					}
@@ -168,6 +168,7 @@ public class Inscribirse extends JDialog {
 	}
 	
 	public void terminate() {
+		pantalla_jugador.setEnabled(true);
 		dispose();
 	}
 }

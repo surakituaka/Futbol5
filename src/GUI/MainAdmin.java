@@ -33,7 +33,7 @@ public class MainAdmin extends JFrame {
 				pantalla_principal.habilitarAdmin();
 		    }
 		});
-		setBounds(100, 100, 292, 287);
+		setBounds(100, 100, 292, 316);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +60,7 @@ public class MainAdmin extends JFrame {
 		JButton btnEquipos = new JButton("Equipos");
 		btnEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUI_Equipos pantalla_gestion_equipos = new GUI_Equipos(yo);
+				GUI_Equipos pantalla_gestion_equipos = new GUI_Equipos(new GlobalParameters(global, null, yo));
 				pantalla_gestion_equipos.setVisible(true);
 				yo.setEnabled(false);
 			}
@@ -87,12 +87,12 @@ public class MainAdmin extends JFrame {
 		btnCerrarSesin.setToolTipText("");
 		btnCerrarSesin.setSelectedIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
 		btnCerrarSesin.setIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
-		btnCerrarSesin.setBounds(48, 195, 178, 29);
+		btnCerrarSesin.setBounds(48, 235, 178, 29);
 		contentPane.add(btnCerrarSesin);
-	}
-	
-	public void actualizarGlobal(GlobalParameters global_nuevo) {
 		
+		JButton btnBuzon = new JButton("Buzon de Mensajes");
+		btnBuzon.setBounds(48, 195, 178, 29);
+		contentPane.add(btnBuzon);
 	}
 }
 

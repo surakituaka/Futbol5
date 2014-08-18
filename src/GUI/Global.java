@@ -27,7 +27,7 @@ public class Global {
 		int nombre;
 		for (nombre='a';nombre<('a'+20);nombre++){
 			Jugador player = new Jugador();
-			player.setNombre(Character.toString((char)nombre));
+			player.setNombre((new String("Jugador ")).concat(Character.toString((char)nombre)));
 			player.setApellido(Character.toString((char)nombre));
 			jugadores.add(player);
 		}
