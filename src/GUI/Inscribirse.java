@@ -57,7 +57,8 @@ public class Inscribirse extends JDialog {
 			i++;
 		}
 		comboPartidos.setBounds(163, 11, 215, 20);
-		partido_actual = global.partidos.get(0);
+		if(global.partidos.size() > 0)
+			partido_actual = global.partidos.get(0);
 		comboPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String id_partido = (String) comboPartidos.getSelectedItem();
@@ -152,10 +153,9 @@ public class Inscribirse extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				if(inscripcionEsValida()){
 					global.jugador_seleccionado.setTipofromString(label_inscripcion, campoCondicion.getText());
-					global.jugador_seleccionado.inscribirse_a(partido_actual);
-					//TODO: Inscribir a partido
-					
+					global.jugador_seleccionado.inscribirse_a(partido_actual);				
 					pantalla_jugador.seInscribio();
+					
 					if(checkRecomendarAmigo.isSelected()) {
 						RecomendacionPopup pantalla_recomendacion = new RecomendacionPopup(new GlobalParameters(global, global.jugador_seleccionado, null), yo);
 						pantalla_recomendacion.setVisible(true);

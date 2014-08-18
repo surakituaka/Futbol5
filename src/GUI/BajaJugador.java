@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.Color;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -81,12 +79,6 @@ public class BajaJugador extends JDialog {
 		}
 		getContentPane().add(comboReemplazo);
 		
-		
-		// TODO Cargar los partidos a los que el Jugador se encuentra inscripto
-
-		
-		
-		
 		JButton botonCancelar = new JButton("Cancelar");
 		botonCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -102,14 +94,18 @@ public class BajaJugador extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				Partido partido_inscripto = global.jugador_seleccionado.getInscripto();
 				
-				if(comboReemplazo.getSelectedItem() != null)
-					global.jugador_seleccionado.bajarse_de(partido_inscripto, (Jugador) comboReemplazo.getSelectedItem());
+				if(comboReemplazo.getSelectedItem() != null) {
+					Jugador amigo_reemplazo = null;
+					for (int i = 0;i<global.jugador_seleccionado.getAmigos().size();i++){
+						if(global.jugador_seleccionado.getAmigos().get(i).getNombre().equals(comboReemplazo.getSelectedItem()))
+							amigo_reemplazo = global.jugador_seleccionado.getAmigos().get(i);
+					}
+					global.jugador_seleccionado.bajarse_de(partido_inscripto, amigo_reemplazo);
+				}
 				else
-					global.jugador_seleccionado.bajarse_de(partido_inscripto);
-				
-				// TODO Desinscribir al Jugador
-				
+					global.jugador_seleccionado.bajarse_de(partido_inscripto);				
 				pantalla_jugador.setEnabled(true);
+				pantalla_jugador.NoseInscribio();
 				dispose();
 			}
 		});
