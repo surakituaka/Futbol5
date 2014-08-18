@@ -29,7 +29,7 @@ public class Inscribirse extends JDialog {
 	private static JButton btnInscribirse;
 	private static Inscribirse yo;
 	
-	public Inscribirse(MainJugador caller) {
+	public Inscribirse(GlobalParameters global) {
 		yo = this;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
@@ -43,7 +43,7 @@ public class Inscribirse extends JDialog {
 		setTitle("Inscribirse a un Partido");
 		setBounds(100, 100, 394, 279);
 		getContentPane().setLayout(null);
-		pantalla_jugador = caller;
+		pantalla_jugador = (MainJugador) global.pantalla_anterior;
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();

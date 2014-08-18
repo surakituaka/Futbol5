@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import club.*;
 
 
 public class MainAdmin extends JFrame {
@@ -19,19 +19,26 @@ public class MainAdmin extends JFrame {
 	private JPanel contentPane;
 	private static Principal pantalla_principal;
 	private static MainAdmin yo;
-
+	private final GlobalParameters global;
 	
-	public MainAdmin(Principal principal_caller) {
+	public MainAdmin(GlobalParameters globales) {
+		global = globales;
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		addWindowListener(new java.awt.event.WindowAdapter() {
+		    public void windowClosing(WindowEvent winEvt) {
+		        // Perhaps ask user if they want to save any unsaved files first.
+				pantalla_principal.habilitarAdmin();
+		    }
+		});
 		setBounds(100, 100, 292, 287);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		pantalla_principal = principal_caller;
+		pantalla_principal = (Principal) global.pantalla_anterior;
 		yo = this;
 		
 		JLabel Titulo = new JLabel("Panel de Administraci\u00F3n");
@@ -42,7 +49,7 @@ public class MainAdmin extends JFrame {
 		JButton btnPartidos = new JButton("Partidos");
 		btnPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUI_Partido pantalla_gestion_partidos = new GUI_Partido(yo);
+				GUI_Partido pantalla_gestion_partidos = new GUI_Partido(new GlobalParameters(global, null, yo));
 				pantalla_gestion_partidos.setVisible(true);
 				yo.setEnabled(false);
 			}
@@ -73,7 +80,7 @@ public class MainAdmin extends JFrame {
 		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//pantalla_login.setEnabled(true);
+				pantalla_principal.habilitarAdmin();
 				dispose();
 			}
 		});
@@ -82,6 +89,10 @@ public class MainAdmin extends JFrame {
 		btnCerrarSesin.setIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
 		btnCerrarSesin.setBounds(48, 195, 178, 29);
 		contentPane.add(btnCerrarSesin);
+	}
+	
+	public void actualizarGlobal(GlobalParameters global_nuevo) {
+		
 	}
 }
 

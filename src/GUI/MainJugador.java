@@ -11,8 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import club.*;
+import javax.swing.SwingConstants;
 
 public class MainJugador extends JFrame {
 
@@ -26,7 +25,7 @@ public class MainJugador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainJugador(Principal principal_caller, Jugador jugador) {
+	public MainJugador(final GlobalParameters globales) {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainJugador.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
@@ -36,18 +35,20 @@ public class MainJugador extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		pantalla_principal = principal_caller;
+		pantalla_principal = (Principal) globales.pantalla_anterior;
 		pantalla_jugador = this;
 		
-		JLabel lblNewLabel = new JLabel("Organizador de Torneos de Futbol 5");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		lblNewLabel.setBounds(10, 11, 409, 53);
-		contentPane.add(lblNewLabel);
+		
+		JLabel titulo = new JLabel((new String("Ha accedido como Jugador: ")).concat(globales.jugador_seleccionado.getNombre()).concat(" ").concat(globales.jugador_seleccionado.getApellido()));
+		titulo.setHorizontalAlignment(SwingConstants.CENTER);
+		titulo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		titulo.setBounds(10, 11, 409, 53);
+		contentPane.add(titulo);
 		
 		JButton btnInscripcion = new JButton("Inscribirse a un Partido");
 		btnInscripcion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Inscribirse pantalla_inscripcion = new Inscribirse(pantalla_jugador);
+				Inscribirse pantalla_inscripcion = new Inscribirse(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
 				pantalla_inscripcion.setVisible(true);
 				pantalla_jugador.setEnabled(false);
 			}

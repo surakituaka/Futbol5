@@ -8,7 +8,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JComboBox;
+
 import club.*;
 
 
@@ -23,10 +25,11 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JButton btnJugador;
 	private JButton btnAccesoAdmin;
-	
+	private JComboBox<String> comboJugadores;
 	private static MainJugador main_jugador;
 	private static MainAdmin main_admin;
 	private static Principal principal_interface;
+	private static Jugador jugador_seleccionado;
 
 
 	/**
@@ -36,7 +39,9 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					principal_interface = new Principal();
+					Global inicializacionGlobal = new Global();
+					
+					principal_interface = new Principal(inicializacionGlobal);
 					principal_interface.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +52,7 @@ public class Principal extends JFrame {
 	
 	
 	//Constructor
-	public Principal() {
+	public Principal(final Global inicializador) {
 		setResizable(false);
 		setTitle("The Grid");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,16 +62,35 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		comboJugadores = new JComboBox<String>();
+		comboJugadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nombre_jugador = (String) comboJugadores.getSelectedItem();
+				int i = 0;
+				while(i < inicializador.jugadores.size()){
+					if(inicializador.jugadores.get(i).getNombre().equals(nombre_jugador))
+						jugador_seleccionado = inicializador.jugadores.get(i);
+					i++;
+				}
+			}
+		});
+		comboJugadores.setBounds(10, 12, 187, 20);
+		int i = 0;
+		while (i < inicializador.jugadores.size()) {
+			comboJugadores.addItem(inicializador.jugadores.get(i).getNombre());
+            i++;
+        }
+		contentPane.add(comboJugadores);
+
+		
+		
 		btnJugador = new JButton("Acceder");
 		btnJugador.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				// TODO: A utilizar los hardcodeados, por ahora lo pongo asi
-				Jugador pepito = new Jugador();
-				
-				main_jugador = new MainJugador(principal_interface, pepito);
+			public void actionPerformed(ActionEvent arg0) {				
+				main_jugador = new MainJugador(new GlobalParameters(inicializador, jugador_seleccionado, principal_interface));
 				main_jugador.setVisible(true);
-				//login_interface.setEnabled(false);
+				//principal_interface.setEnabled(false);
 			}
 		});
 
@@ -76,18 +100,19 @@ public class Principal extends JFrame {
 		btnAccesoAdmin = new JButton("Acceso como Admin");
 		btnAccesoAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				main_admin = new MainAdmin(principal_interface);
+				main_admin = new MainAdmin(new GlobalParameters(inicializador, null, principal_interface));
 				main_admin.setVisible(true);	
-				//login_interface.setEnabled(false);
+				btnAccesoAdmin.setEnabled(false);
 			}
 		});
 
 		btnAccesoAdmin.setBounds(84, 73, 187, 23);
 		contentPane.add(btnAccesoAdmin);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 12, 187, 20);
-		contentPane.add(comboBox);
+
+	}
+	
+	public void habilitarAdmin() {
+		btnAccesoAdmin.setEnabled(true);
 	}
 
 }

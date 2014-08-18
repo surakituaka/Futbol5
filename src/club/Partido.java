@@ -7,18 +7,26 @@ import java.util.List;
 
 public class Partido {
 	
+	private String id_partido;
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private Date fecha;
 	private String lugar;
 	private IMensajero mensajero;
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
-	private Equipo equipo1=new Equipo();
-	private Equipo equipo2=new Equipo();
+	private Equipo equipo1 = new Equipo();
+	private Equipo equipo2 = new Equipo();
+	
 	
 	public List<Jugador> getJugadores() {
 		return jugadores;
 	}
 	
+	public void setId(String id){
+		this.id_partido = id;
+	}
+	public String getId(){
+		return id_partido;
+	}
 	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
