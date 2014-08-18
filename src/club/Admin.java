@@ -10,6 +10,7 @@ public class Admin {
 	
 	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	private Set<Partido> partidos_validados = new HashSet<Partido>();
+	private String nombre;
 	
 	
 	public List<Propuesta> getNuevas_propuestas() {
@@ -60,6 +61,14 @@ public class Admin {
 	
 	public void dividir_equipos(Partido partido, IGeneradorEquipos generador){
 		generador.generar_equipos(partido);
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 	
