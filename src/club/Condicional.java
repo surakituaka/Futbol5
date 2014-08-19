@@ -39,7 +39,8 @@ public class Condicional implements IModalidad{
 		setCondicion(condicion);
 	}
 
-	
-	
+	public boolean soyStandar(){
+		return false;
+	}
 	
 }

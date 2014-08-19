@@ -23,5 +23,8 @@ public class Solidaria implements IModalidad{
 		return inscripcion;
 	}
 	
-	
+	public boolean soyStandar(){
+		return false;
+	}
+
 }

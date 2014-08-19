@@ -104,5 +104,4 @@ public class MainJugador extends JFrame {
 	public void NoseInscribio() {
 		btnInscripcion.setText("Inscribirse a un Partido");
 	}
-	
 }

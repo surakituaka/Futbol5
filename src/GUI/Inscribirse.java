@@ -18,6 +18,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
+import club.Jugador;
 import club.Partido;
 
 public class Inscribirse extends JDialog {
@@ -152,7 +153,7 @@ public class Inscribirse extends JDialog {
 		btnInscribirse = new JButton("Recomendar Amigo e Inscribirme");
 		btnInscribirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(inscripcionEsValida()){
+				if(inscripcionEsValida(global.jugador_seleccionado)){
 					global.jugador_seleccionado.setTipofromString(label_inscripcion, campoCondicion.getText());
 					global.jugador_seleccionado.inscribirse_a(partido_actual);				
 					pantalla_jugador.seInscribio();
@@ -167,9 +168,12 @@ public class Inscribirse extends JDialog {
 						dispose();
 					}					
 				}
-				else
-					JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Inscribirse al Partido", JOptionPane.ERROR_MESSAGE);				
-
+				else {
+					if(!partido_actual.sePuedeInscribir(global.jugador_seleccionado))
+						JOptionPane.showMessageDialog(null, "El Partido Seleccionado está lleno", "Error al Inscribirse al Partido", JOptionPane.WARNING_MESSAGE);				
+					else
+						JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Inscribirse al Partido", JOptionPane.ERROR_MESSAGE);				
+				}
 			}
 		});
 		btnInscribirse.setBounds(10, 219, 269, 23);
@@ -190,12 +194,14 @@ public class Inscribirse extends JDialog {
 
 	}
 	
-	private boolean inscripcionEsValida() {
+	private boolean inscripcionEsValida(Jugador jugador) {
 		if(comboPartidos.getSelectedItem() != null) {
-			if(botonStandar.isSelected() || botonSolidaria.isSelected())
-				return true;
-			if(botonCondicional.isSelected() && !(campoCondicion.getText().equals("")))
-				return true;
+			if(partido_actual.sePuedeInscribir(jugador)){
+				if(botonStandar.isSelected() || botonSolidaria.isSelected())
+					return true;
+				if(botonCondicional.isSelected() && !(campoCondicion.getText().equals("")))
+					return true;
+			}
 		}
 		return false;
 	}

@@ -100,4 +100,21 @@ public class Partido {
 	public void agregar_calificacion(Calificacion calificacion){
 		this.calificaciones.add(calificacion);
 	}
+	
+	public boolean sePuedeInscribir(Jugador jugador){
+		if(!this.hay10Standar())
+				return true;
+		return false;
+	}
+
+	private boolean hay10Standar() {
+		int contador = 0;
+		for(int i=0;i<jugadores.size();i++){
+			if(jugadores.get(i).getTipo().soyStandar())
+				contador++;
+		}
+		if(contador == 10)
+			return true;
+		return false;
+	}
 }
