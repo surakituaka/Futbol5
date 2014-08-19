@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import club.Jugador;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -24,7 +27,7 @@ public class RecomendacionPopup extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RecomendacionPopup(GlobalParameters global, JDialog caller) {
+	public RecomendacionPopup(final GlobalParameters global, JDialog caller) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
@@ -41,9 +44,11 @@ public class RecomendacionPopup extends JDialog {
 		JButton btnRecomendar = new JButton("Recomendar");
 		btnRecomendar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//TODO: Generar Propuesta a Admin
-				
+				Jugador amigo = new Jugador();
+				amigo.setNombre(campoNombre.getText());
+				amigo.setApellido(campoNombre.getText());
+				amigo.setEmail(campoEmail.getText());
+				global.jugador_seleccionado.proponer_jugador(amigo, global.jugador_seleccionado.getInscripto());		
 				pantalla_inscripcion.terminate();
 				dispose();
 			}
