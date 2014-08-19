@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -101,25 +102,30 @@ public class BajaJugador extends JDialog {
 							amigo_reemplazo = global.jugador_seleccionado.getAmigos().get(i);
 					}
 					global.jugador_seleccionado.bajarse_de(partido_inscripto, amigo_reemplazo);
+					salirDeBaja(global.jugador_seleccionado);
 				}
-				else
-					global.jugador_seleccionado.bajarse_de(partido_inscripto);				
-				pantalla_jugador.setEnabled(true);
-				pantalla_jugador.NoseInscribio();
-				global.jugador_seleccionado.setInscripto(null);
-				dispose();
+				else {
+					int response = JOptionPane.showConfirmDialog(null, "Será Penalizado si no Selecciona un reemplazo", "Baja de un Partido", JOptionPane.WARNING_MESSAGE);
+					if(response == JOptionPane.OK_OPTION) {
+						global.jugador_seleccionado.bajarse_de(partido_inscripto);	
+						salirDeBaja(global.jugador_seleccionado);
+					}
+				}
+
 			}
 		});
 		botonDesinscribirse.setBounds(10, 200, 116, 23);
 		getContentPane().add(botonDesinscribirse);
-	
-		
 		JLabel lblReemplazo = new JLabel("Reemplazo");
 		lblReemplazo.setBounds(10, 130, 79, 14);
 		getContentPane().add(lblReemplazo);
-		
-		
-
+	}
+	
+	private void salirDeBaja(Jugador jugador_seleccionado) {
+		pantalla_jugador.setEnabled(true);
+		pantalla_jugador.NoseInscribio();
+		jugador_seleccionado.setInscripto(null);
+		dispose();
 	}
 }
 

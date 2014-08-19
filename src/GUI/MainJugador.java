@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
@@ -55,15 +56,21 @@ public class MainJugador extends JFrame {
 			
 		btnInscripcion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(globales.jugador_seleccionado.estaInscripto()) {
-					BajaJugador pantalla_baja = new BajaJugador(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
-					pantalla_baja.setVisible(true);	
+				
+				if(!(globales.jugador_seleccionado.estoyPenalizado())) {
+					if(globales.jugador_seleccionado.estaInscripto()) {
+						BajaJugador pantalla_baja = new BajaJugador(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
+						pantalla_baja.setVisible(true);	
+					}
+					else {
+						Inscribirse pantalla_inscripcion = new Inscribirse(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
+						pantalla_inscripcion.setVisible(true);				
+					}
+					pantalla_jugador.setEnabled(false);
 				}
-				else {
-					Inscribirse pantalla_inscripcion = new Inscribirse(new GlobalParameters(globales, globales.jugador_seleccionado, pantalla_jugador));
-					pantalla_inscripcion.setVisible(true);				
-				}
-				pantalla_jugador.setEnabled(false);
+				else
+					JOptionPane.showMessageDialog(null,"El Jugador se encuentra penalizado y no puede inscribirse" , "Error", JOptionPane.ERROR_MESSAGE);
+
 			}
 		});
 		btnInscripcion.setBounds(10, 75, 182, 29);
@@ -72,9 +79,7 @@ public class MainJugador extends JFrame {
 		JButton btnCalificar = new JButton("Calificar");
 		btnCalificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Calificar pantalla_calificacion = new Calificar(pantalla_jugador);
-				pantalla_calificacion.setVisible(true);
-				pantalla_jugador.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "En Construccion...", "Calificar", JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		btnCalificar.setBounds(237, 75, 182, 29);

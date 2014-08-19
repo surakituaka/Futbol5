@@ -9,6 +9,7 @@ public class Jugador{
 	
 	private String nombre;
 	private String apellido;
+	private String email;
 	private IModalidad tipo;
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	//private Double prioridad;
@@ -189,8 +190,20 @@ public class Jugador{
 		if(tipo_string.equals("Solidaria"))
 			this.setTipo(new Solidaria());
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
-	
+	public boolean estoyPenalizado() {
+		if(this.penalizaciones.size() > 0)
+			return true;
+		return false;
+	}
 	
 	
 	
