@@ -10,12 +10,13 @@ public class GlobalParameters extends Global {
 	public Jugador jugador_seleccionado;
 	
 	
-	public GlobalParameters(Global harcodeo, Jugador jugador, JFrame pantalla) {
+	public GlobalParameters(Global hardcodeo, Jugador jugador, JFrame pantalla) {
 		pantalla_anterior = pantalla;
 		jugador_seleccionado = jugador;
-		jugadores = harcodeo.jugadores;
-		administrador = harcodeo.administrador;
-		partidos = harcodeo.partidos;
+		criterios = hardcodeo.criterios;
+		jugadores = hardcodeo.jugadores;
+		administrador = hardcodeo.administrador;
+		partidos = hardcodeo.partidos;
 
 		
 		// TODO Auto-generated constructor stub

@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import club.Admin;
-import club.Condicional;
-import club.Jugador;
-import club.Partido;
-import club.Solidaria;
-import club.Standar;
+import club.*;
 
 //Aca se cargan TODOS los harcodeos de la DB dinamica.
 //Esta estructura aconsejo pasarla por parametro cada vez que se cargue una nueva ventana.
@@ -19,6 +14,8 @@ public class Global {
 	public List<Jugador> jugadores = new ArrayList<Jugador>();
 	public List<Partido> partidos = new ArrayList<Partido>();
 	public Admin administrador;
+	
+	public List<String> criterios = new ArrayList<String>();
 	
 	public Global(){
 		//Creamos 3 amigos libres.
@@ -156,6 +153,12 @@ public class Global {
 		//Cargamos al Admin.
 				administrador = new Admin();
 				administrador.setNombre("Clue");
+				
+		//Cargamos los criterios existentes.
+				criterios.add("CriterioCompuesto");
+				criterios.add("Handicap");
+				criterios.add("Promedio");
+				criterios.add("PromedioUnitario");
 	}
 	
 	public void agregarPartido(Partido partido) {

@@ -11,6 +11,10 @@ public class Promedio extends CriterioOrden{
 	
 	private Integer cantidad_partidos;
 	
+	public String quienSoy(){
+		return "Promedio";
+	}
+	
 	public Integer getCantidad_partidos() {
 		return cantidad_partidos;
 	}

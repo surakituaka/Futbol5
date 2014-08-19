@@ -15,6 +15,10 @@ public class Handicap extends CriterioOrden{
 		Collections.sort(partido.getJugadores(),this);
 	}
 
+	public String quienSoy(){
+		return "Handicap";
+	}
+	
 	@Override
 	public int compare(Jugador jugador1, Jugador jugador2) {
 		if(jugador1.getHandicap()>jugador2.getHandicap()){

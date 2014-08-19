@@ -16,6 +16,10 @@ public class CriterioCompuesto extends CriterioOrden{
 	private List<CriterioOrden> criterios = new ArrayList<CriterioOrden>();
 	private Map<Jugador, ArrayList<Integer>> promedios = new HashMap<Jugador,ArrayList<Integer>>();
 	
+	public String quienSoy(){
+		return "Compuesto";
+	}
+	
 	public List<CriterioOrden> getCriterios() {
 		return criterios;
 	}

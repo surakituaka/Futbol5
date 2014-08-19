@@ -120,7 +120,7 @@ public class GUI_Jugadores extends JDialog {
 		JLabel Titulo = new JLabel("Nuevas propuestas de Jugador");
 		Titulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setBounds(10, 11, 309, 28);
+		Titulo.setBounds(10, 11, 384, 28);
 		getContentPane().add(Titulo);
 		
 		JPanel panel = new JPanel();
