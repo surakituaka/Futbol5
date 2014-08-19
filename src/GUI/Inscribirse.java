@@ -35,6 +35,9 @@ public class Inscribirse extends JDialog {
 	private final JComboBox<String> comboPartidos;
 	private Partido partido_actual;
 	private static String label_inscripcion;
+	private static JLabel l_cantJugadores;
+	
+	private static String gen_cantJugadores = "Cantidad de Jugadores: ";
 	
 	public Inscribirse(final GlobalParameters global) {
 		yo = this;
@@ -59,15 +62,15 @@ public class Inscribirse extends JDialog {
 			i++;
 		}
 		comboPartidos.setBounds(163, 11, 215, 20);
-		if(global.partidos.size() > 0)
-			partido_actual = global.partidos.get(0);
 		comboPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String id_partido = (String) comboPartidos.getSelectedItem();
 				int i = 0;
 				while(i < global.partidos.size()){
-					if(global.partidos.get(i).getId().equals(id_partido))
+					if(global.partidos.get(i).getId().equals(id_partido)) {
 						partido_actual = global.partidos.get(i);
+						l_cantJugadores.setText(gen_cantJugadores.concat(Integer.toString(global.partidos.get(i).getJugadores().size())));
+					}
 					i++;
 				}
 			}
@@ -96,10 +99,14 @@ public class Inscribirse extends JDialog {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Puestos Disponibles:");
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setBounds(10, 11, 149, 14);
-		panel.add(lblNewLabel);
+		l_cantJugadores = new JLabel();
+		if(global.partidos.size() > 0) {
+			l_cantJugadores.setText(gen_cantJugadores.concat(Integer.toString(global.partidos.get(0).getJugadores().size())));
+			partido_actual = global.partidos.get(0);
+		}
+		l_cantJugadores.setForeground(Color.RED);
+		l_cantJugadores.setBounds(10, 11, 149, 14);
+		panel.add(l_cantJugadores);
 		
 		JLabel lblTipoDeInscripcin = new JLabel("Tipo de Inscripci\u00F3n:");
 		lblTipoDeInscripcin.setBounds(10, 36, 100, 14);
