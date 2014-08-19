@@ -37,6 +37,13 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 			return MENOR;
 		}
 	*/
+		
+		//standar mayor a demas tipos		
+		if((jugador1.getTipo().getInscripcion().equals("STANDAR") && !jugador2.getTipo().getInscripcion().equals("STANDAR"))){
+			return MAYOR;
+		}
+		
+		
 		//entre solidarios
 		if(jugador1.getTipo().getInscripcion().equals("SOLIDARIA") && jugador2.getTipo().getInscripcion().equals("SOLIDARIA") && jugador1.getTipo().getFecha().after(jugador2.getTipo().getFecha())){
 			return MAYOR;
@@ -46,10 +53,6 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 			return MENOR;
 		}
 		
-		//standar mayor a demas tipos		
-		if((jugador1.getTipo().getInscripcion().equals("STANDAR") && !jugador2.getTipo().getInscripcion().equals("STANDAR"))){
-			return MAYOR;
-		}
 		
 		//solidario mayor a condicional
 		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) &&	(jugador2.getTipo().getInscripcion().equals("CONDICIONAL"))){
@@ -58,7 +61,7 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 		
 		//solidaria menor a standar
 		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) && (jugador2.getTipo().getInscripcion().equals("STANDAR"))){
-			return MAYOR;
+			return MENOR;
 		}
 		
 		//condicional menor a todos

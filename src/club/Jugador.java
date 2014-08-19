@@ -130,7 +130,7 @@ public class Jugador{
 		
 		Collections.sort(partido.getJugadores(),new OrdenadorJugadoresTipo());
 		
-		if(partido.getJugadores().size()>=10 && partido.getJugadores().get(9).getTipo().getInscripcion().equals("STANDAR")){
+		if(partido.hay10Standar()){
 			
 			respuesta.setEsta_inscripto(false);
 			respuesta.setMensaje("El jugador no ha sido inscipto, no hay mas cupos.");
