@@ -71,7 +71,9 @@ public class MainAdmin extends JFrame {
 		JButton btnGestionJugadores = new JButton("Gesti\u00F3n de Jugadores");
 		btnGestionJugadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				GUI_Jugadores pantalla_gestion_jugadores = new GUI_Jugadores(new GlobalParameters(global, null, yo));
+				pantalla_gestion_jugadores.setVisible(true);
+				yo.setEnabled(false);
 			}
 		});
 		btnGestionJugadores.setBounds(48, 115, 178, 29);

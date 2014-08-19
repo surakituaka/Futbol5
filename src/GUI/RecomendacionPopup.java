@@ -9,7 +9,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import club.IOrden;
 import club.Jugador;
+import club.OrdenNuevoJugador;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -48,6 +50,10 @@ public class RecomendacionPopup extends JDialog {
 				amigo.setNombre(campoNombre.getText());
 				amigo.setApellido(campoNombre.getText());
 				amigo.setEmail(campoEmail.getText());
+				
+				IOrden orden = new OrdenNuevoJugador();
+				((OrdenNuevoJugador) orden).setAdmin(global.administrador);
+				global.jugador_seleccionado.setPropocicion(orden);
 				global.jugador_seleccionado.proponer_jugador(amigo, global.jugador_seleccionado.getInscripto());		
 				pantalla_inscripcion.terminate();
 				dispose();
