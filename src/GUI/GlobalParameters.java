@@ -14,7 +14,7 @@ public class GlobalParameters extends Global {
 		pantalla_anterior = pantalla;
 		jugador_seleccionado = jugador;
 		jugadores = harcodeo.jugadores;
-		admin = harcodeo.admin;
+		administrador = harcodeo.administrador;
 		partidos = harcodeo.partidos;
 
 		

@@ -39,8 +39,7 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Global inicializacionGlobal = new Global();
-					
+					Global inicializacionGlobal = new Global();					
 					principal_interface = new Principal(inicializacionGlobal);
 					principal_interface.setVisible(true);					
 				} catch (Exception e) {

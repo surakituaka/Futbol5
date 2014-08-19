@@ -119,7 +119,7 @@ public class TestSobreJugadores {
 	}
 	
 	@Test
-	public void todos_entrar_porque_hay_9_standars() {
+	public void todos_entran_porque_hay_9_standars() {
 		
 		Partido partido = new Partido();
 		
