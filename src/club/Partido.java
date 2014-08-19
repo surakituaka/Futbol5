@@ -112,7 +112,7 @@ public class Partido {
 	public boolean hay10Standar() {
 		int contador = 0;
 		for (Jugador jugador : jugadores) {
-			if(jugador.getTipo().soyStandar()){
+			if(jugador.getTipo().getInscripcion().equals("STANDAR")){
 				contador++;
 			}
 		}
