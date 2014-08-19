@@ -2,6 +2,7 @@ package club;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -108,14 +109,17 @@ public class Partido {
 		return false;
 	}
 
-	private boolean hay10Standar() {
+	public boolean hay10Standar() {
 		int contador = 0;
-		for(int i=0;i<jugadores.size();i++){
-			if(jugadores.get(i).getTipo().soyStandar())
+		for (Jugador jugador : jugadores) {
+			if(jugador.getTipo().getInscripcion().equals("STANDAR")){
 				contador++;
+			}
 		}
-		if(contador == 10)
+		if(contador == 10){
 			return true;
+		}
+			
 		return false;
 	}
 }

@@ -22,9 +22,12 @@ public class Standar implements IModalidad{
 	public void setFecha(Date fecha) {
 		this.fecha=fecha;		
 	}
-	public boolean soyStandar(){
-		return true;
-	}
 
+
+	@Override
+	public boolean soyStandar() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
