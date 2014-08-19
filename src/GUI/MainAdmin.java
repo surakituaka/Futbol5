@@ -93,6 +93,13 @@ public class MainAdmin extends JFrame {
 		contentPane.add(btnCerrarSesin);
 		
 		JButton btnBuzon = new JButton("Buzon de Mensajes");
+		btnBuzon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BandejaEntrada pantalla_bandeja_entrada = new BandejaEntrada(new GlobalParameters(global, null, yo));
+				pantalla_bandeja_entrada.setVisible(true);
+				yo.setEnabled(false);
+			}
+		});
 		btnBuzon.setBounds(48, 195, 178, 29);
 		contentPane.add(btnBuzon);
 	}
