@@ -105,7 +105,7 @@ public class Inscribirse extends JDialog {
 			partido_actual = global.partidos.get(0);
 		}
 		l_cantJugadores.setForeground(Color.RED);
-		l_cantJugadores.setBounds(10, 11, 149, 14);
+		l_cantJugadores.setBounds(10, 11, 348, 14);
 		panel.add(l_cantJugadores);
 		
 		JLabel lblTipoDeInscripcin = new JLabel("Tipo de Inscripci\u00F3n:");

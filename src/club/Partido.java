@@ -94,7 +94,8 @@ public class Partido {
 	}
 	
 	public String enviar_mensaje(String emisor,String receptor,String mensaje){
-		return mensajero.enviar_mensaje(emisor, receptor, mensaje);
+		//return mensajero.enviar_mensaje(emisor, receptor, mensaje);
+		return "";
 	}
 	
 	public void agregar_calificacion(Calificacion calificacion){

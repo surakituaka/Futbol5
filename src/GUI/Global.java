@@ -20,7 +20,6 @@ public class Global {
 	public List<Partido> partidos = new ArrayList<Partido>();
 	public Admin administrador;
 	
-	
 	public Global(){
 		//Creamos 3 amigos libres.
 		Jugador amigo1 = new Jugador();
@@ -60,17 +59,16 @@ public class Global {
 		//3 Solidarios
 		for (num=sol;num<sol+3;num++){
 			Jugador player = new Jugador();
-			//player.setNombre((new String("Solidario-")).concat(Integer.toString(num)));
-			//player.setApellido((new String("Apellido-")).concat(Integer.toString(num)));
+			player.setNombre((new String("Solidario-")).concat(Integer.toString(num)));
+			player.setApellido((new String("Apellido-")).concat(Integer.toString(num)));
 			player.setTipo(new Solidaria());
-			//player.agregar_amigo(amigo1);
-			//player.agregar_amigo(amigo2);
-			//player.agregar_amigo(amigo3);
-//------------->			jugadores.add(player);			
+			player.agregar_amigo(amigo1);
+			player.agregar_amigo(amigo2);
+			player.agregar_amigo(amigo3);
+			jugadores.add(player);			
 			player.inscribirse_a(partido);
-			//if(num==sol+2){player.inscribirse_a(calificable);player.setPartidos_jugados(calificables);}
+			if(num==sol+2){player.inscribirse_a(calificable);player.setPartidos_jugados(calificables);}
 		}
-		/*
 		sol=num;
 		//10 Standar
 		for (num=stan;num<stan+10;num++){
@@ -154,7 +152,7 @@ public class Global {
 			player.agregar_amigo(amigo3);
 			jugadores.add(player);		
 		}
-		*/
+		
 		//Cargamos al Admin.
 				administrador = new Admin();
 				administrador.setNombre("Clue");
