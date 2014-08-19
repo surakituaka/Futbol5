@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -61,28 +62,46 @@ public class GUI_Jugadores extends JDialog {
 				pantalla_admin.setEnabled(true);
 		    }
 		});
-		setBounds(100, 100, 335, 332);
+		setBounds(100, 100, 410, 332);
 		getContentPane().setLayout(null);
 		
 		btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);
-				propuesta_seleccionada.getJugador().agregar_amigo(propuesta_seleccionada.getAmigo());
-				propuesta_seleccionada.getAmigo().setTipofromString(tipo_inscripcion_seleccionada, t_condicion.getText());
-				propuesta_seleccionada.getAmigo().inscribirse_a(propuesta_seleccionada.getPartido());
-				
-				pantalla_admin.setEnabled(true);
-				dispose();
+				if(comboJugadores.getSelectedIndex() > -1) {
+					global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);
+					propuesta_seleccionada.getAmigo().setTipofromString(tipo_inscripcion_seleccionada, t_condicion.getText());
+					global.administrador.aprobar_propuesta(propuesta_seleccionada);
+					
+					global.jugadores.add(propuesta_seleccionada.getAmigo());
+					
+					pantalla_admin.refreshComboJugadores();
+					pantalla_admin.setEnabled(true);
+					dispose();
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Seleccione una propuesta.", "Error", JOptionPane.WARNING_MESSAGE);
+
 			}
 		});
 		btnAceptar.setBounds(10, 270, 115, 23);
 		getContentPane().add(btnAceptar);
 		JButton btnRechazar = new JButton("Rechazar");
-		btnRechazar.setBounds(222, 270, 97, 23);
+		btnRechazar.setBounds(297, 270, 97, 23);
 		getContentPane().add(btnRechazar);
 		btnRechazar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(comboJugadores.getSelectedIndex() > -1) {
+					global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);
+					String razon = JOptionPane.showInputDialog(null, "Ingrese una Razón", "Rechazar una Propuesta", JOptionPane.PLAIN_MESSAGE);
+					global.administrador.rechazar_propuesta(propuesta_seleccionada,razon);					
+					pantalla_admin.setEnabled(true);
+					dispose();
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Seleccione una propuesta.", "Error", JOptionPane.WARNING_MESSAGE);
+
+
 				//TODO TERMINAR
 			}
 		});
@@ -91,7 +110,7 @@ public class GUI_Jugadores extends JDialog {
 		for(int i = 0;i < global.administrador.getNuevas_propuestas().size();i++) 
 			comboJugadores.addItem(global.administrador.getNuevas_propuestas().get(i).getAmigo().getNombre());
 		
-		comboJugadores.setBounds(161, 50, 158, 20);
+		comboJugadores.setBounds(161, 50, 233, 20);
 		getContentPane().add(comboJugadores);
 		
 		JLabel lblPropuestasDeJugador = new JLabel("Propuestas de Jugadores:");
@@ -106,7 +125,7 @@ public class GUI_Jugadores extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 78, 309, 141);
+		panel.setBounds(10, 78, 384, 141);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		l_nombre = new JLabel(gen_nombre);

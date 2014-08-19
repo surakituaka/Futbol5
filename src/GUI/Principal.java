@@ -30,6 +30,7 @@ public class Principal extends JFrame {
 	private static MainAdmin main_admin;
 	private static Principal principal_interface;
 	private static Jugador jugador_seleccionado;
+	private final Global global;
 
 
 	/**
@@ -60,6 +61,7 @@ public class Principal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		global = inicializador;
 		
 		
 		comboJugadores = new JComboBox<String>();
@@ -75,11 +77,7 @@ public class Principal extends JFrame {
 			}
 		});
 		comboJugadores.setBounds(10, 12, 187, 20);
-		int i = 0;
-		while (i < inicializador.jugadores.size()) {
-			comboJugadores.addItem(inicializador.jugadores.get(i).getNombre());
-            i++;
-        }
+		refreshComboJugadores();
 		contentPane.add(comboJugadores);
 
 		
@@ -113,7 +111,11 @@ public class Principal extends JFrame {
 	public void habilitarAdmin() {
 		btnAccesoAdmin.setEnabled(true);
 	}
-
+	public void refreshComboJugadores() {
+		comboJugadores.removeAllItems();
+		for(int i=0;i < global.jugadores.size();i++)
+			comboJugadores.addItem(global.jugadores.get(i).getNombre());
+	}
 }
 
 

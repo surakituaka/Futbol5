@@ -96,5 +96,8 @@ public class MainAdmin extends JFrame {
 		btnBuzon.setBounds(48, 195, 178, 29);
 		contentPane.add(btnBuzon);
 	}
+	public void refreshComboJugadores(){
+		pantalla_principal.refreshComboJugadores();
+	}
 }
 
