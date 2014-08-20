@@ -10,20 +10,19 @@ public class EquipoSuma11 implements IGeneradorEquipos{
 		
 		List<Jugador> e1 = new ArrayList<Jugador>();
 		List<Jugador> e2 = new ArrayList<Jugador>();
+
 		int i = 0;
-		int j = 9;
-		while ( i < 5) {
-			while ( j > 4) {
-				if(i+j==9){
-					e1.add(partido.getTitulares().get(i));
-					e2.add(partido.getTitulares().get(j));
-					break;
-				}
-			}
-			i++;
-			j--;
+		while(i < 9){
+			e1.add(partido.getTitulares().get(i));
+			e2.add(partido.getTitulares().get(9-i));
+			i += 4;
 		}
-		
+		i -= 5;
+		while(i > 2){
+			e1.add(partido.getTitulares().get(i));
+			e2.add(partido.getTitulares().get(9-i));
+			i -= 4;
+		}
 		
 		partido.getEquipo1().setJugadores(e1);
 		partido.getEquipo2().setJugadores(e2);
@@ -32,3 +31,7 @@ public class EquipoSuma11 implements IGeneradorEquipos{
 	}
 	
 }
+
+/* Ordena asi	e1 = (01) - (05) - (09) - (08) - (04)
+				e2 = (10) - (06) - (02) - (03) - (07) 
+*/
