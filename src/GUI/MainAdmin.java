@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -60,9 +61,12 @@ public class MainAdmin extends JFrame {
 		JButton btnEquipos = new JButton("Equipos");
 		btnEquipos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "En Construccion...", "Gestion de Equipos", JOptionPane.WARNING_MESSAGE);
+				/*
 				GUI_Equipos pantalla_gestion_equipos = new GUI_Equipos(new GlobalParameters(global, null, yo));
 				pantalla_gestion_equipos.setVisible(true);
 				yo.setEnabled(false);
+				*/
 			}
 		});
 		btnEquipos.setBounds(48, 155, 178, 29);
