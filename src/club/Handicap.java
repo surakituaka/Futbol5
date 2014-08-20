@@ -21,13 +21,8 @@ public class Handicap extends CriterioOrden{
 	
 	@Override
 	public int compare(Jugador jugador1, Jugador jugador2) {
-		if(jugador1.getHandicap()>jugador2.getHandicap()){
-			return 1;
-		}
-		if(jugador1.getHandicap()<jugador2.getHandicap()){
-			return -1;
-		}
-		return 0;
+		
+		return jugador2.getHandicap().compareTo(jugador1.getHandicap());
 	}
 
 	

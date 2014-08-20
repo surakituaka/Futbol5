@@ -75,7 +75,7 @@ public class Promedio extends CriterioOrden{
 			prom2=prom2/cant_cal2;
 		}
 		
-		return prom1.compareTo(prom2);
+		return prom2.compareTo(prom1);
 	}
 
 	

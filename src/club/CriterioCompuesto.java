@@ -55,20 +55,15 @@ public class CriterioCompuesto extends CriterioOrden{
 	@Override
 	public int compare(Jugador jugador1, Jugador jugador2) {
 		
-		double j1 = 0, j2 = 0;
+		Double j1 = new Double(0), j2 = new Double(0);
 		for (int i = 0; i < promedios.get(jugador2).size(); i++) {
 			j1+=promedios.get(jugador1).get(i);
 			j2+=promedios.get(jugador2).get(i);
 		}
 		j1 = j1/promedios.get(jugador1).size();
 		j2 = j2/promedios.get(jugador2).size();
-		if(j1<j2){
-			return 1;
-		}
-		if(j1>j2){
-			return -1;
-		}
-		return 0;
+		
+		return j1.compareTo(j2);
 	}
 
 	
