@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import club.Admin;
 import club.Condicional;
+import club.CriterioOrden;
+import club.Handicap;
 import club.IOrden;
 import club.OrdenNuevoJugador;
 import club.Penalizacion;
@@ -224,6 +226,31 @@ public class TestSobreJugadores {
 		jugador.proponer_jugador(amigo, partido);
 		
 		assertTrue(admin.getNuevas_propuestas().size()==1);
+	}
+	
+	@Test
+	public void ordenar_equipo_handicap(){
+		
+		Partido partido = new Partido();
+		for(int i=0;i < 9;i++){
+			Jugador jugador = new Jugador();
+			jugador.setNombre(Integer.toString(i));
+			jugador.setTipo(new Standar());
+			jugador.setHandicap(5);
+			jugador.inscribirse_a(partido);
+		}
+		Jugador jugador_s = new Jugador();
+		jugador_s.setNombre("Special");
+		jugador_s.setHandicap(10);
+		jugador_s.setTipo(new Standar());
+		jugador_s.inscribirse_a(partido);
+		CriterioOrden[] criterios = {new Handicap()};
+
+		Admin admin = new Admin();
+		admin.organizar_equipo(partido, criterios);
+		
+		
+		assertTrue(partido.getJugadores().get(0).getNombre().equals("Special"));
 	}
 	
 	
