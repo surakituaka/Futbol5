@@ -4,13 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import club.Admin;
-import club.CriterioOrden;
-import club.Handicap;
 import club.IMensajero;
 import club.Jugador;
 import club.Partido;
-import club.Promedio;
 import club.Standar;
 import static org.mockito.Mockito.*;
 
