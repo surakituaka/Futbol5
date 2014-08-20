@@ -48,7 +48,15 @@ public class Admin {
 	}
 	
 	public void organizar_equipo(Partido partido, CriterioOrden[] criterios){
-		Collections.sort(partido.getJugadores(),new CriterioCompuesto(criterios));
+		
+		Collections.sort(partido.getJugadores(),new OrdenadorJugadoresTipo());
+		partido.getTitulares().clear();		
+		
+		for(int i =0;i<10;i++){
+			partido.getTitulares().add(partido.getJugadores().get(i));
+		}
+		
+		Collections.sort(partido.getTitulares(),new CriterioCompuesto(criterios));
 	}
 	
 	public void agregar_partido_validado(Partido partido){

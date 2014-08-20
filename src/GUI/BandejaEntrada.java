@@ -19,7 +19,7 @@ public class BandejaEntrada extends JDialog {
 
 
 	public BandejaEntrada(final GlobalParameters global) {
-		BandejaEntrada yo = this;
+		final BandejaEntrada yo = this;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setTitle("Bandeja de entrada");

@@ -15,8 +15,8 @@ public class EquipoSuma11 implements IGeneradorEquipos{
 		while ( i < 5) {
 			while ( j > 4) {
 				if(i+j==9){
-					e1.add(partido.getJugadores().get(i));
-					e2.add(partido.getJugadores().get(j));
+					e1.add(partido.getTitulares().get(i));
+					e2.add(partido.getTitulares().get(j));
 					break;
 				}
 			}

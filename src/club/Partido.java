@@ -14,6 +14,7 @@ public class Partido {
 	private String lugar;
 	private IMensajero mensajero;
 	private List<Calificacion> calificaciones = new ArrayList<Calificacion>();
+	private List<Jugador> titulares = new ArrayList<Jugador>();
 	private Equipo equipo1 = new Equipo();
 	private Equipo equipo2 = new Equipo();
 	
@@ -78,6 +79,14 @@ public class Partido {
 
 	public void setEquipo2(Equipo equipo2) {
 		this.equipo2 = equipo2;
+	}
+
+	public List<Jugador> getTitulares() {
+		return titulares;
+	}
+
+	public void setTitulares(List<Jugador> titulares) {
+		this.titulares = titulares;
 	}
 
 	public void agregar_jugador(Jugador jugador){
