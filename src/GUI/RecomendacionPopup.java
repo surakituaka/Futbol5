@@ -68,7 +68,7 @@ public class RecomendacionPopup extends JDialog {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-		    	pantalla_inscripcion.setEnabled(true); 
+		    	pantalla_inscripcion.terminate(); 
 		    	dispose();
 			}
 		});

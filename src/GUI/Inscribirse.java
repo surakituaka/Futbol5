@@ -157,7 +157,7 @@ public class Inscribirse extends JDialog {
 		lblCondicion.setBounds(252, 36, 66, 14);
 		panel.add(lblCondicion);
 		
-		btnInscribirse = new JButton("Recomendar Amigo e Inscribirme");
+		btnInscribirse = new JButton("Inscribirme y Recomendar Amigo");
 		btnInscribirse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(inscripcionEsValida(global.jugador_seleccionado)){
