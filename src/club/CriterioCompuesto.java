@@ -39,14 +39,14 @@ public class CriterioCompuesto extends CriterioOrden{
 	@Override
 	public void ordenar(Partido partido) {
 		
-		for (Jugador jugador : partido.getJugadores()) {
+		for (Jugador jugador : partido.getTitulares()) {
 			promedios.put(jugador, new ArrayList<Integer>());
 		}
 		
 		for (CriterioOrden criterio : this.getCriterios()) {
-			Collections.sort(partido.getJugadores(), criterio);
-			for (Jugador jugador : partido.getJugadores()) {
-				promedios.get(jugador).add(partido.getJugadores().indexOf(jugador)+1);
+			Collections.sort(partido.getTitulares(), criterio);
+			for (Jugador jugador : partido.getTitulares()) {
+				promedios.get(jugador).add(partido.getTitulares().indexOf(jugador)+1);
 			}
 			
 		}

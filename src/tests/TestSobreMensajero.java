@@ -1,10 +1,16 @@
 package tests;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
+
+import club.Admin;
+import club.CriterioOrden;
+import club.Handicap;
 import club.IMensajero;
 import club.Jugador;
 import club.Partido;
+import club.Promedio;
 import club.Standar;
 import static org.mockito.Mockito.*;
 
@@ -65,6 +71,12 @@ public class TestSobreMensajero {
 		}
 		
 		assertEquals(rta,"Mensaje malo enviado al admin");
-	}	
+		
+		/*
+		Admin a =new Admin();
+		CriterioOrden[] criterios ={new Handicap() ,new Promedio(3)};
+		a.organizar_equipo(partido, criterios);
+		*/
+		}	
 
 }

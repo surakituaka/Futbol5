@@ -55,8 +55,9 @@ public class Admin {
 		for(int i =0;i<10;i++){
 			partido.getTitulares().add(partido.getJugadores().get(i));
 		}
-		
-		Collections.sort(partido.getTitulares(),new CriterioCompuesto(criterios));
+		CriterioOrden criterio = new CriterioCompuesto(criterios);
+		criterio.ordenar(partido);
+		//Collections.sort(partido.getTitulares(),new CriterioCompuesto(criterios));
 	}
 	
 	public void agregar_partido_validado(Partido partido){

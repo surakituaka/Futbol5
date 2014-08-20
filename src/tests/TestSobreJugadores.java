@@ -250,7 +250,7 @@ public class TestSobreJugadores {
 		admin.organizar_equipo(partido, criterios);
 		
 		
-		assertTrue(partido.getJugadores().get(0).getNombre().equals("Special"));
+		assertTrue(partido.getTitulares().get(0).getNombre().equals("Special"));
 	}
 	
 	
