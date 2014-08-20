@@ -13,6 +13,7 @@ public class GlobalParameters extends Global {
 	public GlobalParameters(Global hardcodeo, Jugador jugador, JFrame pantalla) {
 		pantalla_anterior = pantalla;
 		jugador_seleccionado = jugador;
+		mensajero = hardcodeo.mensajero;
 		criterios = hardcodeo.criterios;
 		jugadores = hardcodeo.jugadores;
 		administrador = hardcodeo.administrador;

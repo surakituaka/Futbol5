@@ -14,10 +14,13 @@ public class Global {
 	public List<Jugador> jugadores = new ArrayList<Jugador>();
 	public List<Partido> partidos = new ArrayList<Partido>();
 	public Admin administrador;
-	
+	public IMensajero mensajero;
 	public List<String> criterios = new ArrayList<String>();
 	
 	public Global(){
+		//Creamos el mensajero
+		mensajero = new MockMensajero();
+		
 		//Creamos 3 amigos libres.
 		Jugador amigo1 = new Jugador();
 		amigo1.setNombre("Amigo-Ideal");
@@ -49,6 +52,7 @@ public class Global {
 		//-----------------------------------------------
 		//Partido de 10 Standars mas otros			
 		partido = new Partido();
+		partido.setMensajero(mensajero);
 		partido.setFecha(new Date());
 		partido.setId("Completo");
 		partido.setLugar("Salon N* 2");	
@@ -87,6 +91,7 @@ public class Global {
 		//-----------------------------------------------
 		//Partido de 5 Standar + 5 extras
 		partido = new Partido();
+		partido.setMensajero(mensajero);
 		partido.setFecha(new Date());
 		partido.setId("5+5");
 		partido.setLugar("Salon N* 7");		

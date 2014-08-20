@@ -61,6 +61,7 @@ public class GUI_Partido extends JDialog {
 						partido_nuevo.setFecha(fecha);
 						partido_nuevo.setId(nombre_partido);
 						partido_nuevo.setLugar(lugar);
+						partido_nuevo.setMensajero(global.mensajero);
 						global.agregarPartido(partido_nuevo);
 						comboPartidos.addItem(partido_nuevo.getId());
 						pantalla_admin.setEnabled(true);

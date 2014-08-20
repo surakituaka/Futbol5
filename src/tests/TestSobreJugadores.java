@@ -8,10 +8,6 @@ import org.junit.Test;
 
 import club.Admin;
 import club.Condicional;
-import club.CriterioOrden;
-import club.EquipoParImpar;
-import club.EquipoSuma11;
-import club.Handicap;
 import club.IOrden;
 import club.OrdenNuevoJugador;
 import club.Penalizacion;

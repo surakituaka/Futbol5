@@ -2,7 +2,6 @@ package club;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -104,8 +103,7 @@ public class Partido {
 	}
 	
 	public String enviar_mensaje(String emisor,String receptor,String mensaje){
-		//return mensajero.enviar_mensaje(emisor, receptor, mensaje);
-		return "";
+		return mensajero.enviar_mensaje(emisor, receptor, mensaje);
 	}
 	
 	public void agregar_calificacion(Calificacion calificacion){
