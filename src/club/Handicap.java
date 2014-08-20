@@ -12,7 +12,7 @@ public class Handicap extends CriterioOrden{
 	@Override
 	public void ordenar(Partido partido) {
 		
-		Collections.sort(partido.getJugadores(),this);
+		Collections.sort(partido.getTitulares(),this);
 	}
 
 	public String quienSoy(){
