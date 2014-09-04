@@ -1,24 +1,23 @@
 package GUI;
 
-import javax.swing.JFrame;
-
-import club.*;
+import clasesDeNegocio.*;
 
 public class GlobalParameters extends Global {
 
-	public JFrame pantalla_anterior;
+	public VentanaTheGrid pantalla_anterior;
 	public Jugador jugador_seleccionado;
 	
 	
-	public GlobalParameters(Global hardcodeo, Jugador jugador, JFrame pantalla) {
+	public GlobalParameters(Global hardcodeo, Jugador jugador, VentanaTheGrid pantalla) {
 		pantalla_anterior = pantalla;
 		jugador_seleccionado = jugador;
+		
 		mensajero = hardcodeo.mensajero;
-		criterios = hardcodeo.criterios;
 		jugadores = hardcodeo.jugadores;
 		administrador = hardcodeo.administrador;
 		partidos = hardcodeo.partidos;
-
+		criterios = hardcodeo.criterios;
+		generadores_equipo = hardcodeo.generadores_equipo;
 		
 		// TODO Auto-generated constructor stub
 	}

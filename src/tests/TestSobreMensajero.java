@@ -4,10 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import club.IMensajero;
-import club.Jugador;
-import club.Partido;
-import club.Standar;
+import clasesDeNegocio.*;
+import ServiciosExternos.*;
 import static org.mockito.Mockito.*;
 
 public class TestSobreMensajero {
@@ -18,7 +16,7 @@ public class TestSobreMensajero {
 		IMensajero mensajero = mock(IMensajero.class);
 		when(mensajero.enviar_mensaje("partido","admin","partido lleno")).thenReturn("Mensaje enviado al admin");
 		
-		Partido partido = new Partido();
+		Partido partido = new Partido(mensajero);
 		partido.setMensajero(mensajero);
 		
 		for(int i = 0;i<10;i++){
@@ -43,14 +41,14 @@ public class TestSobreMensajero {
 		when(mensajero.enviar_mensaje("partido","admin","partido lleno")).thenReturn("Mensaje bueno enviado al admin");
 		when(mensajero.enviar_mensaje("partido","admin","se fue alguien del partido")).thenReturn("Mensaje malo enviado al admin");
 		
-		Partido partido = new Partido();
+		Partido partido = new Partido(mensajero);
 		partido.setMensajero(mensajero);
 		
 		Jugador j= null;
 		for(int i = 0;i<10;i++){
 			j = new Jugador();
 			j.setTipo(new Standar());
-			partido.getJugadores().add(j);
+			j.inscribirse_a(partido);
 		}
 		
 		String rta = null;

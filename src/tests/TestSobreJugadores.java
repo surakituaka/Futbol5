@@ -6,24 +6,17 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
-import club.Admin;
-import club.Condicional;
-import club.IOrden;
-import club.OrdenNuevoJugador;
-import club.Penalizacion;
-import club.Solidaria;
-import club.Standar;
-import club.Jugador;
-import club.Partido;
-import club.Respuesta;
+import clasesDeNegocio.*;
+import ServiciosExternos.*;
 
 
 public class TestSobreJugadores {
 	
 	@Test
 	public void standar_puede_entrar_a_partido() {
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		
-		Partido partido = new Partido();
 		Jugador jugador = new Jugador();
 		
 		jugador.setTipo(new Standar());
@@ -38,7 +31,9 @@ public class TestSobreJugadores {
 	@Test
 	public void solidario_puede_entrar_a_partido() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
 		Jugador jugador = new Jugador();
 		
 		jugador.setTipo(new Solidaria());
@@ -53,7 +48,10 @@ public class TestSobreJugadores {
 	@Test
 	public void condicional_puede_entrar_a_partido() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
+		
 		Jugador jugador = new Jugador();
 		
 		jugador.setTipo(new Condicional("condicion loca"));
@@ -66,9 +64,12 @@ public class TestSobreJugadores {
 	}
 	
 	@Test
+	@Deprecated
 	public void standar_no_puede_entrar_a_partido_por_estar_penalizado() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
 		Jugador jugador = new Jugador();
 		
 		jugador.setTipo(new Standar());
@@ -84,7 +85,9 @@ public class TestSobreJugadores {
 	@Test
 	public void standar_no_puede_entrar_a_partido_por_estar_lleno() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
 		
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
@@ -106,7 +109,9 @@ public class TestSobreJugadores {
 	@Test
 	public void no_entra_nadie_porque_hay_10_standars() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
 		
 		for(int i = 0;i<15;i++){
 			Jugador j = new Jugador();
@@ -119,9 +124,12 @@ public class TestSobreJugadores {
 	}
 	
 	@Test
+	@Deprecated
 	public void todos_entran_porque_hay_9_standars() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
 		
 		for(int i = 0;i<9;i++){
 			Jugador j = new Jugador();
@@ -142,23 +150,22 @@ public class TestSobreJugadores {
 	@Test
 	public void standar_puede_entrar_a_partido_por_tener_mas_prioridad() {
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		
 		for(int i = 0;i<9;i++){
 			Jugador j = new Jugador();
 			j.setTipo(new Standar());
-//			j.setPrioridad(1.0);
-			partido.getJugadores().add(j);
+			j.inscribirse_a(partido);
 		}
 		
 		Jugador j = new Jugador();
 		j.setTipo(new Solidaria());
-//		j.setPrioridad(1.0);
+		j.inscribirse_a(partido);
 		partido.getJugadores().add(j);
 		
 		Jugador jugador = new Jugador();
 		jugador.setTipo(new Standar());
-//		jugador.setPrioridad(2.0);
 		Respuesta respuesta = new Respuesta();
 		
 		respuesta=jugador.inscribirse_a(partido);
@@ -170,9 +177,11 @@ public class TestSobreJugadores {
 	public void jugador_es_penalizado_por_no_tener_reemplazo(){
 		
 		Jugador jugador = new Jugador();
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
 		
-		partido.agregar_jugador(jugador);
+		Partido partido = new Partido(mensajero);
+		
+		jugador.inscribirse_a(partido);
 		
 		jugador.bajarse_de(partido);
 		
@@ -184,9 +193,11 @@ public class TestSobreJugadores {
 		
 		Jugador jugador = new Jugador();
 		Jugador reemplazo = new Jugador();
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
 		
-		partido.agregar_jugador(jugador);
+		Partido partido = new Partido(mensajero);
+		
+		jugador.inscribirse_a(partido);
 		
 		jugador.bajarse_de(partido,reemplazo);
 		
@@ -201,19 +212,21 @@ public class TestSobreJugadores {
 		
 		Jugador calificador = new Jugador();
 		Jugador calificado = new Jugador();
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		
 		calificador.calificar(calificado, 6, "Jugo bien", partido);
 		
-		assertTrue(partido.getCalificaciones().size()>0);
+		assertTrue(calificador.getCalificaciones().size()>0);
 	}
 	
 	@Test
 	public void jugador_puede_proponer_amigo(){
 		
 		Jugador jugador = new Jugador();
-		Jugador amigo = new Jugador();
-		Partido partido = new Partido();
+		Amigo amigo = new Amigo("pepe", "grillo", "email@email.com");
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		Admin admin = new Admin();
 		IOrden orden = new OrdenNuevoJugador();
 		

@@ -4,21 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import club.Admin;
-import club.CriterioOrden;
-import club.EquipoParImpar;
-import club.EquipoSuma11;
-import club.Handicap;
-import club.Jugador;
-import club.Partido;
-import club.Standar;
+import clasesDeNegocio.*;
+import ServiciosExternos.*;
 
 public class TestSobrePartidos {
 
 	@Test
 	public void ordenar_equipo_handicap(){
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
 			jugador.setNombre(Integer.toString(i));
@@ -41,15 +36,16 @@ public class TestSobrePartidos {
 		Admin admin = new Admin();
 		admin.organizar_equipo(partido, criterios);
 		
-		String nombrePrimero = partido.getTitulares().get(0).getNombre();
-		String nombreUltimo = partido.getTitulares().get(9).getNombre();
+		String nombrePrimero = partido.getJugadores().get(0).getNombre();
+		String nombreUltimo = partido.getJugadores().get(9).getNombre();
 		assertTrue(nombrePrimero.equals("Primero") && nombreUltimo.equals("Ultimo"));
 	}
 
 	@Test
 	public void generar_equipo_tentativo_parimpar(){
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
 			jugador.setNombre(Integer.toString(i));
@@ -83,7 +79,8 @@ public class TestSobrePartidos {
 	@Test
 	public void generar_equipo_tentativo_suma11(){
 		
-		Partido partido = new Partido();
+		IMensajero mensajero = new MockMensajero();
+		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
 			jugador.setNombre(Integer.toString(i));

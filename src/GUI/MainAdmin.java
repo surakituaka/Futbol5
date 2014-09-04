@@ -1,114 +1,118 @@
 package GUI;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 
-public class MainAdmin extends JFrame {
+public class MainAdmin extends VentanaTheGrid {
 	private static final long serialVersionUID = 828297704025213357L;
-	private JPanel contentPane;
-	private static Principal pantalla_principal;
-	private static MainAdmin yo;
-	private final GlobalParameters global;
 	
-	public MainAdmin(GlobalParameters globales) {
-		global = globales;
+	//Componentes no alterables
+	private JLabel titulo;
+	private JPanel contentPane;
+
+	//Componentes Modificables
+	private JButton btnPartidos;
+	private JButton btnConfirmacion;
+	private JButton btnGestionJugadores;
+	private JButton btnCerrarSesion;
+	private JButton btnPropuestas;
+	
+	//Constructor
+	public MainAdmin(GlobalParameters caller) {
+		super();
+		global = caller; //Seteamos los atributos
+		yo = this;
+		
+		//Creemos la JFrame principal
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/Inform.gif")));
 		setTitle("The Grid");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-		    public void windowClosing(WindowEvent winEvt) {
-		        // Perhaps ask user if they want to save any unsaved files first.
-				pantalla_principal.habilitarAdmin();
-		    }
-		});
-		setBounds(100, 100, 292, 316);
+		setBounds(100, 100, 292, 307);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		pantalla_principal = (Principal) global.pantalla_anterior;
-		yo = this;
 		
-		JLabel Titulo = new JLabel("Panel de Administraci\u00F3n");
-		Titulo.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		Titulo.setBounds(10, 11, 272, 53);
-		contentPane.add(Titulo);
+		//Creemos los botones
 		
-		JButton btnPartidos = new JButton("Partidos");
+		btnPartidos = new JButton("Partidos");
+		btnConfirmacion = new JButton("Confirmacion");
+		btnGestionJugadores = new JButton("Jugadores");
+		btnCerrarSesion = new JButton("Cerrar Sesi\u00F3n");
+		btnPropuestas = new JButton("Propuestas de Jugadores");
+
+		btnPartidos.setBounds(48, 75, 178, 29);
+		btnConfirmacion.setBounds(48, 115, 178, 29);
+		btnGestionJugadores.setBounds(48, 155, 178, 29);
+		btnCerrarSesion.setBounds(48, 235, 178, 29);
+		btnPropuestas.setBounds(48, 195, 178, 29);
+
+		contentPane.add(btnPartidos);
+		contentPane.add(btnConfirmacion);
+		contentPane.add(btnGestionJugadores);
+		contentPane.add(btnCerrarSesion);
+		contentPane.add(btnPropuestas);
+		
+		btnCerrarSesion.setSelectedIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
+		btnCerrarSesion.setIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
+		
+		//Creemos las labels
+		
+		titulo = new JLabel("Panel de Administraci\u00F3n");
+		titulo.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		titulo.setBounds(10, 11, 272, 53);
+		contentPane.add(titulo);
+		
+		//Comportamiento de los botones
+
 		btnPartidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUI_Partido pantalla_gestion_partidos = new GUI_Partido(new GlobalParameters(global, null, yo));
-				pantalla_gestion_partidos.setVisible(true);
-				yo.setEnabled(false);
+				Admin_Partidos pantalla_gestion_partidos = new Admin_Partidos(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_gestion_partidos);
+
 			}
 		});
-		btnPartidos.setBounds(48, 75, 178, 29);
-		contentPane.add(btnPartidos);
-		
-		JButton btnEquipos = new JButton("Equipos");
-		btnEquipos.addActionListener(new ActionListener() {
+
+		btnConfirmacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "En Construccion...", "Gestion de Equipos", JOptionPane.WARNING_MESSAGE);
-				/*
-				GUI_Equipos pantalla_gestion_equipos = new GUI_Equipos(new GlobalParameters(global, null, yo));
-				pantalla_gestion_equipos.setVisible(true);
-				yo.setEnabled(false);
-				*/
+				Admin_ConfirmacionPartidos pantalla_confirmacion_partidos = new Admin_ConfirmacionPartidos(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_confirmacion_partidos);				
 			}
 		});
-		btnEquipos.setBounds(48, 155, 178, 29);
-		contentPane.add(btnEquipos);
 		
-		JButton btnGestionJugadores = new JButton("Gesti\u00F3n de Jugadores");
 		btnGestionJugadores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GUI_Jugadores pantalla_gestion_jugadores = new GUI_Jugadores(new GlobalParameters(global, null, yo));
-				pantalla_gestion_jugadores.setVisible(true);
-				yo.setEnabled(false);
+				Admin_Jugadores pantalla_gestion_jugadores = new Admin_Jugadores(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_gestion_jugadores);
 			}
 		});
-		btnGestionJugadores.setBounds(48, 115, 178, 29);
-		contentPane.add(btnGestionJugadores);
-		
-		JButton btnCerrarSesin = new JButton("Cerrar Sesi\u00F3n");
-		btnCerrarSesin.addActionListener(new ActionListener() {
+
+		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				pantalla_principal.habilitarAdmin();
-				dispose();
+				terminate();
 			}
 		});
-		btnCerrarSesin.setToolTipText("");
-		btnCerrarSesin.setSelectedIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
-		btnCerrarSesin.setIcon(new ImageIcon(MainAdmin.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
-		btnCerrarSesin.setBounds(48, 235, 178, 29);
-		contentPane.add(btnCerrarSesin);
-		
-		JButton btnBuzon = new JButton("Buzon de Mensajes");
-		btnBuzon.addActionListener(new ActionListener() {
+
+		btnPropuestas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BandejaEntrada pantalla_bandeja_entrada = new BandejaEntrada(new GlobalParameters(global, null, yo));
-				pantalla_bandeja_entrada.setVisible(true);
-				yo.setEnabled(false);
+				Admin_NuevosJugadores pantalla_gestion_jugadores = new Admin_NuevosJugadores(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_gestion_jugadores);
+				/*Admin_BandejaEntrada pantalla_bandeja_entrada = new Admin_BandejaEntrada(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_bandeja_entrada);*/
 			}
 		});
-		btnBuzon.setBounds(48, 195, 178, 29);
-		contentPane.add(btnBuzon);
 	}
 	public void refreshComboJugadores(){
-		pantalla_principal.refreshComboJugadores();
+		((Principal) global.pantalla_anterior).refreshCombo();
 	}
 }
 
