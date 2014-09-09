@@ -1,11 +1,7 @@
 package tests;
 
 import static org.junit.Assert.*;
-
-import java.util.GregorianCalendar;
-
 import org.junit.Test;
-
 import clasesDeNegocio.*;
 import ServiciosExternos.*;
 
@@ -16,16 +12,12 @@ public class TestSobreJugadores {
 	public void standar_puede_entrar_a_partido() {
 		IMensajero mensajero = new MockMensajero();
 		Partido partido = new Partido(mensajero);
-		
+		partido.setId("Partido 1");
 		Jugador jugador = new Jugador();
+				
+		jugador.inscribirse_a(partido, new Standar());
 		
-		jugador.setTipo(new Standar());
-		
-		Respuesta respuesta = new Respuesta();
-		
-		respuesta=jugador.inscribirse_a(partido);
-		
-		assertTrue(respuesta.getEsta_inscripto());
+		assertTrue(jugador.estoyInscripto(partido));
 	}
 	
 	@Test
@@ -34,15 +26,11 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
+		partido.setId("Partido 1");
 		Jugador jugador = new Jugador();
+		jugador.inscribirse_a(partido, new Solidaria());
 		
-		jugador.setTipo(new Solidaria());
-		
-		Respuesta respuesta = new Respuesta();
-		
-		respuesta=jugador.inscribirse_a(partido);
-		
-		assertTrue(respuesta.getEsta_inscripto());
+		assertTrue(jugador.estoyInscripto(partido));
 	}
 	
 	@Test
@@ -51,19 +39,15 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		
+		partido.setId("Partido 1");
 		Jugador jugador = new Jugador();
+			
+		jugador.inscribirse_a(partido,new Condicional("condicion loca"));
 		
-		jugador.setTipo(new Condicional("condicion loca"));
-		
-		Respuesta respuesta = new Respuesta();
-		
-		respuesta=jugador.inscribirse_a(partido);
-		
-		assertTrue(respuesta.getEsta_inscripto());
+		assertTrue(jugador.estoyInscripto(partido));
 	}
 	
-	@Test
+	/*@Test
 	@Deprecated
 	public void standar_no_puede_entrar_a_partido_por_estar_penalizado() {
 		
@@ -79,31 +63,47 @@ public class TestSobreJugadores {
 		respuesta=jugador.inscribirse_a(partido);
 		
 		assertFalse(respuesta.getEsta_inscripto());
+	}*/
+	
+	
+	@Test
+	public void condicional_no_puede_entrar_a_partido_por_baja_prioridad() {
+		
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido partido = new Partido(mensajero);
+		partido.setId("Partido Loco");
+		for(int i = 0;i<10;i++){
+			Jugador j = new Jugador();
+			if(i<9)
+				j.inscribirse_a(partido, new Standar());
+			else
+				j.inscribirse_a(partido, new Solidaria());
+//			j.setPrioridad(10.0);
+		}
+		Jugador jugador = new Jugador();
+//		jugador.setPrioridad(1.0);		
+		jugador.inscribirse_a(partido,new Condicional("Si me dan el arco"));
+		
+		assertFalse(jugador.estoyInscripto(partido));
 	}
-	
-	
 	@Test
 	public void standar_no_puede_entrar_a_partido_por_estar_lleno() {
 		
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		
+		partido.setId("Partido Loco");
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
-			j.setTipo(new Standar());
+			j.inscribirse_a(partido, new Standar());
 //			j.setPrioridad(10.0);
-			partido.getJugadores().add(j);
 		}
-		
 		Jugador jugador = new Jugador();
-		jugador.setTipo(new Standar());
-//		jugador.setPrioridad(1.0);
-		Respuesta respuesta = new Respuesta();
+//		jugador.setPrioridad(1.0);		
+		jugador.inscribirse_a(partido,new Standar());
 		
-		respuesta=jugador.inscribirse_a(partido);
-		
-		assertFalse(respuesta.getEsta_inscripto());
+		assertFalse(jugador.estoyInscripto(partido));
 	}
 	
 	@Test
@@ -112,18 +112,16 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		
+		partido.setId("Partido Loco");
 		for(int i = 0;i<15;i++){
 			Jugador j = new Jugador();
-			j.setTipo(new Standar());
 //			j.setPrioridad(10.0);
-			j.inscribirse_a(partido);
+			j.inscribirse_a(partido, new Standar());
 		}
-		
-		assertTrue(partido.getJugadores().size()==10);
+		assertTrue(partido.getInscripciones().size()==10);
 	}
 	
-	@Test
+	/*@Test
 	@Deprecated
 	public void todos_entran_porque_hay_9_standars() {
 		
@@ -145,43 +143,40 @@ public class TestSobreJugadores {
 		}
 		
 		assertTrue(partido.getJugadores().size()==18);
-	}
+	}*/
 	
 	@Test
 	public void standar_puede_entrar_a_partido_por_tener_mas_prioridad() {
 		
 		IMensajero mensajero = new MockMensajero();
 		Partido partido = new Partido(mensajero);
-		
+		partido.setId("Partido Loco");
+
 		for(int i = 0;i<9;i++){
 			Jugador j = new Jugador();
-			j.setTipo(new Standar());
-			j.inscribirse_a(partido);
+			if(i<9)
+				j.inscribirse_a(partido, new Standar());
+			else
+				j.inscribirse_a(partido, new Solidaria());
 		}
 		
-		Jugador j = new Jugador();
-		j.setTipo(new Solidaria());
-		j.inscribirse_a(partido);
-		partido.getJugadores().add(j);
+		Jugador jugador_standar = new Jugador();
+		jugador_standar.inscribirse_a(partido, new Standar());
 		
-		Jugador jugador = new Jugador();
-		jugador.setTipo(new Standar());
-		Respuesta respuesta = new Respuesta();
-		
-		respuesta=jugador.inscribirse_a(partido);
-		
-		assertTrue(respuesta.getEsta_inscripto());
+		assertTrue(jugador_standar.estoyInscripto(partido));
 	}
 	
 	@Test
 	public void jugador_es_penalizado_por_no_tener_reemplazo(){
 		
 		Jugador jugador = new Jugador();
+		jugador.setUsuario("j1");
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		
-		jugador.inscribirse_a(partido);
+		partido.setId("Partido Loco");
+
+		jugador.inscribirse_a(partido, new Standar());
 		
 		jugador.bajarse_de(partido);
 		
@@ -192,17 +187,22 @@ public class TestSobreJugadores {
 	public void jugador_no_es_penalizado(){
 		
 		Jugador jugador = new Jugador();
+		jugador.setUsuario("j1");
 		Jugador reemplazo = new Jugador();
+		reemplazo.setUsuario("j2");
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		
-		jugador.inscribirse_a(partido);
+		partido.setId("Partido Loco");
+
+		jugador.inscribirse_a(partido, new Standar());
 		
 		jugador.bajarse_de(partido,reemplazo);
 		
 		assertTrue(jugador.getPenalizaciones().isEmpty());
-		assertTrue((partido.getJugadores().size()==1) && (partido.getJugadores().get(0))==reemplazo);
+		assertTrue(partido.getInscripciones().size()==1);
+		assertTrue(partido.getInscripciones().get(0).getJugador_inscripto()==reemplazo);
+		assertTrue(partido.getInscripciones().get(0).getModalidad().getInscripcion().matches("STANDAR"));
 	}
 	
 	

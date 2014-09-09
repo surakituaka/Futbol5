@@ -14,12 +14,9 @@ import javax.swing.border.BevelBorder;
 
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
-import clasesDeNegocio.Penalizacion;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	private static final long serialVersionUID = -8202945325005603430L;
@@ -49,7 +46,6 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	
 	//Atributos
 	Partido partido_seleccionado = null;
-	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
 
 	//Constructor
 	public Admin_ConfirmacionPartidos(GlobalParameters caller){
@@ -265,8 +261,6 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 			bajaPenalizada(global.getJugadorByUsuario(e2_j5.getText()), partido);			
 	}
 	private void bajaPenalizada(Jugador jugador, Partido partido){
-		partido.quitar_jugador(jugador);
-		jugador.darBajaLista(partido);
-		jugador.agregar_penalizacion(new Penalizacion(new GregorianCalendar(),"Por no presentarse al partido: "+partido.getId()+ " el dia "+formato_fecha.format(partido.getFecha())));
+		jugador.bajarse_de(partido);
 	}
 }

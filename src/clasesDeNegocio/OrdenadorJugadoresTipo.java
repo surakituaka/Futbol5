@@ -6,9 +6,9 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
-public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
+public class OrdenadorJugadoresTipo implements Comparator<Inscripcion>{
 
-	public int compare(Jugador jugador1, Jugador jugador2) {
+	public int compare(Inscripcion jugador1, Inscripcion jugador2) {
 		
 		final int MAYOR = 1;
 		final int MENOR =-1;
@@ -18,30 +18,30 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 			return IGUAL;
 		
 		//standar mayor a demas tipos		
-		if((jugador1.getTipo().getInscripcion().equals("STANDAR") && !jugador2.getTipo().getInscripcion().equals("STANDAR"))){
+		if((jugador1.getModalidad().getInscripcion().equals("STANDAR") && !jugador2.getModalidad().getInscripcion().equals("STANDAR"))){
 			return MAYOR;
 		}
 		
-		if((!jugador1.getTipo().getInscripcion().equals("STANDAR") && jugador2.getTipo().getInscripcion().equals("STANDAR"))){
+		if((!jugador1.getModalidad().getInscripcion().equals("STANDAR") && jugador2.getModalidad().getInscripcion().equals("STANDAR"))){
 			return MENOR;
 		}	
 		
 		//entre solidarios
-		if(jugador1.getTipo().getInscripcion().equals("SOLIDARIA") && jugador2.getTipo().getInscripcion().equals("SOLIDARIA") && jugador1.getTipo().getFecha().after(jugador2.getTipo().getFecha())){
+		if(jugador1.getModalidad().getInscripcion().equals("SOLIDARIA") && jugador2.getModalidad().getInscripcion().equals("SOLIDARIA") && jugador1.getModalidad().getFecha().after(jugador2.getModalidad().getFecha())){
 			return MAYOR;
 		}
 			
-		if(jugador1.getTipo().getInscripcion().equals("SOLIDARIA") && jugador2.getTipo().getInscripcion().equals("SOLIDARIA") && jugador1.getTipo().getFecha().before(jugador2.getTipo().getFecha())){
+		if(jugador1.getModalidad().getInscripcion().equals("SOLIDARIA") && jugador2.getModalidad().getInscripcion().equals("SOLIDARIA") && jugador1.getModalidad().getFecha().before(jugador2.getModalidad().getFecha())){
 			return MENOR;
 		}
 	 		
 		//solidario mayor a condicional
-		if((jugador1.getTipo().getInscripcion().equals("SOLIDARIA")) &&	(jugador2.getTipo().getInscripcion().equals("CONDICIONAL"))){
+		if((jugador1.getModalidad().getInscripcion().equals("SOLIDARIA")) &&	(jugador2.getModalidad().getInscripcion().equals("CONDICIONAL"))){
 			return MAYOR;
 		}
 				
 		//condicional menor a todos
-		if((jugador1.getTipo().getInscripcion().equals("CONDICIONAL") && !jugador2.getTipo().getInscripcion().equals("SOLIDARIA"))){
+		if((jugador1.getModalidad().getInscripcion().equals("CONDICIONAL") && !jugador2.getModalidad().getInscripcion().equals("SOLIDARIA"))){
 			return MENOR;
 		}
 		
@@ -52,49 +52,49 @@ public class OrdenadorJugadoresTipo implements Comparator<Jugador>{
 	
 
 	@Override
-	public Comparator<Jugador> reversed() {
+	public Comparator<Inscripcion> reversed() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparing(Comparator<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparing(Comparator<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U extends Comparable<? super U>> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0) {
+	public <U extends Comparable<? super U>> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0,
+	public <U> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0,
 			Comparator<? super U> arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingDouble(
-			ToDoubleFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingDouble(
+			ToDoubleFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingInt(
-			ToIntFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingInt(
+			ToIntFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingLong(
-			ToLongFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingLong(
+			ToLongFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

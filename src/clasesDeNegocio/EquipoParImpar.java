@@ -10,12 +10,12 @@ public class EquipoParImpar implements IGeneradorEquipos{
 		List<Jugador> e1 = new ArrayList<Jugador>();
 		List<Jugador> e2 = new ArrayList<Jugador>();
 		
-		for (Jugador jugador : partido.getJugadores()) {
-			if(partido.getJugadores().indexOf(jugador)%2==0){
-				e1.add(jugador);
+		for (Inscripcion inscripcion : partido.getInscripciones()) {
+			if(partido.getInscripciones().indexOf(inscripcion)%2==0){
+				e1.add(inscripcion.getJugador_inscripto());
 			}
 			else{
-				e2.add(jugador);
+				e2.add(inscripcion.getJugador_inscripto());
 			}
 		}
 		partido.getEquipo1().setJugadores(e1);

@@ -13,21 +13,21 @@ public class EstadoPendiente implements IEstadoEquipo {
 	public String getEstado(Partido partido) {	
 		if(partido.getFecha().before(Calendar.getInstance().getTime()))
 			return estado_vencido;
-		if(equiposCorrectos(partido.getEquipo1(),partido.getEquipo2(), partido.getJugadores()))
+		if(equiposCorrectos(partido.getEquipo1(),partido.getEquipo2(), partido.getInscripciones()))
 			return estado_equipos;
 		return estado_base;
 	}
 	
-	private boolean equiposCorrectos(Equipo equipo1, Equipo equipo2, List<Jugador> jugadores){
+	private boolean equiposCorrectos(Equipo equipo1, Equipo equipo2, List<Inscripcion> inscripciones){
 		
 		int cantidad_jugadores_correctos = 0;
-		for(int i=0; i < jugadores.size();i++){
+		for(int i=0; i < inscripciones.size();i++){
 			for(int j=0; j < equipo1.getJugadores().size();j++){
-				if(equipo1.getJugadores().get(j).getUsuario().equals(jugadores.get(i).getUsuario()))
+				if(equipo1.getJugadores().get(j).getUsuario().equals(inscripciones.get(i).getJugador_inscripto().getUsuario()))
 					cantidad_jugadores_correctos++;
 			}
 			for(int j=0; j < equipo2.getJugadores().size();j++){
-				if(equipo2.getJugadores().get(j).getUsuario().equals(jugadores.get(i).getUsuario()))
+				if(equipo2.getJugadores().get(j).getUsuario().equals(inscripciones.get(i).getJugador_inscripto().getUsuario()))
 					cantidad_jugadores_correctos++;
 			}
 		}

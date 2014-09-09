@@ -21,8 +21,7 @@ public class TestSobreMensajero {
 		
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
-			j.setTipo(new Standar());
-			partido.getJugadores().add(j);
+			j.inscribirse_a(partido, new Standar());
 		}
 		
 		String rta = null;
@@ -42,13 +41,13 @@ public class TestSobreMensajero {
 		when(mensajero.enviar_mensaje("partido","admin","se fue alguien del partido")).thenReturn("Mensaje malo enviado al admin");
 		
 		Partido partido = new Partido(mensajero);
-		partido.setMensajero(mensajero);
+		partido.setId("Partido Loco");
 		
 		Jugador j= null;
 		for(int i = 0;i<10;i++){
 			j = new Jugador();
-			j.setTipo(new Standar());
-			j.inscribirse_a(partido);
+			j.setUsuario("j"+ Integer.toString(i));
+			j.inscribirse_a(partido, new Standar());
 		}
 		
 		String rta = null;

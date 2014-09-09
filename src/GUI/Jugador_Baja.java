@@ -81,8 +81,8 @@ public class Jugador_Baja extends VentanaTheGrid {
 		lista_reemplazo.setBounds(99, 130, 144, 20);
 		getContentPane().add(lista_partido);
 		getContentPane().add(lista_reemplazo);
-		for(int i=0;i<global.jugador_seleccionado.getPartidos_inscriptos().size();i++){
-			Partido partido_inscripto = global.jugador_seleccionado.getPartidos_inscriptos().get(i);
+		for(int i=0;i<global.jugador_seleccionado.getInscripciones().size();i++){
+			Partido partido_inscripto = global.jugador_seleccionado.getInscripciones().get(i).getPartido_inscripto();
 			if(!partido_inscripto.estaConfirmado())
 				lista_partido.addItem(partido_inscripto.getId());
 		}

@@ -16,28 +16,26 @@ public class TestSobrePartidos {
 		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
+			jugador.setUsuario("j"+ Integer.toString(i));
 			jugador.setNombre(Integer.toString(i));
-			jugador.setTipo(new Standar());
 			jugador.setHandicap(5);
-			jugador.inscribirse_a(partido);
+			jugador.inscribirse_a(partido,new Standar());
 		}
 		Jugador jugador_s = new Jugador();
-		jugador_s.setNombre("Primero");
+		jugador_s.setUsuario("Primero");
 		jugador_s.setHandicap(10);
-		jugador_s.setTipo(new Standar());
-		jugador_s.inscribirse_a(partido);
+		jugador_s.inscribirse_a(partido,new Standar());
 		Jugador jugador_u = new Jugador();
-		jugador_u.setNombre("Ultimo");
+		jugador_u.setUsuario("Ultimo");
 		jugador_u.setHandicap(1);
-		jugador_u.setTipo(new Standar());
-		jugador_u.inscribirse_a(partido);
+		jugador_u.inscribirse_a(partido,new Standar());
 		CriterioOrden[] criterios = {new Handicap()};
 
 		Admin admin = new Admin();
 		admin.organizar_equipo(partido, criterios);
 		
-		String nombrePrimero = partido.getJugadores().get(0).getNombre();
-		String nombreUltimo = partido.getJugadores().get(9).getNombre();
+		String nombrePrimero = partido.getInscripciones().get(0).getJugador_inscripto().getUsuario();
+		String nombreUltimo = partido.getInscripciones().get(9).getJugador_inscripto().getUsuario();
 		assertTrue(nombrePrimero.equals("Primero") && nombreUltimo.equals("Ultimo"));
 	}
 
@@ -48,30 +46,28 @@ public class TestSobrePartidos {
 		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
+			jugador.setUsuario("j"+ Integer.toString(i));
 			jugador.setNombre(Integer.toString(i));
-			jugador.setTipo(new Standar());
 			jugador.setHandicap(5);
-			jugador.inscribirse_a(partido);
+			jugador.inscribirse_a(partido,new Standar());
 		}
 		Jugador jugadorConMejorHandicap = new Jugador();
-		jugadorConMejorHandicap.setNombre("Primero");
+		jugadorConMejorHandicap.setUsuario("Primero");
 		jugadorConMejorHandicap.setHandicap(10);
-		jugadorConMejorHandicap.setTipo(new Standar());
-		jugadorConMejorHandicap.inscribirse_a(partido);
+		jugadorConMejorHandicap.inscribirse_a(partido,new Standar());
 
 		Jugador segundoConMejorHandicap = new Jugador();
-		segundoConMejorHandicap.setNombre("Segundo");
+		segundoConMejorHandicap.setUsuario("Segundo");
 		segundoConMejorHandicap.setHandicap(9);
-		segundoConMejorHandicap.setTipo(new Standar());
-		segundoConMejorHandicap.inscribirse_a(partido);
+		segundoConMejorHandicap.inscribirse_a(partido,new Standar());
 		CriterioOrden[] criterios = {new Handicap()};
 		Admin admin = new Admin();
 		admin.organizar_equipo(partido, criterios);
 		
 		admin.dividir_equipos(partido, new EquipoParImpar());
 		
-		boolean PrimeroEsPrimeroEquipo1 = partido.getEquipo1().getJugadores().get(0).getNombre().equals("Primero");
-		boolean SegundoEsPrimeroEquipo2 = partido.getEquipo2().getJugadores().get(0).getNombre().equals("Segundo");
+		boolean PrimeroEsPrimeroEquipo1 = partido.getEquipo1().getJugadores().get(0).getUsuario().equals("Primero");
+		boolean SegundoEsPrimeroEquipo2 = partido.getEquipo2().getJugadores().get(0).getUsuario().equals("Segundo");
 		
 		assertTrue(PrimeroEsPrimeroEquipo1 && SegundoEsPrimeroEquipo2);
 	}
@@ -83,22 +79,20 @@ public class TestSobrePartidos {
 		Partido partido = new Partido(mensajero);
 		for(int i=0;i < 8;i++){
 			Jugador jugador = new Jugador();
+			jugador.setUsuario("j"+ Integer.toString(i));
 			jugador.setNombre(Integer.toString(i));
-			jugador.setTipo(new Standar());
 			jugador.setHandicap(5);
-			jugador.inscribirse_a(partido);
+			jugador.inscribirse_a(partido,new Standar());
 		}
 		Jugador jugadorConMejorHandicap = new Jugador(); //Deberia ser ordenado como primero
-		jugadorConMejorHandicap.setNombre("Primero");
+		jugadorConMejorHandicap.setUsuario("Primero");
 		jugadorConMejorHandicap.setHandicap(10);
-		jugadorConMejorHandicap.setTipo(new Standar());
-		jugadorConMejorHandicap.inscribirse_a(partido);
+		jugadorConMejorHandicap.inscribirse_a(partido,new Standar());
 
 		Jugador jugadorConPeorHandicap = new Jugador(); //Deberia ser ordenado como ultimo
-		jugadorConPeorHandicap.setNombre("Segundo");
+		jugadorConPeorHandicap.setUsuario("Segundo");
 		jugadorConPeorHandicap.setHandicap(9);
-		jugadorConPeorHandicap.setTipo(new Standar());
-		jugadorConPeorHandicap.inscribirse_a(partido);
+		jugadorConPeorHandicap.inscribirse_a(partido,new Standar());
 		CriterioOrden[] criterios = {new Handicap()};
 		Admin admin = new Admin();
 		admin.organizar_equipo(partido, criterios);
@@ -109,8 +103,8 @@ public class TestSobrePartidos {
 						e2 = (10) - (06) - (02) - (03) - (07) 
 		*/
 		
-		boolean PrimeroEsPrimeroEquipo1 = partido.getEquipo1().getJugadores().get(0).getNombre().equals("Primero");
-		boolean SegundoEsPrimeroEquipo2 = partido.getEquipo2().getJugadores().get(2).getNombre().equals("Segundo");
+		boolean PrimeroEsPrimeroEquipo1 = partido.getEquipo1().getJugadores().get(0).getUsuario().equals("Primero");
+		boolean SegundoEsPrimeroEquipo2 = partido.getEquipo2().getJugadores().get(2).getUsuario().equals("Segundo");
 		
 		assertTrue(PrimeroEsPrimeroEquipo1 && SegundoEsPrimeroEquipo2);
 	}

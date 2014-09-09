@@ -264,7 +264,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		
 		btnCambiarEstado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					if(partido_seleccionado.getJugadores().size() != 10) {
+					if(partido_seleccionado.getInscripciones().size() != 10) {
 						JOptionPane.showMessageDialog(null, "El partido no tiene suficientes jugadores para generar equipos", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
@@ -293,13 +293,13 @@ public class Admin_Partidos extends VentanaTheGrid {
 		String id_partido = (String) comboPartidos.getSelectedItem(); 
 		partido_seleccionado = global.getPartidoById(id_partido);
 		if(partido_seleccionado != null){
-			for(int i=0;i< partido_seleccionado.getJugadores().size();i++)
-				comboJugadores.addItem(partido_seleccionado.getJugadores().get(i).getUsuario());
+			for(int i=0;i< partido_seleccionado.getInscripciones().size();i++)
+				comboJugadores.addItem(partido_seleccionado.getInscripciones().get(i).getJugador_inscripto().getUsuario());
 			//Llenemos las labels
 			campoId.setText(partido_seleccionado.getId());
 			campoFecha.setText(formato_fecha.format(partido_seleccionado.getFecha()));
 			campoLugar.setText(partido_seleccionado.getLugar());
-			lblCantInscriptos.setText(gen_cantJugadores + Integer.toString(partido_seleccionado.getJugadores().size()));
+			lblCantInscriptos.setText(gen_cantJugadores + Integer.toString(partido_seleccionado.getInscripciones().size()));
 			lblEstadoPartido.setText(gen_EstadoActual + partido_seleccionado.getEstado());
 			btnCambiarEstado.setText(obtenerEstadoBoton(partido_seleccionado));
 			if(btnCambiarEstado.getText().matches(" "))

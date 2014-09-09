@@ -14,7 +14,9 @@ public class Partido {
 	private String id_partido;
 	private Date fecha;
 	private String lugar;
+	@Deprecated
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	private IMensajero mensajero;
 	private Equipo equipo1 = new Equipo();
 	private Equipo equipo2 = new Equipo();
@@ -24,6 +26,7 @@ public class Partido {
 		setMensajero(emailInterface);
 	}
 	
+	@Deprecated
 	public List<Jugador> getJugadores() {
 		return jugadores;
 	}
@@ -34,6 +37,8 @@ public class Partido {
 	public String getId(){
 		return id_partido;
 	}
+	
+	@Deprecated
 	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
@@ -86,68 +91,98 @@ public class Partido {
 		this.estado = estado;
 	}
 	
+	public List<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(List<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+
+	@Deprecated
 	public void agregar_jugador(Jugador jugador){
 		
 		this.jugadores.add(jugador);
 	}
 	
+	@Deprecated
 	public Jugador quitar_jugador(Jugador jugador){
 		int i = this.jugadores.indexOf(jugador);
 		return this.jugadores.remove(i);
+	}
+	
+	public void agregar_inscripcion(Inscripcion inscripcion){
+		
+		this.inscripciones.add(inscripcion);
+	}
+
+	public Inscripcion quitar_inscripcion(Jugador jugador){
+		for(int i=0;i<inscripciones.size();i++)
+			if(this.inscripciones.get(i).getJugador_inscripto().getUsuario().matches(jugador.getUsuario()))
+				return this.inscripciones.remove(i);
+		return null;
 	}
 	
 	public String enviar_mensaje(String emisor,String receptor,String mensaje){
 		return mensajero.enviar_mensaje(emisor, receptor, mensaje);
 	}
 
-	public Respuesta inscribir(Jugador jugador){
-		Respuesta respuesta = new Respuesta();
+	public Inscripcion inscribir(Jugador jugador, IModalidad tipo_inscripcion){
 		if(!hay10Standar()){
 			if(!validar10()){
-				agregar_jugador(jugador);
-				respuesta.setEsta_inscripto(true);
-				respuesta.setMensaje("El jugador esta inscripto.");
-				return respuesta;
+				Inscripcion inscripcion = new Inscripcion();
+				inscripcion.setJugador_inscripto(jugador);
+				inscripcion.setModalidad(tipo_inscripcion);
+				inscripcion.setPartido_inscripto(this);
+				agregar_inscripcion(inscripcion);
+				return inscripcion;
 			}
 			else{
-				Jugador jugador_a_eliminar = buscarAlgunoConMenosPrioridad(jugador);
+				Jugador jugador_a_eliminar = buscarAlgunoConMenosPrioridad(tipo_inscripcion);
 				if(jugador_a_eliminar != null){
-					jugador_a_eliminar.darBajaLista(this);
-					quitar_jugador(jugador_a_eliminar);
-					agregar_jugador(jugador);
-					respuesta.setEsta_inscripto(true);
-					respuesta.setMensaje("El jugador esta inscripto.");
-					return respuesta;
+					jugador_a_eliminar.quitar_inscripcion(this);
+					quitar_inscripcion(jugador_a_eliminar);
+					
+					Inscripcion inscripcion = new Inscripcion();
+					inscripcion.setJugador_inscripto(jugador);
+					inscripcion.setModalidad(tipo_inscripcion);
+					inscripcion.setPartido_inscripto(this);
+					agregar_inscripcion(inscripcion);
+					return inscripcion;
 				}
 			}
 		}
-		respuesta.setEsta_inscripto(false);
-		respuesta.setMensaje("El jugador no ha sido inscipto, no hay mas cupos.");
-		return respuesta;			
+		return null;			
 	}
-	public Jugador buscarAlgunoConMenosPrioridad(Jugador jugador){
+	public Jugador buscarAlgunoConMenosPrioridad(IModalidad modalidad){
 		OrdenadorJugadoresTipo comparador = new OrdenadorJugadoresTipo();
-		Collections.sort(getJugadores(),comparador); //Ordena la lista con los de mayor prioridad al final
-		Jugador ultimo_jugador_inscripto = jugadores.get(0);
+		Collections.sort(getInscripciones(),comparador); //Ordena la lista con los de mayor prioridad al final
+		Inscripcion ultimo_jugador_inscripto = getInscripciones().get(0);
 		//Se agrega esta sentencia porque si ambos son solidarios los toma por fecha, y al estar inscripto ser mas viejo que el nuevo
 		//Nos devuelve que el nuevo tiene mas prioridad, pero queremos priorizar el solidario inscripto por sobre el nuevo
-		if(ultimo_jugador_inscripto.getTipo().getInscripcion().equals("SOLIDARIA") && jugador.getTipo().getInscripcion().equals("SOLIDARIA"))
+		if(ultimo_jugador_inscripto.getModalidad().getInscripcion().equals("SOLIDARIA") && modalidad.getInscripcion().equals("SOLIDARIA"))
 			return null;
-		
-		int comparacion = comparador.compare(ultimo_jugador_inscripto,jugador);
+		Inscripcion aux = new Inscripcion(); aux.setModalidad(modalidad);
+		int comparacion = comparador.compare(ultimo_jugador_inscripto,aux);
 		if(comparacion < 0)
-			return ultimo_jugador_inscripto;
+			return ultimo_jugador_inscripto.getJugador_inscripto();
 		return null;
 	}
 	
+	public void reemplazarJugadores(Jugador baja, Jugador reemplazo){
+		Inscripcion aux = this.quitar_inscripcion(baja);
+		aux.setJugador_inscripto(reemplazo);
+		this.agregar_inscripcion(aux);
+	}
+	
 	public Boolean validar10(){
-		return jugadores.size() == 10;
+		return inscripciones.size() == 10;
 	}
 	
 	public boolean hay10Standar() {
 		int contador = 0;
-		for (int i=0;i<jugadores.size();i++) 
-			if(jugadores.get(i).getTipo().getInscripcion().equals("STANDAR"))
+		for (int i=0;i<inscripciones.size();i++) 
+			if(inscripciones.get(i).getModalidad().getInscripcion().equals("STANDAR"))
 				contador++;
 		
 		if(contador == 10)

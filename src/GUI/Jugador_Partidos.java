@@ -51,8 +51,8 @@ public class Jugador_Partidos extends VentanaTheGrid {
 		scroll_lista = new JScrollPane(lista_partidos);
 		scroll_lista.setBounds(10, 10, 122, 99);
 		getContentPane().add(scroll_lista);
-		for(int i=0;i<global.jugador_seleccionado.getPartidos_inscriptos().size();i++)
-			modelo_lista.addElement(global.jugador_seleccionado.getPartidos_inscriptos().get(i));
+		for(int i=0;i<global.jugador_seleccionado.getInscripciones().size();i++)
+			modelo_lista.addElement(global.jugador_seleccionado.getInscripciones().get(i).getPartido_inscripto());
 		
 		//Crear botones y labels
 		btnVolver = new JButton("Volver");

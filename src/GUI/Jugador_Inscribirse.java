@@ -18,9 +18,10 @@ import java.awt.event.WindowEvent;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
+import clasesDeNegocio.IModalidad;
+import clasesDeNegocio.Inscripcion;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
-import clasesDeNegocio.Respuesta;
 
 public class Jugador_Inscribirse extends VentanaTheGrid {
 	private static final long serialVersionUID = 4024067139818249946L;
@@ -137,20 +138,13 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 		campoCondicion.setColumns(10);
 		
 		l_cantJugadores.setForeground(Color.RED);
-		if(partidos_disponibles.getSelectedItem() != null) { //Setear el valor de la label
-			String nombre_partido = (String) partidos_disponibles.getSelectedItem();
-			Partido partido_seleccionado = global.getPartidoById(nombre_partido);
-			l_cantJugadores.setText(gen_cantJugadores.concat(Integer.toString(partido_seleccionado.getJugadores().size())));
-			partido_actual = global.partidos.get(0);
-		}
-		
+		setearLabels();
 		//Comportamiento de la Combo y Checkbox
 
 		partidos_disponibles.addActionListener(new ActionListener() { //Comportamiento de la combo
 			public void actionPerformed(ActionEvent arg0) {
-				String id_partido = (String) partidos_disponibles.getSelectedItem();
-				partido_actual =global.getPartidoById(id_partido);
-				l_cantJugadores.setText(gen_cantJugadores.concat(Integer.toString(partido_actual.getJugadores().size())));
+				setearLabels();
+				partido_actual =global.getPartidoById((String) partidos_disponibles.getSelectedItem());
 			}
 		});
 		
@@ -198,11 +192,11 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 						JOptionPane.showMessageDialog(null, "Usted se encuentra ya se encuentra inscripto a este Partido", "Error al Inscribirse al Partido", JOptionPane.ERROR_MESSAGE);				
 						return;
 					}
-					global.jugador_seleccionado.setTipofromString(label_inscripcion, campoCondicion.getText());
-					Respuesta respuesta = global.jugador_seleccionado.inscribirse_a(partido_actual);	
+					IModalidad modalidad = global.jugador_seleccionado.getTipofromString(label_inscripcion, campoCondicion.getText());
+					Inscripcion inscripcion = global.jugador_seleccionado.inscribirse_a(partido_actual,modalidad);	
 					if(partido_actual.validar10())
 						partido_actual.enviar_mensaje("partido "+partido_actual.getId(),global.administrador.getEmail(), "Hay 10 jugadores"); //Enviamos el email
-					if(respuesta.getEsta_inscripto()){
+					if(inscripcion != null){
 						if(recomendarAmigo.isSelected()) {
 							Jugador_RecomendacionPopup pantalla_recomendacion = new Jugador_RecomendacionPopup(new GlobalParameters(global, global.jugador_seleccionado, yo), partido_actual);
 							pantalla_recomendacion.setVisible(true);
@@ -250,5 +244,13 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 				break;
 		}
 		return boton.getText();	
+	}
+	public void setearLabels(){
+		if(partidos_disponibles.getSelectedItem() != null) { //Setear el valor de la label
+			String nombre_partido = (String) partidos_disponibles.getSelectedItem();
+			Partido partido_seleccionado = global.getPartidoById(nombre_partido);
+			l_cantJugadores.setText(gen_cantJugadores.concat(Integer.toString(partido_seleccionado.getInscripciones().size())));
+			partido_actual = global.partidos.get(0);
+		}
 	}
 }

@@ -38,14 +38,13 @@ public class Admin extends Usuario {
 		this.nuevas_propuestas.add(propuesta);
 	}
 	
-	public Respuesta aprobar_propuesta(Propuesta propuesta, Jugador nuevo_jugador){
+	public void aprobar_propuesta(Propuesta propuesta, Jugador nuevo_jugador, IModalidad modalidad){
 		propuesta.getJugador().agregar_amigo(propuesta.getAmigo());		
 		nuevo_jugador.agregar_amigo(new Amigo(propuesta.getJugador().getNombre(),propuesta.getJugador().getApellido(),propuesta.getJugador().getEmail()));
-		return nuevo_jugador.inscribirse_a(propuesta.getPartido());
+		nuevo_jugador.inscribirse_a(propuesta.getPartido(), modalidad);
 	}
 	
 	public Respuesta rechazar_propuesta(Propuesta propuesta, String razon){
-		
 		Respuesta rta = new Respuesta();
 		rta.setEsta_inscripto(false);
 		rta.setMensaje(razon);

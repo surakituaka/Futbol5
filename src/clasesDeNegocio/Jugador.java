@@ -10,13 +10,16 @@ public class Jugador extends Usuario{
 	private String nombre;
 	private String apellido;
 	private Date fecha_nacimiento;
+	@Deprecated
 	private IModalidad tipo;
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	//private Double prioridad;
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	private IOrden proposicion;
 	private Integer handicap = 1; //Por defecto todos tienen 1
+	@Deprecated
 	private List<Partido>partidos_inscriptos = new ArrayList<Partido>();
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 
 	
@@ -38,9 +41,11 @@ public class Jugador extends Usuario{
 	public void setFecha_nacimiento(Date fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
 	}
+	@Deprecated
 	public IModalidad getTipo() {
 		return tipo;
 	}	
+	@Deprecated
 	public void setTipo(IModalidad tipo) {
 		this.tipo = tipo;
 	}
@@ -68,9 +73,11 @@ public class Jugador extends Usuario{
 	public void setHandicap(Integer handicap) {
 		this.handicap = handicap;
 	}
+	@Deprecated
 	public List<Partido> getPartidos_inscriptos() {
 		return partidos_inscriptos;
 	}
+	@Deprecated
 	public void setPartidos_inscriptos(List<Partido> partidos_inscriptos) {
 		this.partidos_inscriptos = partidos_inscriptos;
 	}
@@ -80,6 +87,12 @@ public class Jugador extends Usuario{
 	}
 	public void setCalificaciones(List<Calificacion> calificaciones) {
 		this.calificaciones = calificaciones;
+	}
+	public List<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+	public void setInscripciones(List<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
 	}
 	public Calificacion remover_calificacion(Calificacion calificacion) {
 		int index = calificaciones.indexOf(calificacion);
@@ -98,14 +111,6 @@ public class Jugador extends Usuario{
 		this.prioridad = prioridad;
 	}
 */	
-	public void agregar_inscripcion(Partido partido){
-		this.partidos_inscriptos.add(partido);
-	}
-
-	public Partido quitar_inscripcion(Partido partido){
-		int i = this.partidos_inscriptos.indexOf(partido);
-		return this.partidos_inscriptos.remove(i);
-	}
 	public void agregar_amigo(Amigo amigo){
 		this.amigos.add(amigo);
 	}
@@ -124,37 +129,42 @@ public class Jugador extends Usuario{
 		return this.penalizaciones.remove(i);
 	}	
 	
-	
+	public void agregar_inscripcion(Inscripcion inscripcion){
+		
+		this.inscripciones.add(inscripcion);
+	}
 
-	public Respuesta inscribirse_a(Partido partido){
-		Respuesta respuesta;
+	public Inscripcion quitar_inscripcion(Partido partido){
+		for(int i=0;i<inscripciones.size();i++)
+			if(this.inscripciones.get(i).getPartido_inscripto().getId().matches(partido.getId()))
+				return this.inscripciones.remove(i);
+		return null;
+	}
+
+	public Inscripcion inscribirse_a(Partido partido, IModalidad tipo_inscripcion){
+		Inscripcion inscripcion = null;
 		if(estoyInscripto(partido)){
-			respuesta = new Respuesta();
-			respuesta.setEsta_inscripto(true);
-			respuesta.setMensaje("El jugador ya esta inscripto");
-			return respuesta;	
+			return inscripcion;	
 		}
-		respuesta = partido.inscribir(this);
-		if(respuesta.getEsta_inscripto()) {
-			agregar_inscripcion(partido);
+		inscripcion = partido.inscribir(this, tipo_inscripcion);
+		if(inscripcion != null) {
+			agregar_inscripcion(inscripcion);
 			for(Amigo amigo:getAmigos()){
 				partido.enviar_mensaje("Partido "+partido.getId(), amigo.getEmail(), "tu amigo "+getNombre()+" ingreso a un partido");
 			}
 		}
-		return respuesta;
+		return inscripcion;
 	}
 	
 	public void bajarse_de(Partido partido){
-		partido.quitar_jugador(this);
-		darBajaLista(partido);
+		partido.quitar_inscripcion(this);
+		this.quitar_inscripcion(partido);
 		this.agregar_penalizacion(new Penalizacion(new GregorianCalendar(),"por dejar un partido sin reemplazo"));
 	}
 	
 	public void bajarse_de(Partido partido,Jugador reemplazo){
-		partido.quitar_jugador(this);
-		darBajaLista(partido);
-		reemplazo.setTipo(this.getTipo());
-		partido.agregar_jugador(reemplazo);
+		partido.reemplazarJugadores(this, reemplazo);
+		this.quitar_inscripcion(partido);
 	}
 	
 	public void proponer_jugador(Amigo amigo, Partido partido){
@@ -167,27 +177,28 @@ public class Jugador extends Usuario{
 	
 	public boolean estoyInscripto(Partido partido) {
 		boolean respuesta = false;
-		for(int i=0;i<partidos_inscriptos.size();i++){
-			if(partidos_inscriptos.get(i).getId().matches(partido.getId()))
+		for(int i=0;i<getInscripciones().size();i++){
+			if(getInscripciones().get(i).getPartido_inscripto().getId().matches(partido.getId()))
 				respuesta = true;
 		}
 		return respuesta;
 	}
 	
-	public void setTipofromString(String tipo_string, String condicion) {
+	public IModalidad getTipofromString(String tipo_string, String condicion) {
 		if(tipo_string.equals("Standar"))
-			this.setTipo(new Standar());
+			return new Standar();
 		if(tipo_string.equals("Condicional")) 
-			this.setTipo(new Condicional(condicion));
+			return new Condicional(condicion);
 		if(tipo_string.equals("Solidaria"))
-			this.setTipo(new Solidaria());
+			return new Solidaria();
+		return null;
 	}
 
 	public List<Partido> getPartidos_jugados() {
 		List<Partido>partidos_jugados = new ArrayList<Partido>();
-		for(int i=0;i< this.getPartidos_inscriptos().size();i++){
-			if(this.getPartidos_inscriptos().get(i).estaConfirmado())
-				partidos_jugados.add(this.getPartidos_inscriptos().get(i));
+		for(int i=0;i< this.getInscripciones().size();i++){
+			if(this.getInscripciones().get(i).getPartido_inscripto().estaConfirmado())
+				partidos_jugados.add(this.getInscripciones().get(i).getPartido_inscripto());
 		}
 		return partidos_jugados;
 	}
@@ -205,19 +216,14 @@ public class Jugador extends Usuario{
 	public List<Jugador> getNoCalificados(Partido partido){ 
 		List<Jugador> jugadores_noCalificados = new ArrayList<Jugador>();
 		List<Calificacion> calificaciones_partido = getCalificacionesByPartido(partido); //Lista de los calificados
-		for(int i=0;i<partido.getJugadores().size();i++) 
-			if(!partido.getJugadores().get(i).getUsuario().matches(getUsuario())){ //Si no soy yo prosigo
-				jugadores_noCalificados.add(partido.getJugadores().get(i)); //Agrego al jugador a la lista
+		for(int i=0;i<partido.getInscripciones().size();i++) 
+			if(!partido.getInscripciones().get(i).getJugador_inscripto().getUsuario().matches(getUsuario())){ //Si no soy yo prosigo
+				jugadores_noCalificados.add(partido.getInscripciones().get(i).getJugador_inscripto()); //Agrego al jugador a la lista
 				for(int j=0;j<calificaciones_partido.size();j++)//Este jugador, posee alguna calificacion?
-					if(calificaciones.get(j).estaCalificado(partido.getJugadores().get(i))) 
-						jugadores_noCalificados.remove(partido.getJugadores().get(i));//Si esta calificado, me arrepiento y lo saco
+					if(calificaciones.get(j).estaCalificado(partido.getInscripciones().get(i).getJugador_inscripto())) 
+						jugadores_noCalificados.remove(partido.getInscripciones().get(i).getJugador_inscripto());//Si esta calificado, me arrepiento y lo saco
 			}
 		return jugadores_noCalificados;
-	}
-	
-	public void darBajaLista(Partido partido) {
-		int index = getPartidos_inscriptos().indexOf(partido);
-		getPartidos_inscriptos().remove(index);
 	}
 	
 	public boolean yaExisteAmigo(Amigo amigo){

@@ -12,7 +12,7 @@ public class Handicap extends CriterioOrden{
 	@Override
 	public void ordenar(Partido partido) {
 		
-		Collections.sort(partido.getJugadores(),this);
+		Collections.sort(partido.getInscripciones(),this);
 	}
 
 	public String quienSoy(){
@@ -20,57 +20,57 @@ public class Handicap extends CriterioOrden{
 	}
 	
 	@Override
-	public int compare(Jugador jugador1, Jugador jugador2) {
+	public int compare(Inscripcion inscripcion1, Inscripcion inscripcion2) {
 		
-		return jugador2.getHandicap().compareTo(jugador1.getHandicap());
+		return inscripcion2.getJugador_inscripto().getHandicap().compareTo(inscripcion1.getJugador_inscripto().getHandicap());
 	}
 
 	
 
 	@Override
-	public Comparator<Jugador> reversed() {
+	public Comparator<Inscripcion> reversed() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparing(Comparator<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparing(Comparator<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U extends Comparable<? super U>> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0) {
+	public <U extends Comparable<? super U>> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0,
+	public <U> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0,
 			Comparator<? super U> arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingDouble(
-			ToDoubleFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingDouble(
+			ToDoubleFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingInt(
-			ToIntFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingInt(
+			ToIntFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingLong(
-			ToLongFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingLong(
+			ToLongFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

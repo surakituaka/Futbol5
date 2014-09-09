@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import clasesDeNegocio.Admin;
 import clasesDeNegocio.Amigo;
+import clasesDeNegocio.IModalidad;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Propuesta;
 
@@ -76,11 +77,11 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 							nuevo_jugador.setNombre(propuesta_seleccionada.getAmigo().getNombre());
 							nuevo_jugador.setApellido(propuesta_seleccionada.getAmigo().getApellido());
 							nuevo_jugador.setEmail(propuesta_seleccionada.getAmigo().getEmail());
-							nuevo_jugador.setTipofromString(tipo_inscripcion_seleccionada, t_condicion.getText());
+							IModalidad modalidad = nuevo_jugador.getTipofromString(tipo_inscripcion_seleccionada, t_condicion.getText());
 							Jugador jugador_yaInscripto = propuesta_seleccionada.getJugador();
 							Amigo nuevo_amigo = new Amigo(jugador_yaInscripto.getNombre(),jugador_yaInscripto.getApellido(),jugador_yaInscripto.getEmail());
 							nuevo_jugador.agregar_amigo(nuevo_amigo);
-							global.administrador.aprobar_propuesta(propuesta_seleccionada, nuevo_jugador);
+							global.administrador.aprobar_propuesta(propuesta_seleccionada, nuevo_jugador, modalidad);
 							global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);							
 							pantalla_admin.refreshComboJugadores();
 							pantalla_admin.setEnabled(true);

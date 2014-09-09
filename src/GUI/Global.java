@@ -75,11 +75,14 @@ public class Global {
 			this.jugadores.add(amigo);
 		}
 		for(int i = 0; i<10;i++){
-			jugadores.get(i).setTipo(new Standar());
-			if(i == 9)
-			jugadores.get(i).setTipo(new Solidaria());
-			jugadores.get(i).inscribirse_a(partidito);
-			jugadores.get(i).inscribirse_a(partido_criticas);
+			if(i == 9){
+				jugadores.get(i).inscribirse_a(partidito, new Solidaria());
+				jugadores.get(i).inscribirse_a(partido_criticas, new Solidaria());
+			}
+			else {
+				jugadores.get(i).inscribirse_a(partidito, new Standar());
+				jugadores.get(i).inscribirse_a(partido_criticas, new Standar());
+			}
 		}
 		//Seteamos CRITIAS
 		CriterioOrden[] criterios_partido_prueba = new CriterioOrden[criterios.size()];

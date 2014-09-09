@@ -81,9 +81,9 @@ public class Jugador_Calificaciones extends VentanaTheGrid {
 		//inicializamos los valores de las combos
 		for(int i=1; i<11;i++)
 			calificacion.addItem(Integer.toString(i));
-		for(int i=0;i<global.jugador_seleccionado.getPartidos_inscriptos().size();i++){
-			if(global.jugador_seleccionado.getPartidos_inscriptos().get(i).estaConfirmado())
-				partidos_jugados.addItem(global.jugador_seleccionado.getPartidos_inscriptos().get(i).getId());
+		for(int i=0;i<global.jugador_seleccionado.getInscripciones().size();i++){
+			if(global.jugador_seleccionado.getInscripciones().get(i).getPartido_inscripto().estaConfirmado())
+				partidos_jugados.addItem(global.jugador_seleccionado.getInscripciones().get(i).getPartido_inscripto().getId());
 		}
 		if(partidos_jugados.getSelectedIndex() > -1){
 			partido_seleccionado = global.getPartidoById((String) partidos_jugados.getSelectedItem());

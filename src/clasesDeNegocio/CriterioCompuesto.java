@@ -14,7 +14,7 @@ import java.util.function.ToLongFunction;
 public class CriterioCompuesto extends CriterioOrden{
 	
 	private List<CriterioOrden> criterios = new ArrayList<CriterioOrden>();
-	private Map<Jugador, ArrayList<Integer>> promedios = new HashMap<Jugador,ArrayList<Integer>>();
+	private Map<Inscripcion, ArrayList<Integer>> promedios = new HashMap<Inscripcion,ArrayList<Integer>>();
 	
 	public String quienSoy(){
 		return "Compuesto";
@@ -28,40 +28,40 @@ public class CriterioCompuesto extends CriterioOrden{
 		this.criterios = criterios;
 	}
 
-	public Map<Jugador, ArrayList<Integer>> getPromedios() {
+	public Map<Inscripcion, ArrayList<Integer>> getPromedios() {
 		return promedios;
 	}
 
-	public void setPromedios(Map<Jugador, ArrayList<Integer>> promedios) {
+	public void setPromedios(Map<Inscripcion, ArrayList<Integer>> promedios) {
 		this.promedios = promedios;
 	}
 
 	@Override
 	public void ordenar(Partido partido) {
 		
-		for (Jugador jugador : partido.getJugadores()) {
-			promedios.put(jugador, new ArrayList<Integer>());
+		for (Inscripcion inscripcion : partido.getInscripciones()) {
+			promedios.put(inscripcion, new ArrayList<Integer>());
 		}
 		
 		for (CriterioOrden criterio : this.getCriterios()) {
-			Collections.sort(partido.getJugadores(), criterio);
-			for (Jugador jugador : partido.getJugadores()) {
-				promedios.get(jugador).add(partido.getJugadores().indexOf(jugador)+1);
+			Collections.sort(partido.getInscripciones(), criterio);
+			for (Inscripcion inscripcion : partido.getInscripciones()) {
+				promedios.get(inscripcion).add(partido.getInscripciones().indexOf(inscripcion)+1);
 			}
 			
 		}
 	}
 
 	@Override
-	public int compare(Jugador jugador1, Jugador jugador2) {
+	public int compare(Inscripcion inscripcion1, Inscripcion inscripcion2) {
 		
 		Double j1 = new Double(0), j2 = new Double(0);
-		for (int i = 0; i < promedios.get(jugador2).size(); i++) {
-			j1+=promedios.get(jugador1).get(i);
-			j2+=promedios.get(jugador2).get(i);
+		for (int i = 0; i < promedios.get(inscripcion2).size(); i++) {
+			j1+=promedios.get(inscripcion1).get(i);
+			j2+=promedios.get(inscripcion2).get(i);
 		}
-		j1 = j1/promedios.get(jugador1).size();
-		j2 = j2/promedios.get(jugador2).size();
+		j1 = j1/promedios.get(inscripcion1).size();
+		j2 = j2/promedios.get(inscripcion2).size();
 		
 		return j1.compareTo(j2);
 	}
@@ -76,49 +76,49 @@ public class CriterioCompuesto extends CriterioOrden{
 
 	
 	@Override
-	public Comparator<Jugador> reversed() {
+	public Comparator<Inscripcion> reversed() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparing(Comparator<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparing(Comparator<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U extends Comparable<? super U>> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0) {
+	public <U extends Comparable<? super U>> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <U> Comparator<Jugador> thenComparing(
-			Function<? super Jugador, ? extends U> arg0,
+	public <U> Comparator<Inscripcion> thenComparing(
+			Function<? super Inscripcion, ? extends U> arg0,
 			Comparator<? super U> arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingDouble(
-			ToDoubleFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingDouble(
+			ToDoubleFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingInt(
-			ToIntFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingInt(
+			ToIntFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Comparator<Jugador> thenComparingLong(
-			ToLongFunction<? super Jugador> arg0) {
+	public Comparator<Inscripcion> thenComparingLong(
+			ToLongFunction<? super Inscripcion> arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -5,6 +5,7 @@ public class Propuesta {
 	private Amigo amigo;
 	private Partido partido;
 	private Jugador jugador;
+	private IModalidad modalidad;
 	
 	public Amigo getAmigo() {
 		return amigo;
@@ -28,5 +29,13 @@ public class Propuesta {
 	
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
+	}
+
+	public IModalidad getModalidad() {
+		return modalidad;
+	}
+
+	public void setModalidad(IModalidad modalidad) {
+		this.modalidad = modalidad;
 	}
 }

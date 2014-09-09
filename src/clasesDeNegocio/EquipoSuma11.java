@@ -12,14 +12,14 @@ public class EquipoSuma11 implements IGeneradorEquipos{
 
 		int i = 0;
 		while(i < 9){
-			e1.add(partido.getJugadores().get(i));
-			e2.add(partido.getJugadores().get(9-i));
+			e1.add(partido.getInscripciones().get(i).getJugador_inscripto());
+			e2.add(partido.getInscripciones().get(9-i).getJugador_inscripto());
 			i += 4;
 		}
 		i -= 5;
 		while(i > 2){
-			e1.add(partido.getJugadores().get(i));
-			e2.add(partido.getJugadores().get(9-i));
+			e1.add(partido.getInscripciones().get(i).getJugador_inscripto());
+			e2.add(partido.getInscripciones().get(9-i).getJugador_inscripto());
 			i -= 4;
 		}
 		
