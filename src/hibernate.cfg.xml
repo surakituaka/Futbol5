@@ -5,11 +5,12 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 
 <hibernate-configuration>
 <session-factory>
-<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriverr</property>
-<property name="hibernate.connection.url">jdbc:oracle:1521/FUTBOL5</property>
+<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+<property name="hibernate.connection.url">jdbc:oracle:thin@localhost:1521:FUTBOL5</property>
 <property name="hibernate.connection.username">C##FUTBOL5</property>
 <property name="hibernate.connection.password">TheGrid</property>
 <property name="dialect">org.hibernate.dialect.Oracle12cDialect</property>
+<property name=”hibernate.default_schema”>FUTBOL5</property>
 <property name="show_sql">true</property>
 <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
 <property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
