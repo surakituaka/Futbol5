@@ -11,7 +11,7 @@ import ServiciosExternos.IMensajero;
 
 public class Partido {
 	
-	private String id_partido;
+	private String partido_nombre;
 	private Date fecha;
 	private String lugar;
 	@Deprecated
@@ -32,10 +32,10 @@ public class Partido {
 	}
 	
 	public void setId(String id){
-		this.id_partido = id;
+		this.partido_nombre = id;
 	}
 	public String getId(){
-		return id_partido;
+		return partido_nombre;
 	}
 	
 	@Deprecated

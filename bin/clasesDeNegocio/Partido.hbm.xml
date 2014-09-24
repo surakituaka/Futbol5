@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="clasesDeNegocio.Partido" table="PARTIDO">
+        <id name="partido_nombre" type="java.lang.String" access="field">
+            <column name="PARTIDO_NOMBRE" />
+            <generator class="assigned" />
+        </id>
+        <property name="fecha" type="java.util.Date">
+            <column name="FECHA" />
+        </property>
+        <property name="lugar" type="java.lang.String">
+            <column name="LUGAR" />
+        </property>
+        <list name="jugadores" inverse="false" table="JUGADOR" lazy="true">
+            <key>
+                <column name="PARTIDO_NOMBRE" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="clasesDeNegocio.Jugador" />
+        </list>
+        <list name="inscripciones" inverse="false" table="INSCRIPCION" lazy="true">
+            <key>
+                <column name="PARTIDO_NOMBRE" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="clasesDeNegocio.Inscripcion" />
+        </list>
+        <many-to-one name="mensajero" class="ServiciosExternos.IMensajero" fetch="join">
+            <column name="MENSAJERO" />
+        </many-to-one>
+        <many-to-one name="equipo1" class="clasesDeNegocio.Equipo" fetch="join">
+            <column name="EQUIPO1" />
+        </many-to-one>
+        <many-to-one name="equipo2" class="clasesDeNegocio.Equipo" fetch="join">
+            <column name="EQUIPO2" />
+        </many-to-one>
+        <many-to-one name="estado" class="clasesDeNegocio.IEstadoEquipo" fetch="join">
+            <column name="ESTADO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

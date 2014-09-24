@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="clasesDeNegocio.Penalizacion" table="PENALIZACION">
+        <id name="fecha" type="java.util.GregorianCalendar">
+            <column name="FECHA" />
+            <generator class="assigned" />
+        </id>
+        <property name="motivo" type="java.lang.String">
+            <column name="MOTIVO" />
+        </property>
+    </class>
+</hibernate-mapping>

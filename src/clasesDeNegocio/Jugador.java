@@ -6,14 +6,14 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Jugador extends Usuario{
-		
+	
+	private Long id;
 	private String nombre;
 	private String apellido;
 	private Date fecha_nacimiento;
 	@Deprecated
 	private IModalidad tipo;
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
-	//private Double prioridad;
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	private IOrden proposicion;
 	private Integer handicap = 1; //Por defecto todos tienen 1
@@ -23,6 +23,12 @@ public class Jugador extends Usuario{
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -94,6 +100,12 @@ public class Jugador extends Usuario{
 	public void setInscripciones(List<Inscripcion> inscripciones) {
 		this.inscripciones = inscripciones;
 	}
+	public IOrden getProposicion() {
+		return proposicion;
+	}
+	public void setProposicion(IOrden proposicion) {
+		this.proposicion = proposicion;
+	}
 	public Calificacion remover_calificacion(Calificacion calificacion) {
 		int index = calificaciones.indexOf(calificacion);
 		return calificaciones.remove(index);
@@ -136,7 +148,7 @@ public class Jugador extends Usuario{
 
 	public Inscripcion quitar_inscripcion(Partido partido){
 		for(int i=0;i<inscripciones.size();i++)
-			if(this.inscripciones.get(i).getPartido_inscripto().getId().matches(partido.getId()))
+			if(this.inscripciones.get(i).getPartido_inscripto().getId().equals(partido.getId()))
 				return this.inscripciones.remove(i);
 		return null;
 	}
@@ -178,7 +190,7 @@ public class Jugador extends Usuario{
 	public boolean estoyInscripto(Partido partido) {
 		boolean respuesta = false;
 		for(int i=0;i<getInscripciones().size();i++){
-			if(getInscripciones().get(i).getPartido_inscripto().getId().matches(partido.getId()))
+			if(getInscripciones().get(i).getPartido_inscripto().getId().equals(partido.getId()))
 				respuesta = true;
 		}
 		return respuesta;
@@ -206,7 +218,7 @@ public class Jugador extends Usuario{
 	public List<Calificacion> getCalificacionesByPartido(Partido partido) {
 		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 		for(int i=0;i< this.getCalificaciones().size();i++){
-			if(this.getCalificaciones().get(i).getPartido().getId().matches(partido.getId()))
+			if(this.getCalificaciones().get(i).getPartido().getId().equals(partido.getId()))
 				calificaciones.add(this.getCalificaciones().get(i));
 		}
 		return calificaciones;

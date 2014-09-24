@@ -1,8 +1,17 @@
 package tests;
 
 import static org.junit.Assert.*;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.junit.Test;
+
 import clasesDeNegocio.*;
+import clasesManejadoras.ManejadorJugador;
 import ServiciosExternos.*;
 
 
@@ -241,7 +250,23 @@ public class TestSobreJugadores {
 	
 	
 	
-	
+	@Test
+	public void persistencia() throws ParseException{
+		
+		ManejadorJugador manejadorJugador = new ManejadorJugador();
+		/*
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		Date date = formatter.parse("01/29/02");
+		
+		manejadorJugador.agregaJugador("pepe33", "Pepeneitor", "Pepe", "Lopez", "pepel@algo.com", date);
+		*/
+		
+		List<Jugador> jugadores = manejadorJugador.listaJugadores();
+		
+		System.out.println(jugadores.get(0).getApellido());		
+		
+		
+	}
 	
 	
 	
