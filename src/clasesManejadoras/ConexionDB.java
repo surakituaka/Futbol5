@@ -14,13 +14,13 @@ import org.hibernate.Session;
 import clasesDeNegocio.Jugador;
 
 
-public class ManejadorJugador {
+public class ConexionDB {
 	
 	private SessionFactory sessionFactory;
 	
-	public ManejadorJugador() {
+	public ConexionDB() {
 		try {
-			System.out.println("Inicalizando Hibernate");
+			System.out.println("Inicializando Hibernate");
 			
 			
 			Configuration configuration = new Configuration();
@@ -33,17 +33,11 @@ public class ManejadorJugador {
 		}
 	}
 	
-	public void agregaJugador(String usuario,String pass,String nombre, String apellido,String email, Date fecha_nacimiento) {
+	public void agregaJugador(Jugador jugador) {
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			Jugador jugador = new Jugador();
-			jugador.setUsuario(usuario);
-			jugador.setPassword(pass);
-			jugador.setNombre(nombre);
-			jugador.setApellido(apellido);
-			jugador.setEmail(email);
-			jugador.setFecha_nacimiento(fecha_nacimiento);
+			
 			session.save(jugador);
 			tx.commit();
 			session.close();

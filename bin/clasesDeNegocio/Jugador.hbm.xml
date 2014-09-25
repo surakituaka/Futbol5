@@ -4,38 +4,31 @@
 <!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="clasesDeNegocio.Jugador" table="T_JUGADOR">
- 
- <!--Clave-->
+  <!--Clave-->
   <id name="id" type="java.lang.Long">
    <column name="JUGADOR_ID"/>
    <generator class="sequence">
-   <param name="sequence">S_JUGADOR_ID</param>
+    <param name="sequence">S_JUGADOR_ID</param>
    </generator>
   </id>
-  
   <property generated="never" lazy="false" name="nombre" type="java.lang.String">
    <column name="JUGADOR_NOMBRE"/>
   </property>
-  
-  
   <property generated="never" lazy="false" name="apellido" type="java.lang.String">
    <column name="JUGADOR_APELLIDO"/>
   </property>
-  
-  
   <property generated="never" lazy="false" name="fecha_nacimiento" type="java.util.Date">
    <column name="JUGADOR_FECHA_NACIMIENTO"/>
   </property>
-  
-  
-  <!--
-  <list lazy="true" name="penalizaciones" table="PENALIZACION">
+  <list lazy="true" name="penalizaciones" table="T_PENALIZACION" cascade="save-update" inverse="true" fetch="select" >
+   <synchronize table="T_PENALIZACION"/>
    <key>
-    <column name="ID"/>
+    <column name="JUGADOR_ID" not-null="true"/>
    </key>
    <list-index base="0"/>
    <one-to-many class="clasesDeNegocio.Penalizacion"/>
   </list>
+  <!--
   <list lazy="true" name="amigos" table="AMIGO">
    <key>
     <column name="ID"/>
@@ -47,26 +40,18 @@
    <column name="PROPOSICION"/>
   </many-to-one>
   -->
-  
-  
   <property generated="never" lazy="false" name="handicap" type="java.lang.Integer">
    <column name="JUGADOR_HANDICAP"/>
   </property>
-  
-  
   <property generated="never" lazy="false" name="usuario" type="java.lang.String">
    <column name="JUGADOR_USUARIO"/>
   </property>
-  
   <property generated="never" lazy="false" name="password" type="java.lang.String">
    <column name="JUGADOR_PASSWORD"/>
   </property>
-  
   <property generated="never" lazy="false" name="email" type="java.lang.String">
    <column name="JUGADOR_EMAIL"/>
   </property>
-  
-  
   <!--
   <list lazy="true" name="inscripciones" table="INSCRIPCION">
    <key>
@@ -83,6 +68,5 @@
    <one-to-many class="clasesDeNegocio.Calificacion"/>
   </list>
   -->
-  
  </class>
 </hibernate-mapping>

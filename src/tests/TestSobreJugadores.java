@@ -6,12 +6,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Test;
 
 import clasesDeNegocio.*;
-import clasesManejadoras.ManejadorJugador;
+import clasesManejadoras.ConexionDB;
 import ServiciosExternos.*;
 
 
@@ -251,23 +252,49 @@ public class TestSobreJugadores {
 	
 	
 	@Test
-	public void persistencia() throws ParseException{
+	public void persistencia_jugador() throws ParseException{
 		
-		ManejadorJugador manejadorJugador = new ManejadorJugador();
+		ConexionDB conexionDB = new ConexionDB();
 		/*
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 		Date date = formatter.parse("01/29/02");
 		
-		manejadorJugador.agregaJugador("pepe33", "Pepeneitor", "Pepe", "Lopez", "pepel@algo.com", date);
+		conexionDB.agregaJugador("pepe33", "Pepeneitor", "Pepe", "Lopez", "pepel@algo.com", date);
 		*/
 		
-		List<Jugador> jugadores = manejadorJugador.listaJugadores();
+		List<Jugador> jugadores = conexionDB.listaJugadores();
 		
-		System.out.println(jugadores.get(0).getApellido());		
-		
+		assertTrue(jugadores.size()!=0);
 		
 	}
 	
+	@Test
+	public void persistenciajugador_penalizado() throws ParseException{
+		
+		ConexionDB conexionDB = new ConexionDB();
+		
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		Date date = formatter.parse("01/29/02");
+		
+		
+		Jugador jugador = new Jugador();
+		jugador.setUsuario("carlongo");
+		jugador.setPassword("pirulin");
+		jugador.setNombre("Carlos");
+		jugador.setApellido("Perez");
+		jugador.setEmail("CP@algo.com");
+		jugador.setFecha_nacimiento(date);
+		
+		Penalizacion penalizacion = new Penalizacion(new GregorianCalendar(), "sos muy garca",jugador);
+		jugador.getPenalizaciones().add(penalizacion);
+		conexionDB.agregaJugador(jugador);
+		
+		
+		List<Jugador> jugadores = conexionDB.listaJugadores();
+		
+		assertTrue(jugadores.size()!=0);
+		
+	}
 	
 	
 	

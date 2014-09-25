@@ -171,7 +171,7 @@ public class Jugador extends Usuario{
 	public void bajarse_de(Partido partido){
 		partido.quitar_inscripcion(this);
 		this.quitar_inscripcion(partido);
-		this.agregar_penalizacion(new Penalizacion(new GregorianCalendar(),"por dejar un partido sin reemplazo"));
+		this.agregar_penalizacion(new Penalizacion(new GregorianCalendar(),"por dejar un partido sin reemplazo",this));
 	}
 	
 	public void bajarse_de(Partido partido,Jugador reemplazo){

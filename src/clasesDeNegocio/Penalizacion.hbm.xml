@@ -1,15 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="clasesDeNegocio.Penalizacion" table="PENALIZACION">
-        <id name="fecha" type="java.util.GregorianCalendar">
-            <column name="FECHA" />
-            <generator class="assigned" />
-        </id>
-        <property name="motivo" type="java.lang.String">
-            <column name="MOTIVO" />
-        </property>
-    </class>
+ <class name="clasesDeNegocio.Penalizacion" table="T_PENALIZACION">
+  <id name="id" type="java.lang.Long">
+   <column name="PENALIZACION_ID"/>
+   <generator class="sequence">
+    <param name="sequence">S_PENALIZACION_ID</param>
+   </generator>
+  </id>
+  <property generated="never" lazy="false" name="motivo" type="java.lang.String">
+   <column name="PENALIZACION_MOTIVO"/>
+  </property>
+  <property generated="never" lazy="false" name="fecha" type="java.util.GregorianCalendar">
+   <column name="PENALIZACION_FECHA"/>
+  </property>
+  <many-to-one class="clasesDeNegocio.Jugador" name="jugador">
+  	<column name="JUGADOR_ID" not-null="true" />
+  	
+  </many-to-one>
+ </class>
 </hibernate-mapping>
