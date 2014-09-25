@@ -1,6 +1,5 @@
 package clasesManejadoras;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -46,6 +45,7 @@ public class ConexionDB {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Jugador> listaJugadores() {
 		
 		try {
