@@ -1,3 +1,10 @@
-/tests
-/clasesManejadoras
+/lib
+/GUI
+/ServiciosExternos
+/auxiliares
 /clasesDeNegocio
+/clasesManejadoras
+/com.springsource.org.hamcrest.core-1.1.0.jar
+/com.springsource.org.objenesis-1.0.0.jar
+/hibernate.cfg.xml
+/tests

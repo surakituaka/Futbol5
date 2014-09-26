@@ -20,12 +20,18 @@
   <property generated="never" lazy="false" name="fecha_nacimiento" type="java.util.Date">
    <column name="JUGADOR_FECHA_NACIMIENTO"/>
   </property>
-  <list name="penalizaciones" table="T_PENALIZACION" cascade="all-delete-orphan" access="property">
-   <synchronize table="T_PENALIZACION"/>
+  
+  
+  
+  <list name="penalizaciones" table="T_PENALIZACION" cascade="all" access="property">
    <key column="JUGADOR_ID" not-null="true"/>
-   <list-index base="0"/>
+   <list-index column="IDX" base="0"/>
    <one-to-many class="clasesDeNegocio.Penalizacion"/>
   </list>
+  
+  
+  
+  
   <!--
   <list lazy="true" name="amigos" table="AMIGO">
    <key>

@@ -16,6 +16,10 @@
   <property generated="never" lazy="false" name="fecha" type="java.util.GregorianCalendar">
    <column name="PENALIZACION_FECHA"/>
   </property>
-  <many-to-one column="JUGADOR_ID" not-null="true" class="clasesDeNegocio.Jugador" name="jugador" access="property"/>
+  
+  
+  <many-to-one column="JUGADOR_ID" not-null="true" class="clasesDeNegocio.Jugador" name="jugador" access="property"  insert="false" update="false"/>
+  
+  
  </class>
 </hibernate-mapping>

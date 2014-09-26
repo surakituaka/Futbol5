@@ -250,23 +250,23 @@ public class TestSobreJugadores {
 	}
 	
 	
-	
+	/*
 	@Test
 	public void persistencia_jugador() throws ParseException{
 		
 		ConexionDB conexionDB = new ConexionDB();
-		/*
+		
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 		Date date = formatter.parse("01/29/02");
 		
 		conexionDB.agregaJugador("pepe33", "Pepeneitor", "Pepe", "Lopez", "pepel@algo.com", date);
-		*/
+		
 		
 		List<Jugador> jugadores = conexionDB.listaJugadores();
 		
 		assertTrue(jugadores.size()!=0);
 		
-	}
+	}*/
 	
 	@Test
 	public void persistenciajugador_penalizado() throws ParseException{
