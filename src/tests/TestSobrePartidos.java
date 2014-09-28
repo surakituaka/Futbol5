@@ -115,7 +115,7 @@ public class TestSobrePartidos {
 		assertTrue(PrimeroEsPrimeroEquipo1 && SegundoEsPrimeroEquipo2);
 	}
 	
-	
+	/*
 	@Test
 	public void persistir_partido_con_estado() throws ParseException{
 		
@@ -137,8 +137,8 @@ public class TestSobrePartidos {
 		p.setEstado(estado);
 		
 		conexionDB.agregar(p);
-		
 	}
+	*/
 	
 	/*
 	@Test

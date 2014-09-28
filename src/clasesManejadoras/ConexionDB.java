@@ -10,7 +10,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.Session;
 
+import clasesDeNegocio.Calificacion;
 import clasesDeNegocio.Jugador;
+import clasesDeNegocio.Partido;
 
 
 public class ConexionDB {
@@ -75,9 +77,36 @@ public class ConexionDB {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Partido> listaPartidos() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			List<Partido> result = session.createQuery("from Partido as Partido").list();
+			tx.commit();
+			session.close();
+			return result;
+		} catch (HibernateException e) {
+			throw new RuntimeException(e.getMessage());
+		}		
+	}
 
-	
-	
+	@SuppressWarnings("unchecked")
+	public List<Calificacion> listaCalificaciones() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			List<Calificacion> result = (List<Calificacion>) session.createQuery("from Partido as Partido").list();
+			tx.commit();
+			session.close();
+			return result;
+		} catch (HibernateException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 	
 	
 }

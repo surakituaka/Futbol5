@@ -1,16 +1,25 @@
 package clasesDeNegocio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class Calificacion {
 	
+	private Long id;
 	private Jugador calificador;
 	private Jugador calificado;
 	private Integer calificacion;
 	private String critica;
 	private Partido partido;
-	private GregorianCalendar fecha;
+	private Date fecha;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Jugador getCalificador() {
 		return calificador;
 	}
@@ -51,15 +60,21 @@ public class Calificacion {
 		this.partido = partido;
 	}
 	
-	public GregorianCalendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
-	public Calificacion(Jugador calificador, Jugador calificado, Integer calificacion, String critica, Partido partido,GregorianCalendar fecha){
+	
+	public Calificacion(){
+		super();
+	}
+	
+	
+	public Calificacion(Jugador calificador, Jugador calificado, Integer calificacion, String critica, Partido partido,Date fecha){
 		super();
 		this.calificador=calificador;
 		this.calificado=calificado;

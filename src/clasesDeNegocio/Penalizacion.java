@@ -1,14 +1,19 @@
 package clasesDeNegocio;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class Penalizacion {
 	
 	
 	private Long id;
-	private GregorianCalendar fecha;
+	private Date fecha;
 	private String motivo;
 	private Jugador jugador;
+	
+	public Penalizacion(){
+		super();
+	}
+	
 	
 	public Long getId() {
 		return id;
@@ -18,11 +23,11 @@ public class Penalizacion {
 		this.id = id;
 	}
 
-	public GregorianCalendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 	
-	public void setFecha(GregorianCalendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	
@@ -42,7 +47,7 @@ public class Penalizacion {
 		this.jugador = jugador;
 	}
 
-	public Penalizacion(GregorianCalendar fecha, String motivo, Jugador jugador) {
+	public Penalizacion(Date fecha, String motivo, Jugador jugador) {
 		super();
 		this.fecha = fecha;
 		this.motivo = motivo;

@@ -4,16 +4,19 @@
 <!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="clasesDeNegocio.Penalizacion" table="T_PENALIZACION">
+ 
   <id name="id" type="java.lang.Long">
    <column name="PENALIZACION_ID"/>
    <generator class="sequence">
     <param name="sequence">S_PENALIZACION_ID</param>
    </generator>
   </id>
+  
   <property generated="never" lazy="false" name="motivo" type="java.lang.String">
    <column name="PENALIZACION_MOTIVO"/>
   </property>
-  <property generated="never" lazy="false" name="fecha" type="java.util.GregorianCalendar">
+  
+  <property generated="never" lazy="false" name="fecha" type="java.util.Date">
    <column name="PENALIZACION_FECHA"/>
   </property>
   

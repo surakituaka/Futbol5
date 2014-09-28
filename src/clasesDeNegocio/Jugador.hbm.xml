@@ -26,14 +26,17 @@
   
   
   
-  <list name="penalizaciones" table="T_PENALIZACION" cascade="all" access="property">
+  <list name="penalizaciones" table="T_PENALIZACION" cascade="all" access="property" lazy="false">
    <key column="JUGADOR_ID" not-null="true"/>
    <list-index column="IDX" base="0"/>
    <one-to-many class="clasesDeNegocio.Penalizacion"/>
   </list>
   
-  
-  
+  <list name="calificaciones" table="T_CALIFICACION" cascade="all" access="property" lazy="false">
+   <key column="JUGADOR_CALIFICADOR" not-null="true"/>
+   <list-index column="IDX" base="0"/>
+   <one-to-many class="clasesDeNegocio.Calificacion" />
+  </list>
   
   <!--
   <list lazy="true" name="amigos" table="AMIGO">
@@ -73,16 +76,9 @@
    <one-to-many class="clasesDeNegocio.Inscripcion"/>
   </list>
   
-  
-  <list lazy="true" name="calificaciones" table="CALIFICACION">
-   <key>
-    <column name="ID"/>
-   </key>
-   <list-index base="0"/>
-   <one-to-many class="clasesDeNegocio.Calificacion"/>
-  </list>
-  
-  
   -->
+  
+  
+  
  </class>
 </hibernate-mapping>

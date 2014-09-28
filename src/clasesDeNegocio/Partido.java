@@ -28,6 +28,12 @@ public class Partido implements Serializable{
 	private Equipo equipo2 = new Equipo();
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
+	public Partido(){
+		super();
+	}
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

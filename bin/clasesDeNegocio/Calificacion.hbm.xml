@@ -3,25 +3,32 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 24/09/2014 16:33:23 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="clasesDeNegocio.Calificacion" table="CALIFICACION">
-        <id name="calificador" type="clasesDeNegocio.Jugador">
-            <column name="CALIFICADOR" />
-            <generator class="assigned" />
+    <class name="clasesDeNegocio.Calificacion" table="T_CALIFICACION">
+    
+        <id name="id" type="java.lang.Long">
+            <column name="CALIFICACION_ID" />
+            <generator class="sequence">
+    			<param name="sequence">S_CALIFICACION_ID</param>
+   			</generator>
         </id>
-        <many-to-one name="calificado" class="clasesDeNegocio.Jugador" fetch="join">
-            <column name="CALIFICADO" />
-        </many-to-one>
+        
+        <many-to-one column="JUGADOR_CALIFICADOR" not-null="true" fetch="select" name="calificador" class="clasesDeNegocio.Jugador" cascade="all" access="property" insert="false" update="false"/>
+        
+        <many-to-one column="JUGADOR_CALIFICADO" not-null="true" fetch="select" name="calificado" class="clasesDeNegocio.Jugador" cascade="all" access="property" insert="false" update="false"/>
+  
+  		<many-to-one  column="PARTIDO_ID" not-null="true" fetch="select" name="partido" class="clasesDeNegocio.Partido" cascade="all" access="property" insert="false" update="false"/>
+        
         <property name="calificacion" type="java.lang.Integer">
-            <column name="CALIFICACION" />
+            <column name="CALIFICACION_NOTA" />
         </property>
+        
         <property name="critica" type="java.lang.String">
-            <column name="CRITICA" />
+            <column name="CALIFICACION_CRITICA" />
         </property>
-        <many-to-one name="partido" class="clasesDeNegocio.Partido" fetch="join">
-            <column name="PARTIDO" />
-        </many-to-one>
-        <property name="fecha" type="java.util.GregorianCalendar">
-            <column name="FECHA" />
+        
+        <property name="fecha" type="java.util.Date">
+            <column name="CALIFICACION_FECHA" />
         </property>
     </class>
 </hibernate-mapping>
+  

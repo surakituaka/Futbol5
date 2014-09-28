@@ -259,8 +259,15 @@ public class TestSobreJugadores {
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 		Date date = formatter.parse("01/29/02");
 		
-		conexionDB.agregaJugador("pepe33", "Pepeneitor", "Pepe", "Lopez", "pepel@algo.com", date);
+		Jugador jugador = new Jugador();
+		jugador.setUsuario("pepe33");
+		jugador.setPassword("Pepeneitor");
+		jugador.setNombre("Pepe");
+		jugador.setApellido("Lopez");
+		jugador.setEmail("pepel@algo.com");
+		jugador.setFecha_nacimiento(date);
 		
+		conexionDB.agregar(jugador);
 		
 		List<Jugador> jugadores = conexionDB.listaJugadores();
 		
@@ -296,6 +303,30 @@ public class TestSobreJugadores {
 		
 	}
 	*/
+	@Test
+	public void persistencia_calificacion() throws ParseException{
+		
+		ConexionDB conexionDB = new ConexionDB();
+		
+		List<Jugador> jugadores = conexionDB.listaJugadores();
+		
+		List<Partido> partidos = conexionDB.listaPartidos();
+		
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		Date date = formatter.parse("01/29/02");
+		
+		jugadores.get(0).getCalificaciones().add(new Calificacion(jugadores.get(0), jugadores.get(1), 6, "jugo bien", partidos.get(0), date));
+		
+
+		conexionDB.guardar(jugadores.get(0));
+		
+		
+		List<Calificacion> calificaciones = conexionDB.listaCalificaciones();
+		
+		
+	}
+	
+	
 	
 	
 }

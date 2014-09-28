@@ -148,7 +148,7 @@ public class Jugador extends Usuario{
 
 	public Inscripcion quitar_inscripcion(Partido partido){
 		for(int i=0;i<inscripciones.size();i++)
-			if(this.inscripciones.get(i).getPartido_inscripto().getId().equals(partido.getId()))
+			if(this.inscripciones.get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre()))
 				return this.inscripciones.remove(i);
 		return null;
 	}
@@ -171,7 +171,7 @@ public class Jugador extends Usuario{
 	public void bajarse_de(Partido partido){
 		partido.quitar_inscripcion(this);
 		this.quitar_inscripcion(partido);
-		this.agregar_penalizacion(new Penalizacion(new GregorianCalendar(),"por dejar un partido sin reemplazo",this));
+		this.agregar_penalizacion(new Penalizacion(new Date(),"por dejar un partido sin reemplazo",this));
 	}
 	
 	public void bajarse_de(Partido partido,Jugador reemplazo){
@@ -184,13 +184,13 @@ public class Jugador extends Usuario{
 	}
 	
 	public void calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
-		this.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido,new GregorianCalendar()));
+		this.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido,new Date()));
 	}
 	
 	public boolean estoyInscripto(Partido partido) {
 		boolean respuesta = false;
 		for(int i=0;i<getInscripciones().size();i++){
-			if(getInscripciones().get(i).getPartido_inscripto().getId().equals(partido.getId()))
+			if(getInscripciones().get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre()))
 				respuesta = true;
 		}
 		return respuesta;
