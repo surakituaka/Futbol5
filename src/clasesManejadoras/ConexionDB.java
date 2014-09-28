@@ -32,18 +32,34 @@ public class ConexionDB {
 		}
 	}
 	
-	public void agregaJugador(Jugador jugador) {
+	public void agregar(Object objeto) {
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			
-			session.save(jugador);
+			session.save(objeto);
 			tx.commit();
 			session.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void guardar(Object objeto) {
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			
+			session.update(objeto);
+			tx.commit();
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<Jugador> listaJugadores() {

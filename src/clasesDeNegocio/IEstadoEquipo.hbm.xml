@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2014 13:15:27 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+
+
+    <class name="clasesDeNegocio.IEstadoEquipo" table="T_ESTADO" >
+    
+    
+        <id name="id" type="java.lang.Long">
+            <column name="ESTADO_ID" />
+            <generator class="sequence">
+    			<param name="sequence">S_ESTADO_ID</param>
+   			</generator>
+        </id>
+        
+        
+        <discriminator column="ESTADO_DESCRIPCION" type="java.lang.String"/>
+        
+        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
+        	<column name="ESTADO_DESCRIPCION" />
+        </property>
+        
+        <subclass name="clasesDeNegocio.EstadoPendiente" discriminator-value="Pendiente">
+       
+        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
+        	<column name="ESTADO_DESCRIPCION" />
+        </property>
+        
+        </subclass>
+      
+        <subclass name="clasesDeNegocio.EstadoConfirmado" discriminator-value="Confirmado">
+        
+        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
+        	<column name="ESTADO_DESCRIPCION" />
+        </property>
+        
+        </subclass>
+        
+    </class>
+</hibernate-mapping>

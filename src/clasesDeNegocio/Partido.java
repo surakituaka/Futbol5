@@ -1,5 +1,6 @@
 package clasesDeNegocio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -9,8 +10,13 @@ import clasesDeNegocio.OrdenadorJugadoresTipo;
 import ServiciosExternos.IMensajero;
 
 
-public class Partido {
+public class Partido implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Long id;
 	private String partido_nombre;
 	private Date fecha;
 	private String lugar;
@@ -22,6 +28,22 @@ public class Partido {
 	private Equipo equipo2 = new Equipo();
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPartido_nombre() {
+		return partido_nombre;
+	}
+
+	public void setPartido_nombre(String partido_nombre) {
+		this.partido_nombre = partido_nombre;
+	}
+
 	public Partido(IMensajero emailInterface){
 		setMensajero(emailInterface);
 	}
@@ -29,13 +51,6 @@ public class Partido {
 	@Deprecated
 	public List<Jugador> getJugadores() {
 		return jugadores;
-	}
-	
-	public void setId(String id){
-		this.partido_nombre = id;
-	}
-	public String getId(){
-		return partido_nombre;
 	}
 	
 	@Deprecated

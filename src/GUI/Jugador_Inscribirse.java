@@ -91,7 +91,7 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 		getContentPane().add(partidos_disponibles);		
 		for(int i=0;i < global.partidos.size();i++){ //Bucle de carga de la combo
 			if(!(global.partidos.get(i).estaConfirmado() || global.partidos.get(i).estaConfirmado()))
-				partidos_disponibles.addItem(global.partidos.get(i).getId());
+				partidos_disponibles.addItem(global.partidos.get(i).getPartido_nombre());
 		}
 		
 		botonStandar = new JRadioButton("Standar");

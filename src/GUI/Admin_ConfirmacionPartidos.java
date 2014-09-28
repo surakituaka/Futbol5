@@ -152,7 +152,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 		
 		for(int i=0;i<global.partidos.size();i++)
 			if(global.partidos.get(i).tieneEquipos())
-				comboPartidos.addItem(global.partidos.get(i).getId());
+				comboPartidos.addItem(global.partidos.get(i).getPartido_nombre());
 		
 		if(comboPartidos.getSelectedIndex() > -1)
 			setearCheckBoxes(partido_seleccionado = global.getPartidoById((String) comboPartidos.getSelectedItem()));

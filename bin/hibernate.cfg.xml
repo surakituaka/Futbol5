@@ -11,5 +11,7 @@
   <property name="hibernate.show_sql">true</property>
   <mapping resource="clasesDeNegocio/Jugador.hbm.xml"/>
   <mapping resource="clasesDeNegocio/Penalizacion.hbm.xml"/>
+  <mapping resource="clasesDeNegocio/Partido.hbm.xml"/>
+  <mapping resource="clasesDeNegocio/IEstadoEquipo.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

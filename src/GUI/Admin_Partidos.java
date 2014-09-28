@@ -170,7 +170,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		panel.add(comboJugadores);
 		//inicializamos las combo
 		for(int i=0;i < global.partidos.size();i++) 
-			comboPartidos.addItem(global.partidos.get(i).getId());
+			comboPartidos.addItem(global.partidos.get(i).getPartido_nombre());
 		if(comboPartidos.getSelectedIndex() > -1)
 			llenarDatosPartido();
 
@@ -215,11 +215,11 @@ public class Admin_Partidos extends VentanaTheGrid {
 						return;
 					}
 					partido_nuevo.setFecha(fecha);
-					partido_nuevo.setId(nombre_partido);
+					partido_nuevo.setPartido_nombre(nombre_partido);
 					partido_nuevo.setLugar(lugar);
 					partido_nuevo.setMensajero(global.mensajero);
 					global.agregarPartido(partido_nuevo);
-					comboPartidos.addItem(partido_nuevo.getId());
+					comboPartidos.addItem(partido_nuevo.getPartido_nombre());
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Crear Partido", JOptionPane.ERROR_MESSAGE);					
@@ -254,7 +254,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 						JOptionPane.showMessageDialog(null, "Fecha Ingresada Erronea", "Error al Guardar el Partido", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					partido_seleccionado.setId(campoId.getText());
+					partido_seleccionado.setPartido_nombre(campoId.getText());
 					partido_seleccionado.setFecha(fecha);
 					partido_seleccionado.setLugar(campoLugar.getText());
 					llenarDatosPartido();
@@ -296,7 +296,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 			for(int i=0;i< partido_seleccionado.getInscripciones().size();i++)
 				comboJugadores.addItem(partido_seleccionado.getInscripciones().get(i).getJugador_inscripto().getUsuario());
 			//Llenemos las labels
-			campoId.setText(partido_seleccionado.getId());
+			campoId.setText(partido_seleccionado.getPartido_nombre());
 			campoFecha.setText(formato_fecha.format(partido_seleccionado.getFecha()));
 			campoLugar.setText(partido_seleccionado.getLugar());
 			lblCantInscriptos.setText(gen_cantJugadores + Integer.toString(partido_seleccionado.getInscripciones().size()));

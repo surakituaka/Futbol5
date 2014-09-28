@@ -84,7 +84,7 @@ public class Jugador_Baja extends VentanaTheGrid {
 		for(int i=0;i<global.jugador_seleccionado.getInscripciones().size();i++){
 			Partido partido_inscripto = global.jugador_seleccionado.getInscripciones().get(i).getPartido_inscripto();
 			if(!partido_inscripto.estaConfirmado())
-				lista_partido.addItem(partido_inscripto.getId());
+				lista_partido.addItem(partido_inscripto.getPartido_nombre());
 		}
 
 		//Creemos las Labels

@@ -5,12 +5,15 @@
 <hibernate-mapping>
  <class name="clasesDeNegocio.Jugador" table="T_JUGADOR">
   <!--Clave-->
+  
   <id name="id" type="java.lang.Long">
    <column name="JUGADOR_ID"/>
    <generator class="sequence">
     <param name="sequence">S_JUGADOR_ID</param>
    </generator>
   </id>
+  
+  
   <property generated="never" lazy="false" name="nombre" type="java.lang.String">
    <column name="JUGADOR_NOMBRE"/>
   </property>
@@ -40,9 +43,13 @@
    <list-index base="0"/>
    <one-to-many class="clasesDeNegocio.Amigo"/>
   </list>
+  
+  
   <many-to-one class="clasesDeNegocio.IOrden" fetch="join" name="proposicion">
    <column name="PROPOSICION"/>
   </many-to-one>
+  
+  
   -->
   <property generated="never" lazy="false" name="handicap" type="java.lang.Integer">
    <column name="JUGADOR_HANDICAP"/>
@@ -57,6 +64,7 @@
    <column name="JUGADOR_EMAIL"/>
   </property>
   <!--
+  
   <list lazy="true" name="inscripciones" table="INSCRIPCION">
    <key>
     <column name="ID"/>
@@ -64,6 +72,8 @@
    <list-index base="0"/>
    <one-to-many class="clasesDeNegocio.Inscripcion"/>
   </list>
+  
+  
   <list lazy="true" name="calificaciones" table="CALIFICACION">
    <key>
     <column name="ID"/>
@@ -71,6 +81,8 @@
    <list-index base="0"/>
    <one-to-many class="clasesDeNegocio.Calificacion"/>
   </list>
+  
+  
   -->
  </class>
 </hibernate-mapping>

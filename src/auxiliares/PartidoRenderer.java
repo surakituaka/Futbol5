@@ -20,7 +20,7 @@ public class PartidoRenderer extends JLabel implements ListCellRenderer<Partido>
 					JList<? extends Partido> lista, Partido partido,
 					int index, boolean isSelected, boolean cellHasFocus) {
 				 	 
-		        setText(partido.getId());
+		        setText(partido.getPartido_nombre());
 		 
 		        if (isSelected) {
 		            setBackground(lista.getSelectionBackground());

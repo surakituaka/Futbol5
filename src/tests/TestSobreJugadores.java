@@ -22,7 +22,7 @@ public class TestSobreJugadores {
 	public void standar_puede_entrar_a_partido() {
 		IMensajero mensajero = new MockMensajero();
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido 1");
+		partido.setPartido_nombre("Partido 1");
 		Jugador jugador = new Jugador();
 				
 		jugador.inscribirse_a(partido, new Standar());
@@ -36,7 +36,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido 1");
+		partido.setPartido_nombre("Partido 1");
 		Jugador jugador = new Jugador();
 		jugador.inscribirse_a(partido, new Solidaria());
 		
@@ -49,7 +49,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido 1");
+		partido.setPartido_nombre("Partido 1");
 		Jugador jugador = new Jugador();
 			
 		jugador.inscribirse_a(partido,new Condicional("condicion loca"));
@@ -82,7 +82,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
 			if(i<9)
@@ -103,7 +103,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 		for(int i = 0;i<10;i++){
 			Jugador j = new Jugador();
 			j.inscribirse_a(partido, new Standar());
@@ -122,7 +122,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 		for(int i = 0;i<15;i++){
 			Jugador j = new Jugador();
 //			j.setPrioridad(10.0);
@@ -160,7 +160,7 @@ public class TestSobreJugadores {
 		
 		IMensajero mensajero = new MockMensajero();
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 
 		for(int i = 0;i<9;i++){
 			Jugador j = new Jugador();
@@ -184,7 +184,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 
 		jugador.inscribirse_a(partido, new Standar());
 		
@@ -203,7 +203,7 @@ public class TestSobreJugadores {
 		IMensajero mensajero = new MockMensajero();
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 
 		jugador.inscribirse_a(partido, new Standar());
 		
@@ -267,7 +267,7 @@ public class TestSobreJugadores {
 		assertTrue(jugadores.size()!=0);
 		
 	}*/
-	
+	/*
 	@Test
 	public void persistenciajugador_penalizado() throws ParseException{
 		
@@ -287,7 +287,7 @@ public class TestSobreJugadores {
 		
 		Penalizacion penalizacion = new Penalizacion(new GregorianCalendar(), "sos muy garca",jugador);
 		jugador.getPenalizaciones().add(penalizacion);
-		conexionDB.agregaJugador(jugador);
+		conexionDB.agregar(jugador);
 		
 		
 		List<Jugador> jugadores = conexionDB.listaJugadores();
@@ -295,7 +295,7 @@ public class TestSobreJugadores {
 		assertTrue(jugadores.size()!=0);
 		
 	}
-	
+	*/
 	
 	
 }

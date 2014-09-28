@@ -2,9 +2,15 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Test;
 
 import clasesDeNegocio.*;
+import clasesManejadoras.ConexionDB;
 import ServiciosExternos.*;
 
 public class TestSobrePartidos {
@@ -109,5 +115,43 @@ public class TestSobrePartidos {
 		assertTrue(PrimeroEsPrimeroEquipo1 && SegundoEsPrimeroEquipo2);
 	}
 	
-
-}
+	
+	@Test
+	public void persistir_partido_con_estado() throws ParseException{
+		
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		Date date = formatter.parse("01/29/02");
+		
+		
+		ConexionDB conexionDB = new ConexionDB();
+		
+		IMensajero mensajero = new MockMensajero();
+		
+		Partido p = new Partido(mensajero);
+		p.setPartido_nombre("partido loco");
+		p.setFecha(date);
+		p.setLugar("Aconcagua");
+		
+		IEstadoEquipo estado = new EstadoPendiente();
+		estado.setId(1L);
+		p.setEstado(estado);
+		
+		conexionDB.agregar(p);
+		
+	}
+	
+	/*
+	@Test
+	public void persistir_partido_con_estado() throws ParseException{
+		
+	
+		ConexionDB conexionDB = new ConexionDB();
+		
+		IEstadoEquipo estado = new EstadoPendiente();
+		estado.setId(1L);
+		
+		conexionDB.guardar(estado);
+		
+		}
+	 */
+	}

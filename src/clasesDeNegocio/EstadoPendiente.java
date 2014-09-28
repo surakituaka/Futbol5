@@ -4,12 +4,32 @@ import java.util.Calendar;
 import java.util.List;
 
 public class EstadoPendiente implements IEstadoEquipo {
-
+	/**
+	 * 
+	 */
+	private Long id;
+	private String descripcion;
 	private String estado_base = "Pendiente";
 	private String estado_equipos = "Con Equipos Tentativos";
 	private IEstadoEquipo siguiente = new EstadoConfirmado();
 	private String estado_vencido = "Vencido";
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 	public String getEstado(Partido partido) {	
 		if(partido.getFecha().before(Calendar.getInstance().getTime()))
 			return estado_vencido;

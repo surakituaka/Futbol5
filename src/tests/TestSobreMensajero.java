@@ -41,7 +41,7 @@ public class TestSobreMensajero {
 		when(mensajero.enviar_mensaje("partido","admin","se fue alguien del partido")).thenReturn("Mensaje malo enviado al admin");
 		
 		Partido partido = new Partido(mensajero);
-		partido.setId("Partido Loco");
+		partido.setPartido_nombre("Partido Loco");
 		
 		Jugador j= null;
 		for(int i = 0;i<10;i++){

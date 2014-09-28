@@ -208,7 +208,7 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 		l_nombre.setText(gen_nombre.concat(amigo.getNombre()));
 		l_apellido.setText(gen_apellido.concat(amigo.getApellido()));
 		l_email.setText(gen_email.concat(amigo.getEmail()));
-		l_partido.setText(gen_partido.concat(admin.getNuevas_propuestas().get(i).getPartido().getId()));
+		l_partido.setText(gen_partido.concat(admin.getNuevas_propuestas().get(i).getPartido().getPartido_nombre()));
 		l_propositor.setText(gen_propositor.concat(admin.getNuevas_propuestas().get(i).getJugador().getNombre()));
 		propuesta_seleccionada = admin.getNuevas_propuestas().get(i);
 

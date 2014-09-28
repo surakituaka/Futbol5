@@ -42,7 +42,7 @@ public class Global {
 
 		//Creemos 1 partido
 		Partido partidito = new Partido(administrador.getMensajero());
-		partidito.setId("partidito");
+		partidito.setPartido_nombre("partidito");
 		partidito.setLugar("Lugano");
 		try {
 			partidito.setFecha((new SimpleDateFormat("dd/MM/yy")).parse("12/12/14"));
@@ -54,7 +54,7 @@ public class Global {
 		
 		//Partido para chequear criticas - NO USAR PARA NADA MAS
 		Partido partido_criticas = new Partido(administrador.getMensajero());
-		partido_criticas.setId("Critias");
+		partido_criticas.setPartido_nombre("Critias");
 		partido_criticas.setLugar("Lugano");
 		try {
 			partido_criticas.setFecha((new SimpleDateFormat("dd/MM/yy")).parse("25/12/14"));
