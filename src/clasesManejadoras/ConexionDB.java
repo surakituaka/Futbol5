@@ -35,25 +35,12 @@ public class ConexionDB {
 		}
 	}
 	
-	public void agregar(Object objeto) {
-		try {
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			
-			session.save(objeto);
-			tx.commit();
-			session.close();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void guardar(Object objeto) {
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
 			
-			session.update(objeto);
+			session.saveOrUpdate(objeto);
 			tx.commit();
 			session.close();
 		} catch (HibernateException e) {

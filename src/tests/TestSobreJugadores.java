@@ -267,7 +267,7 @@ public class TestSobreJugadores {
 		jugador.setEmail("pepel@algo.com");
 		jugador.setFecha_nacimiento(date);
 		
-		conexionDB.agregar(jugador);
+		conexionDB.guardar(jugador);
 		
 		List<Jugador> jugadores = conexionDB.listaJugadores();
 		
@@ -294,7 +294,7 @@ public class TestSobreJugadores {
 		
 		Penalizacion penalizacion = new Penalizacion(new GregorianCalendar(), "sos muy garca",jugador);
 		jugador.getPenalizaciones().add(penalizacion);
-		conexionDB.agregar(jugador);
+		conexionDB.guardar(jugador);
 		
 		
 		List<Jugador> jugadores = conexionDB.listaJugadores();
