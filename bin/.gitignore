@@ -1,6 +1,6 @@
-/clasesManejadoras
-/tests
-/hibernate.cfg.xml
 /GUI
+/ServiciosExternos
 /auxiliares
 /clasesDeNegocio
+/clasesManejadoras
+/tests

@@ -303,6 +303,8 @@ public class TestSobreJugadores {
 		
 	}
 	*/
+	
+	/*
 	@Test
 	public void persistencia_calificacion() throws ParseException{
 		
@@ -325,7 +327,7 @@ public class TestSobreJugadores {
 		
 		
 	}
-	
+	*/
 	
 	
 	

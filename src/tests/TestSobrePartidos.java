@@ -6,6 +6,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -153,5 +155,19 @@ public class TestSobrePartidos {
 		conexionDB.guardar(estado);
 		
 		}
-	 */
+	 
+	
+	@Test
+	public void obtener_estados_persistidos(){
+		
+		ConexionDB conexionDB = new ConexionDB();
+		
+		List<IEstadoEquipo>estados=conexionDB.listaEstados();
+		
+		for (IEstadoEquipo estado : estados) {
+			System.out.println(estado.getClass()); 
+		}
+		
 	}
+	*/
+}

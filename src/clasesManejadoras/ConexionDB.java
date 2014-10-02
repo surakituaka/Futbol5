@@ -11,6 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.Session;
 
 import clasesDeNegocio.Calificacion;
+import clasesDeNegocio.IEstadoEquipo;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
 
@@ -108,5 +109,19 @@ public class ConexionDB {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<IEstadoEquipo> listaEstados() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			List<IEstadoEquipo> result = (List<IEstadoEquipo>) session.createQuery("from IEstadoEquipo as IEstadoEquipo").list();
+			tx.commit();
+			session.close();
+			return result;
+		} catch (HibernateException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 	
 }
