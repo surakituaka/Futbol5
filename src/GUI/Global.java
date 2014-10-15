@@ -117,7 +117,7 @@ public class Global {
 	
 	public Partido getPartidoById(String id){
 		for(int i=0;i<partidos.size();i++)
-			if(partidos.get(i).getId().equals(id))
+			if(partidos.get(i).getPartido_nombre().equals(id))
 				return partidos.get(i);
 		return null;
 	}

@@ -177,7 +177,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 					if(response == JOptionPane.OK_OPTION) {
 						darBajaYPenalizarNoAsistentes(partido_seleccionado);
 						partido_seleccionado.confirmar();
-						comboPartidos.removeItem(partido_seleccionado.getId());
+						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 					}				
 					return;
 				}

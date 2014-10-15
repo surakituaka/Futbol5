@@ -162,7 +162,7 @@ public class Jugador extends Usuario{
 		if(inscripcion != null) {
 			agregar_inscripcion(inscripcion);
 			for(Amigo amigo:getAmigos()){
-				partido.enviar_mensaje("Partido "+partido.getId(), amigo.getEmail(), "tu amigo "+getNombre()+" ingreso a un partido");
+				partido.enviar_mensaje("Partido "+partido.getPartido_nombre(), amigo.getEmail(), "tu amigo "+getNombre()+" ingreso a un partido");
 			}
 		}
 		return inscripcion;

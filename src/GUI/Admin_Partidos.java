@@ -229,7 +229,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		accionEliminarPartido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(global.eliminarPartido(partido_seleccionado)){
-					comboPartidos.removeItem(partido_seleccionado.getId());
+					comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 					llenarDatosPartido();
 				}
 			}
