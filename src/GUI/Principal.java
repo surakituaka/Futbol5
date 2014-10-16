@@ -46,7 +46,7 @@ public class Principal extends VentanaTheGrid {
 				try {
 					global_init = new Global();					
 					principal = new Principal();
-					principal.setVisible(true);					
+					principal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

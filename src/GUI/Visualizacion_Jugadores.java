@@ -1,21 +1,21 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.ListSelectionModel;
+import javax.swing.JPanel;
+
+import clasesDeNegocio.Penalizacion;
 
 public class Visualizacion_Jugadores extends VentanaTheGrid {
 	//Componentes no cambiantes
@@ -34,13 +34,16 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 	private JButton btnVolver;
 	
 	//Generadores de Texto
-	private String gen_nombre = "Nombre ";
-	private String gen_handicap = "Handicap ";
-	private String gen_promedioUltimo = "Promedio del Ultimo Partido ";
-	private String gen_promedioTodos = "Promedio de los Partidos Jugados ";
-	private String gen_fecha = "Fecha de Nacimiento ";
-	private String gen_partidos = "Partidos Jugados ";
-	
+	private String gen_nombre = "Nombre: ";
+	private String gen_handicap = "Handicap: ";
+	private String gen_promedioUltimo = "Promedio del Ultimo Partido: ";
+	private String gen_promedioTodos = "Promedio de los Partidos Jugados: ";
+	private String gen_fecha = "Fecha de Nacimiento: ";
+	private String gen_partidos = "Partidos Jugados: ";
+	//Formato de Fecha
+	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
+	private SimpleDateFormat formato_hora = new SimpleDateFormat("hh:mm");
+
 	//Constructor
 	public Visualizacion_Jugadores(GlobalParameters caller) {
 		global = caller; //Seteamos el atributo global
@@ -88,6 +91,7 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		lblPenalizaciones.setBounds(10, 161, 265, 14);
 		getContentPane().add(lblPenalizaciones);
 		
+		actualizarLabels();
 		//Creemos el boton para volver
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(186, 338, 89, 23);
@@ -100,12 +104,39 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		});
 		
 		//Creemos la tabla de Penalizaciones
-		table = new JTable();
-		table.setBounds(10, 327, 265, -131);
-		getContentPane().add(table);
-		
-		
+		String[] columnas = {"Fecha", "Hora", "Motivo"};
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 176, 265, 151);
+		getContentPane().add(panel);
+		table = new JTable(obtenerPenalizaciones(), columnas);
+		table.setRowSelectionAllowed(false);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setPreferredScrollableViewportSize(new Dimension(265,100));
+		table.setFillsViewportHeight(true);
+		JScrollPane scrollPane = new JScrollPane(table);
+		panel.add(scrollPane);
 	}
-	
-
+	private String[][] obtenerPenalizaciones() {
+		List<Penalizacion> penalizaciones = global.jugador_seleccionado.getPenalizaciones();
+		int cantPenalizaciones = penalizaciones.size();
+		String[][] tabla = new String[cantPenalizaciones][3];
+		for(int i=0; i< cantPenalizaciones;i++){
+			tabla[i][0] = formato_fecha.format(penalizaciones.get(i).getFecha());
+			tabla[i][1] = formato_hora.format(penalizaciones.get(i).getFecha());
+			tabla[i][2] = penalizaciones.get(i).getMotivo();
+		}
+		return tabla;
+	}
+	private void actualizarLabels(){
+		if(global.jugador_seleccionado != null) {
+			
+			lblNombre.setText(gen_nombre + global.jugador_seleccionado.getNombre() + " " 	+ global.jugador_seleccionado.getApellido());
+			lblHandicap.setText(gen_handicap + global.jugador_seleccionado.getHandicap().toString());
+			if(global.jugador_seleccionado.getFecha_nacimiento() != null)
+				lblFecha.setText(gen_fecha + formato_fecha.format(global.jugador_seleccionado.getFecha_nacimiento()));
+			lblPartidosJugados.setText(gen_partidos + global.jugador_seleccionado.getPartidos_jugados().size());		
+			//Promedios
+			
+		}
+	}
 }

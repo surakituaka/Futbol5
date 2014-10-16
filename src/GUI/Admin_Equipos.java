@@ -21,8 +21,15 @@ import javax.swing.SwingConstants;
 import auxiliares.CriterioRenderer;
 import clasesDeNegocio.CriterioOrden;
 import clasesDeNegocio.IGeneradorEquipos;
+import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
 import clasesDeNegocio.Promedio;
+
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Admin_Equipos extends VentanaTheGrid {
 	private static final long serialVersionUID = 5894712599675922771L;
@@ -52,6 +59,7 @@ public class Admin_Equipos extends VentanaTheGrid {
 	//Atributos
 	private IGeneradorEquipos generador_equipo;
 	private Partido partido_elegido;
+	private JPanel panel_1;
 
 	//Constructor
 	public Admin_Equipos(GlobalParameters caller, Partido partido) {
@@ -67,14 +75,14 @@ public class Admin_Equipos extends VentanaTheGrid {
 		    	global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setBounds(100, 100, 282, 401);
+		setBounds(100, 100, 295, 401);
 		getContentPane().setLayout(null);
 
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 154, 256, 177);
+		panel.setBounds(10, 154, 269, 177);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -84,19 +92,37 @@ public class Admin_Equipos extends VentanaTheGrid {
 		DefaultListModel<CriterioOrden> listaCriterios = new DefaultListModel<CriterioOrden>();
 
 		JList<String> lista_e1 = new JList<String>(listaEquipo1);
+		lista_e1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+		        if (evt.getClickCount() == 2) {
+		        	String nombre = listaEquipo1.elementAt(lista_e1.locationToIndex(evt.getPoint()));
+		            mostrarVentana(nombre);
+		        }
+			}
+		});
 		scroll_e1 = new JScrollPane(lista_e1);
 		scroll_e1.setBounds(10, 36, 113, 130);
 		panel.add(scroll_e1);
 	
 		JList<String> lista_e2 = new JList<String>(listaEquipo2);
+		lista_e2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+		        if (evt.getClickCount() == 2) {
+		        	String nombre = listaEquipo2.elementAt(lista_e2.locationToIndex(evt.getPoint()));
+		            mostrarVentana(nombre);
+		        }
+			}
+		});
 		scroll_e2 = new JScrollPane(lista_e2);
-		scroll_e2.setBounds(134, 36, 113, 130);
+		scroll_e2.setBounds(146, 36, 113, 130);
 		panel.add(scroll_e2);
 		
 		lista_crit = new JList<CriterioOrden>(listaCriterios);
 		lista_crit.setCellRenderer(new CriterioRenderer());
 		scroll_crit = new JScrollPane(lista_crit);
-		scroll_crit.setBounds(144, 10, 122, 99);
+		scroll_crit.setBounds(157, 9, 122, 99);
 		getContentPane().add(scroll_crit);
 				
 		for(int i=0;i<global.getCriterios().size();i++) //Cargamos los criterios en la lista
@@ -105,31 +131,22 @@ public class Admin_Equipos extends VentanaTheGrid {
 		//Crear Labels
 		
 		lblCriterios = new JLabel("Ordenar Por:");
-		lblGenerar = new JLabel("Generar Equipo Por:");
+		lblCriterios.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEquipo1 = new JLabel("Equipo 1");
 		lblEquipo2 = new JLabel("Equipo 2");
 
-		lblCriterios.setBounds(10, 11, 124, 14);
-		lblGenerar.setBounds(10, 36, 122, 14);
+		lblCriterios.setBounds(10, 11, 137, 14);
 		lblEquipo1.setBounds(10, 11, 113, 14);
-		lblEquipo2.setBounds(134, 11, 113, 14);
+		lblEquipo2.setBounds(146, 11, 113, 14);
 
 		getContentPane().add(lblCriterios);
-		getContentPane().add(lblGenerar);
 		panel.add(lblEquipo1);
 		panel.add(lblEquipo2);
-		lblGenerar.setLabelFor(comboEquipos);
 		lblEquipo1.setLabelFor(lista_e1);
 		lblEquipo2.setLabelFor(lista_e2);
 
 		lblEquipo1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEquipo2.setHorizontalAlignment(SwingConstants.CENTER);
-
-		//Creamos los combos
-		
-		comboEquipos.setBounds(10, 61, 124, 20);
-
-		getContentPane().add(comboEquipos);
 		
 		//inicializemos los combos
 		for(int i=0;i<global.getGeneradoresEquipos().size();i++)
@@ -139,12 +156,25 @@ public class Admin_Equipos extends VentanaTheGrid {
 		//Creamos los botones
 		
 		btnGenerar = new JButton("Generar Equipo");
-		btnGenerar.setBounds(10, 120, 256, 23);
+		btnGenerar.setBounds(10, 120, 269, 23);
 		getContentPane().add(btnGenerar);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(177, 342, 89, 23);
+		btnVolver.setBounds(190, 342, 89, 23);
 		getContentPane().add(btnVolver);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_1.setBounds(10, 36, 137, 72);
+		getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		comboEquipos.setBounds(8, 32, 124, 20);
+		panel_1.add(comboEquipos);
+		lblGenerar = new JLabel("Generar Equipo Por:");
+		lblGenerar.setBounds(10, 7, 122, 14);
+		panel_1.add(lblGenerar);
+		lblGenerar.setLabelFor(comboEquipos);
 		
 		//Comportamiento de las combos
 		
@@ -189,6 +219,12 @@ public class Admin_Equipos extends VentanaTheGrid {
 				terminate();
 			}
 		});
+	}
+	protected void mostrarVentana(String nombre) {
+		Visualizacion_Jugadores datos_pantalla = new Visualizacion_Jugadores(new GlobalParameters(global,global.getJugadorByUsuario(nombre), yo));
+		habilitarPantalla(datos_pantalla);
+		// TODO Auto-generated method stub
+		
 	}
 	private void actualizarListas(){
 		listaEquipo1.removeAllElements();

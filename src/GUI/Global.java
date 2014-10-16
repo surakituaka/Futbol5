@@ -3,10 +3,12 @@ package GUI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
+
 import clasesDeNegocio.*;
 
 //Aca se cargan TODOS los harcodeos de la DB dinamica.
@@ -20,7 +22,7 @@ public class Global {
 	public IMensajero mensajero;
 	public List<CriterioOrden> criterios = new ArrayList<CriterioOrden>();
 	public List<IGeneradorEquipos> generadores_equipo = new ArrayList<IGeneradorEquipos>();
-
+	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
 	
 	public Global(){
 		
@@ -84,6 +86,18 @@ public class Global {
 				jugadores.get(i).inscribirse_a(partido_criticas, new Standar());
 			}
 		}
+		Penalizacion penalizacion_prueba = new Penalizacion();
+		penalizacion_prueba.setJugador(jugadores.get(0));
+		penalizacion_prueba.setMotivo("Por Puto");
+		Date fecha_1 = new Date();
+		try {
+			fecha_1 = formato_fecha.parse("15/10/14");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		penalizacion_prueba.setFecha(fecha_1);
+		jugadores.get(0).agregar_penalizacion(penalizacion_prueba);
 		//Seteamos CRITIAS
 		CriterioOrden[] criterios_partido_prueba = new CriterioOrden[criterios.size()];
 		administrador.organizar_equipo(partido_criticas, criterios.toArray(criterios_partido_prueba));
