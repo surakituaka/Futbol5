@@ -131,12 +131,14 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		if(global.jugador_seleccionado != null) {
 			
 			lblNombre.setText(gen_nombre + global.jugador_seleccionado.getNombre() + " " 	+ global.jugador_seleccionado.getApellido());
+			lblNombre.setForeground(colorJugador(global.jugador_seleccionado)); //Actualiza el color del nombre segun el jugador
 			lblHandicap.setText(gen_handicap + global.jugador_seleccionado.getHandicap().toString());
 			if(global.jugador_seleccionado.getFecha_nacimiento() != null)
 				lblFecha.setText(gen_fecha + formato_fecha.format(global.jugador_seleccionado.getFecha_nacimiento()));
 			lblPartidosJugados.setText(gen_partidos + global.jugador_seleccionado.getPartidos_jugados().size());		
 			//Promedios
-			
+			lblPromedioUltimo.setText(gen_promedioUltimo + global.jugador_seleccionado.promedioUltimoPartido());
+			lblPromedioTodos.setText(gen_promedioTodos + global.jugador_seleccionado.promedioGeneral());
 		}
 	}
 }

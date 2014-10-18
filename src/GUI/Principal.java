@@ -47,6 +47,8 @@ public class Principal extends VentanaTheGrid {
 					global_init = new Global();					
 					principal = new Principal();
 					principal.setVisible(true);
+					Busqueda_Jugadores x = new Busqueda_Jugadores(null);
+					x.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -243,4 +243,45 @@ public class Jugador extends Usuario{
 				return true;
 		return false;
 	}
+	
+	public boolean imBlue()
+	{
+		if(this.getHandicap() > 8)
+			return true;
+		else
+			return false;
+	}
+	public Partido getUltimoPartidoJugado()
+	{
+		Partido partido_base = null;
+		if(inscripciones.size() > 0)
+		{
+			for(int i = 0; i < inscripciones.size(); i++)
+			{
+				if(inscripciones.get(i).getPartido_inscripto().estaConfirmado())
+					if(partido_base == null)
+						partido_base = inscripciones.get(i).getPartido_inscripto();
+					else
+						if(inscripciones.get(i).getPartido_inscripto().getFecha().after(partido_base.getFecha()))
+							partido_base = inscripciones.get(i).getPartido_inscripto();	
+			}		
+		}
+		return partido_base;
+	}
+	
+	public int promedioUltimoPartido() {
+		int promedio = 0;
+		Partido ultimoPartido = getUltimoPartidoJugado();
+		if(ultimoPartido != null)
+			for(int i = 0; i < calificaciones.size(); i++)
+				if(calificaciones.get(i).getPartido().getId().equals(ultimoPartido.getId()))
+					promedio += calificaciones.get(i).getCalificacion();
+		return promedio;
+	}
+	public int promedioGeneral(){
+		int promedio = 0;
+		for(int i = 0; i< calificaciones.size(); i++)
+			promedio += calificaciones.get(i).getCalificacion();		
+		return promedio;
+	}
 }
