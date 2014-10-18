@@ -18,10 +18,7 @@
         
         
         <discriminator column="ESTADO_DESCRIPCION" type="java.lang.String"/>
-        
-        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
-        	<column name="ESTADO_DESCRIPCION" />
-        </property>
+
         
         <subclass name="clasesDeNegocio.EstadoPendiente" discriminator-value="Pendiente">
        

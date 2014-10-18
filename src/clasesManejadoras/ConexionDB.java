@@ -72,7 +72,7 @@ public class ConexionDB {
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			List<Partido> result = session.createQuery("from Partido as Partido").list();
+			List<Partido> result = (List<Partido>) session.createQuery("from Partido as Partido").list();
 			tx.commit();
 			session.close();
 			return result;

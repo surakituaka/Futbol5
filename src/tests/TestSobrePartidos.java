@@ -1,20 +1,27 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.junit.Test;
 
-import clasesDeNegocio.*;
+import ServiciosExternos.IMensajero;
+import ServiciosExternos.MockMensajero;
+import clasesDeNegocio.Admin;
+import clasesDeNegocio.CriterioOrden;
+import clasesDeNegocio.EquipoParImpar;
+import clasesDeNegocio.EquipoSuma11;
+import clasesDeNegocio.Handicap;
+import clasesDeNegocio.IEstadoEquipo;
+import clasesDeNegocio.Jugador;
+import clasesDeNegocio.Partido;
+import clasesDeNegocio.Standar;
 import clasesManejadoras.ConexionDB;
-import ServiciosExternos.*;
 
 public class TestSobrePartidos {
 
@@ -118,7 +125,7 @@ public class TestSobrePartidos {
 		assertTrue(PrimeroEsPrimeroEquipo1 && SegundoEsPrimeroEquipo2);
 	}
 	
-	
+	/*
 	@Test
 	public void persistir_partido_con_estado() throws ParseException{
 		
@@ -135,12 +142,12 @@ public class TestSobrePartidos {
 		partido.setFecha(date);
 		partido.setLugar("Aconcagua");
 		
-		List<IEstadoEquipo> estado = conexionDB.listaEstados();
-		partido.setEstado(estado.get(0));
+		List<IEstadoEquipo> estados = conexionDB.listaEstados();
+		partido.setEstado(estados.get(0));
 		
 		conexionDB.guardar(partido);
 	}
-	
+	*/
 	
 	/*
 	@Test
@@ -156,17 +163,33 @@ public class TestSobrePartidos {
 		}
 	 */
 	
-//	@Test
-//	public void obtener_estados_persistidos(){
-//		
-//		ConexionDB conexionDB = new ConexionDB();
-//		
-//		List<IEstadoEquipo>estados=conexionDB.listaEstados();
-//		
-//		for (IEstadoEquipo estado : estados) {
-//			System.out.println(estado.getClass()); 
-//		}
-//		
-//	}
+	/*
+	@Test
+	public void obtener_estados_persistidos(){
+
+		ConexionDB conexionDB = new ConexionDB();
+
+		List<IEstadoEquipo>estados=conexionDB.listaEstados();
+
+		for (IEstadoEquipo estado : estados) {
+			System.out.println(estado.getClass()); 
+		}
+
+	}*/
+	
+	
+	@Test
+	public void obtener_partidos_persistidos(){
+
+		ConexionDB conexionDB = new ConexionDB();
+
+		List<Partido>partidos=conexionDB.listaPartidos();
+
+		for (Partido partido : partidos) {
+			System.out.println(partido.getPartido_nombre()); 
+			System.out.println(partido.getEstado()); 
+		}
+
+	}
 	
 }

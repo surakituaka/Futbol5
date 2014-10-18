@@ -249,8 +249,8 @@ public class TestSobreJugadores {
 		assertTrue(admin.getNuevas_propuestas().size()==1);
 	}
 	
-	
 	/*
+	
 	@Test
 	public void persistencia_jugador() throws ParseException{
 		
@@ -260,11 +260,11 @@ public class TestSobreJugadores {
 		Date date = formatter.parse("01/29/02");
 		
 		Jugador jugador = new Jugador();
-		jugador.setUsuario("pepe33");
+		jugador.setUsuario("pepe333");
 		jugador.setPassword("Pepeneitor");
 		jugador.setNombre("Pepe");
 		jugador.setApellido("Lopez");
-		jugador.setEmail("pepel@algo.com");
+		jugador.setEmail("pepel3@algo.com");
 		jugador.setFecha_nacimiento(date);
 		
 		conexionDB.guardar(jugador);
@@ -273,7 +273,8 @@ public class TestSobreJugadores {
 		
 		assertTrue(jugadores.size()!=0);
 		
-	}*/
+	}
+	*/
 	/*
 	@Test
 	public void persistenciajugador_penalizado() throws ParseException{

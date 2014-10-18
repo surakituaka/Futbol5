@@ -91,7 +91,7 @@ public class Admin_Equipos extends VentanaTheGrid {
 		listaEquipo2 = new DefaultListModel<String>();
 		DefaultListModel<CriterioOrden> listaCriterios = new DefaultListModel<CriterioOrden>();
 
-		JList<String> lista_e1 = new JList<String>(listaEquipo1);
+		final JList<String> lista_e1 = new JList<String>(listaEquipo1);
 		lista_e1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
@@ -105,7 +105,7 @@ public class Admin_Equipos extends VentanaTheGrid {
 		scroll_e1.setBounds(10, 36, 113, 130);
 		panel.add(scroll_e1);
 	
-		JList<String> lista_e2 = new JList<String>(listaEquipo2);
+		final JList<String> lista_e2 = new JList<String>(listaEquipo2);
 		lista_e2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {

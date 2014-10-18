@@ -2,7 +2,6 @@ package clasesDeNegocio;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Jugador extends Usuario{
@@ -16,7 +15,7 @@ public class Jugador extends Usuario{
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	private IOrden proposicion;
-	private Integer handicap = 1; //Por defecto todos tienen 1
+	private Integer handicap = 6; //Por defecto todos tienen 6
 	@Deprecated
 	private List<Partido>partidos_inscriptos = new ArrayList<Partido>();
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
