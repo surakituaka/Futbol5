@@ -217,7 +217,7 @@ public class Jugador extends Usuario{
 	public List<Calificacion> getCalificacionesByPartido(Partido partido) {
 		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 		for(int i=0;i< this.getCalificaciones().size();i++){
-			if(this.getCalificaciones().get(i).getPartido().getId().equals(partido.getId()))
+			if(this.getCalificaciones().get(i).getPartido().getPartido_nombre().equals(partido.getPartido_nombre()))
 				calificaciones.add(this.getCalificaciones().get(i));
 		}
 		return calificaciones;

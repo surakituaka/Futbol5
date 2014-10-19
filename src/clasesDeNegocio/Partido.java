@@ -32,8 +32,6 @@ public class Partido implements Serializable{
 		super();
 	}
 	
-	
-	
 	public Long getId() {
 		return id;
 	}
