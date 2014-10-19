@@ -7,12 +7,9 @@ public class Equipo {
 	
 	private List<Jugador>jugadores = new ArrayList<Jugador>();
 
-	public List<Jugador> getJugadores() {
-		return jugadores;
-	}
-
-	public void setJugadores(List<Jugador> jugadores) {
-		this.jugadores = jugadores;
-	}
+	public List<Jugador> getJugadores() { return jugadores;	}
+	public void setJugadores(List<Jugador> jugadores) { this.jugadores = jugadores;	}
+	public void addJugador(Jugador player){ jugadores.add(player); }
+	
 	
 }

@@ -3,40 +3,46 @@ package clasesDeNegocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
 import ServiciosExternos.IMensajero;
 
+@Entity
+@Table(name = "T_ADMINISTRADOR")
 public class Admin extends Usuario {
 	
-	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
-	private IMensajero mensajero;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ADMINISTADOR_ID", nullable = false)
+	private Long id;
+	
+	@Column(name = "ADMINISTADOR_USUARIO", length = 20, nullable = false)
+	private String usuario;
+	
+	@Column(name = "ADMINISTRADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "admin";
-		
-	public String getPassword() {
-		return password;
-	}
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
+	
+	@Transient
+	private IMensajero mensajero;
+	
+	public Long getId() { return id; }
+	public void setId(Long id) { this.id = id; }
+	
+	public String getUsuario() { return usuario; }
+	public void setUsuario(String usuario) {this.usuario = usuario; }
+	
+	public String getPassword() { return password; }
+	public void setPassword(String password) { this.password = password; }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	public IMensajero getMensajero() { return mensajero; }
+	public void setMensajero(IMensajero mensajero) { this.mensajero = mensajero; }
 
-	public IMensajero getMensajero() {
-		return mensajero;
-	}
-
-	public void setMensajero(IMensajero mensajero) {
-		this.mensajero = mensajero;
-	}
-
-	public List<Propuesta> getNuevas_propuestas() {
-		return nuevas_propuestas;
-	}
-
-	public void setNuevas_propuestas(List<Propuesta> nuevas_propuestas) {
-		this.nuevas_propuestas = nuevas_propuestas;
-	}
-	public void agregar_propuesta(Propuesta propuesta){
-		this.nuevas_propuestas.add(propuesta);
-	}
+	public List<Propuesta> getNuevas_propuestas() { return nuevas_propuestas; }
+	public void setNuevas_propuestas(List<Propuesta> nuevas_propuestas) { this.nuevas_propuestas = nuevas_propuestas; }
+	public void agregar_propuesta(Propuesta propuesta){ this.nuevas_propuestas.add(propuesta); }
 	
 	public void aprobar_propuesta(Propuesta propuesta, Jugador nuevo_jugador, IModalidad modalidad){
 		propuesta.getJugador().agregar_amigo(propuesta.getAmigo());		

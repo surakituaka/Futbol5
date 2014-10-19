@@ -6,28 +6,62 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
 import clasesDeNegocio.OrdenadorJugadoresTipo;
 import ServiciosExternos.IMensajero;
 
-
+@Entity
+@Table(name = "T_PARTIDO")
 public class Partido implements Serializable{
 	
 	/**
 	 * 
 	 */
+	@Transient
 	private static final long serialVersionUID = 1L;
-	private Long id;
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PARTIDO_ID", nullable = false)
+	private long id;	//TODO Cambiar la DB para añadir esta columna
+	
+	@Column(name = "PARTIDO_NOMBRE", length = 20, nullable = false)
 	private String partido_nombre;
+	
+	@Column(name = "PARTIDO_FECHA", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
-	private String lugar;
-	@Deprecated
-	private List<Jugador> jugadores = new ArrayList<Jugador>();
-	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
-	private IMensajero mensajero;
-	private Equipo equipo1 = new Equipo();
-	private Equipo equipo2 = new Equipo();
+	
+	@Column(name = "PARTIDO_LUGAR", length = 20, nullable = true)
+	private String lugar;	
+
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "ESTADO_ID", nullable = false)
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
+	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY) 
+	private Equipo equipo1 = new Equipo();
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Equipo equipo2 = new Equipo();
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Jugador>jugadores_equipo1 = new ArrayList<Jugador>();
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Jugador>jugadores_equipo2 = new ArrayList<Jugador>();
+	
+	@Transient
+	private IMensajero mensajero;
+	
+	@Deprecated
+	private List<Jugador> jugadores = new ArrayList<Jugador>();
+	
+		
 	public Partido(){
 		super();
 	}
@@ -88,6 +122,15 @@ public class Partido implements Serializable{
 		this.mensajero = mensajero;
 	}
 
+
+	public List<Jugador> getJugadores_Equipo1() { return jugadores_equipo1;	}
+	public void setJugadores_Equipo1(List<Jugador> jugadores) { this.jugadores_equipo1 = jugadores;	}
+	public void addJugador_Equipo1(Jugador player){ jugadores_equipo1.add(player); }
+
+	public List<Jugador> getJugadores_Equipo2() { return jugadores_equipo2;	}
+	public void setJugadores_Equipo2(List<Jugador> jugadores) { this.jugadores_equipo2 = jugadores;	}
+	public void addJugador_Equipo2(Jugador player){ jugadores_equipo2.add(player); }
+	
 	public Equipo getEquipo1() {
 		return equipo1;
 	}

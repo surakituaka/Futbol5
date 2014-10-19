@@ -15,6 +15,12 @@ import clasesDeNegocio.*;
 import clasesManejadoras.ConexionDB;
 import ServiciosExternos.*;
 
+import org.hibernate.HibernateException; 
+import org.hibernate.Session; 
+import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 public class TestSobreJugadores {
 	
@@ -242,7 +248,7 @@ public class TestSobreJugadores {
 		
 		((OrdenNuevoJugador) orden).setAdmin(admin);
 		
-		jugador.setPropocicion(orden);
+		jugador.setProposicion(orden);
 		
 		jugador.proponer_jugador(amigo, partido);
 		

@@ -17,20 +17,20 @@
         </id>
         
         
-        <discriminator column="ESTADO_DESCRIPCION" type="java.lang.String"/>
+        <discriminator column="DTYPE" type="java.lang.String"/>
 
         
-        <subclass name="clasesDeNegocio.EstadoPendiente" discriminator-value="Pendiente">
+        <subclass name="clasesDeNegocio.EstadoPendiente" discriminator-value="EP">
        
-        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
+        <property name="descripcion" type="java.lang.String" insert="true" update="false" unique="true">
         	<column name="ESTADO_DESCRIPCION" />
         </property>
         
         </subclass>
       
-        <subclass name="clasesDeNegocio.EstadoConfirmado" discriminator-value="Confirmado">
+        <subclass name="clasesDeNegocio.EstadoConfirmado" discriminator-value="EC">
         
-        <property name="descripcion" type="java.lang.String" insert="false" update="false" unique="true">
+        <property name="descripcion" type="java.lang.String" insert="true" update="false" unique="true">
         	<column name="ESTADO_DESCRIPCION" />
         </property>
         

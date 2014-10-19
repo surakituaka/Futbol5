@@ -16,43 +16,58 @@ import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
 
 
-public class ConexionDB {
+public final class ConexionDB {
 	
-	private SessionFactory sessionFactory;
-	
-	public ConexionDB() {
-		try {
+    private static SessionFactory sessionFactory;
+
+    static {
+    	Boolean todoOK=false;
+    	int errores=0;
+    	while(!todoOK)
+        try {
 			System.out.println("Inicializando Hibernate");
-			
-			
 			Configuration configuration = new Configuration();
 		    configuration.configure();
 		    ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 		    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-		    System.out.println("terminado la inicializacion de Hibernate");
+		    System.out.println("Terminado la inicializacion de Hibernate");
+		    todoOK=true;
 		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-	}
+			errores++;
+			if(errores >3) 		//HACE 3 INTENTOS PORQUE AL MENOS EN MI DB A VECES NO ARRANCABA AL PRIMER INTENTO.
+			{
+				e.printStackTrace();
+				System.out.println("Superada la cantidad de reintentos. Ejecucion finalizada.");
+				System.exit(0); 
+			}
+			System.out.println("Error al inicar conexion con DB, reintentando..");
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}        
+		
+    }
+
+    public static Session getSession() throws HibernateException {
+        return sessionFactory.openSession();
+    }
 	
-	public void guardar(Object objeto) {
+	public static void guardar(Object objeto) {
 		try {
 			Session session = sessionFactory.openSession();
 			Transaction tx = session.beginTransaction();
-			
 			session.saveOrUpdate(objeto);
 			tx.commit();
 			session.close();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	
-	
+	}	
 	
 	@SuppressWarnings("unchecked")
-	public List<Jugador> listaJugadores() {
+	public static List<Jugador> listaJugadores() {
 		
 		try {
 			Session session = sessionFactory.openSession();
@@ -67,7 +82,7 @@ public class ConexionDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Partido> listaPartidos() {
+	public static List<Partido> listaPartidos() {
 		
 		try {
 			Session session = sessionFactory.openSession();
@@ -82,7 +97,7 @@ public class ConexionDB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Calificacion> listaCalificaciones() {
+	public static List<Calificacion> listaCalificaciones() {
 		
 		try {
 			Session session = sessionFactory.openSession();
@@ -97,7 +112,7 @@ public class ConexionDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<IEstadoEquipo> listaEstados() {
+	public static List<IEstadoEquipo> listaEstados() {
 		
 		try {
 			Session session = sessionFactory.openSession();

@@ -1,33 +1,76 @@
 package clasesDeNegocio;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-public class Jugador extends Usuario{
+import javax.persistence.*;
+
+import org.hibernate.annotations.IndexColumn;
+
+@SuppressWarnings("deprecation")
+@Entity
+@Table(name = "T_JUGADOR")
+public class Jugador extends Usuario{	
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "JUGADOR_ID", nullable = false)
+	private Long id;	//TODO Cambiar la DB para añadir esta columna
 	
-	private Long id;
+	@Column(name = "JUGADOR_USUARIO", length = 20, nullable = false)
+	private String usuario;
+	
+	@Column(name = "JUGADOR_NOMBRE", length = 20, nullable = false)
 	private String nombre;
+	
+	@Column(name = "JUGADOR_APELLIDO", length = 20, nullable = false)
 	private String apellido;
+	
+	@Column(name = "JUGADOR_FECHA_NACIMIENTO", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date fecha_nacimiento;
-	@Deprecated
-	private IModalidad tipo;
-	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
-	private List<Amigo> amigos = new ArrayList<Amigo>();
-	private IOrden proposicion;
+	
+	@Column(name = "JUGADOR_HANDICAP", length = 20, nullable = true)
 	private Integer handicap = 6; //Por defecto todos tienen 6
+	
+	@Column(name = "JUGADOR_EMAIL", length = 30, nullable = false)
+	private String email;	
+	
+	@Column(name = "JUGADOR_PASSWORD", length = 20, nullable = false)
+	private String password = "";
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="JUGADOR_ID")
+	private List<Amigo> amigos = new ArrayList<Amigo>();
+	
+	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@IndexColumn(name="IDX")
+	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
+	
+	@Transient
+	//@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	
+	@Transient
+	//@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
+	
+	//TODO FALTA ESTO
+	@Transient
+	private IOrden proposicion;
+	
+	@Transient
 	@Deprecated
 	private List<Partido>partidos_inscriptos = new ArrayList<Partido>();
-	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
-	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
+	@Transient
+	@Deprecated
+	private IModalidad tipo;
 
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -45,6 +88,24 @@ public class Jugador extends Usuario{
 	}
 	public void setFecha_nacimiento(Date fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
+	}
+	public Integer getHandicap() {
+		return handicap;
+	}
+	public void setHandicap(Integer handicap) {
+		this.handicap = handicap;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Deprecated
 	public IModalidad getTipo() {
@@ -66,18 +127,6 @@ public class Jugador extends Usuario{
 	public void setAmigos(List<Amigo> amigos) {
 		this.amigos = amigos;
 	}	
-	public IOrden getPropocicion() {
-		return proposicion;
-	}
-	public void setPropocicion(IOrden propocicion) {
-		this.proposicion = propocicion;
-	}
-	public Integer getHandicap() {
-		return handicap;
-	}
-	public void setHandicap(Integer handicap) {
-		this.handicap = handicap;
-	}
 	@Deprecated
 	public List<Partido> getPartidos_inscriptos() {
 		return partidos_inscriptos;

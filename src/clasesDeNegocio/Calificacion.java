@@ -2,14 +2,32 @@ package clasesDeNegocio;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "T_CALIFICACION")
 public class Calificacion {
 	
-	private Long id;
+	@Id
+	
+	private Long id;	//TODO Agregar dato en tabla
+	
+	
 	private Jugador calificador;
+	
+	
 	private Jugador calificado;
+	
+	@Column(name = "ADMINISTADOR_ID", length = 20, nullable = false)
 	private Integer calificacion;
+	
+	@Column(name = "ADMINISTADOR_ID", length = 20, nullable = false)
 	private String critica;
+	
+	
 	private Partido partido;
+	
+	
 	private Date fecha;
 	
 	public Long getId() {

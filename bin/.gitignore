@@ -1,6 +1,8 @@
-/GUI
-/ServiciosExternos
-/auxiliares
-/clasesDeNegocio
-/clasesManejadoras
-/tests
+/Managers/
+/GUI/
+/ServiciosExternos/
+/auxiliares/
+/clasesDeNegocio/
+/clasesManejadoras/
+/tests/
+/META-INF/

@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory>
-  <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-  <property name="hibernate.connection.password">TheGrid</property>
-  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:Futbol5</property>
-  <property name="hibernate.connection.username">C##FUTBOL5</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-  <property name="hibernate.show_sql">true</property>
-  <mapping resource="clasesDeNegocio/Jugador.hbm.xml"/>
-  <mapping resource="clasesDeNegocio/Penalizacion.hbm.xml"/>
-  <mapping resource="clasesDeNegocio/Partido.hbm.xml"/>
-  <mapping resource="clasesDeNegocio/Calificacion.hbm.xml"/>
-  
-  
- <mapping resource="clasesDeNegocio/IEstadoEquipo.hbm.xml"/> 
- 
- 
- </session-factory>
+	<session-factory>
+ 		<!-- Database connection settings -->
+  		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+  		<property name="hibernate.connection.url">jdbc:oracle:thin:@127.0.0.1:1521/FUTBOL5</property>
+  		<property name="hibernate.connection.username">C##FUTBOL5</property>
+  		<property name="hibernate.connection.password">TheGrid</property>
+  		
+  		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
+		
+  		<!-- SQL dialect -->
+  		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  		
+  		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+		
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		
+		<!-- Echo all executed SQL to stdout -->
+  		<property name="hibernate.show_sql">true</property>
+  		
+  		<!-- Creation/Update of DB -->
+  		<property name="hbm2ddl.auto">create</property>
+  		
+  		<!--mapping class= "clasesDeNegocio.Admin"/-->
+  		<mapping class= "clasesDeNegocio.Amigo"/>
+  		<mapping class= "clasesDeNegocio.Jugador"/>
+  		<mapping class= "clasesDeNegocio.Penalizacion"/>
+  		<!--mapping class= "clasesDeNegocio.Propuesta"/-->
+  		<!--mapping class= "clasesDeNegocio.Partido"/-->
+  		<mapping resource="clasesDeNegocio/IEstadoEquipo.hbm.xml"/> 
+  		
+ </session-factory> 
 </hibernate-configuration>

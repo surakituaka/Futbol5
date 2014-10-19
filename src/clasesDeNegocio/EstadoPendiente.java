@@ -3,16 +3,43 @@ package clasesDeNegocio;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+//@Entity
+//@DiscriminatorValue(value="EP")
 public class EstadoPendiente implements IEstadoEquipo {
 	/**
 	 * 
 	 */
+	//@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@Column(name = "ESTADO_ID", nullable = false)
 	private Long id;
+	
+	//@Column(name = "ESTADO_DESCRIPCION", length = 20, nullable = false)
 	private String descripcion;
-	private String estado_base = "Pendiente";
-	private String estado_equipos = "Con Equipos Tentativos";
-	private IEstadoEquipo siguiente = new EstadoConfirmado();
-	private String estado_vencido = "Vencido";
+	
+	//@Transient
+	private String estado_base;
+	//@Transient
+	private String estado_equipos;
+	//@Transient
+	private IEstadoEquipo siguiente;
+	//@Transient
+	private String estado_vencido;
+	
+	public EstadoPendiente(){
+		estado_base = "Pendiente";
+		estado_equipos = "Con Equipos Tentativos";
+		siguiente = new EstadoConfirmado();
+		estado_vencido = "Vencido";
+	}
 	
 	public Long getId() {
 		return id;

@@ -3,15 +3,32 @@ package clasesDeNegocio;
 
 import java.util.Calendar;
 
+import javax.persistence.*;
+
+//@Entity
+//@DiscriminatorValue(value="EC")
 public class EstadoConfirmado implements IEstadoEquipo {
 	
 	/**
 	 * 
 	 */
+	//@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@Column(name = "ESTADO_ID", nullable = false)
 	private Long id;
+	
+	//@Column(name = "ESTADO_DESCRIPCION", length = 20, nullable = false)
 	private String descripcion = "Confirmado";
-	private String estado = "Confirmado";
-	private String estado_vencido = "Vencido";
+	
+	//@Transient
+	private String estado;
+	//@Transient
+	private String estado_vencido;
+	
+	public EstadoConfirmado(){
+		estado = "Confirmado";
+		estado_vencido = "Vencido";
+	}
 	
 	public Long getId() {
 		return id;

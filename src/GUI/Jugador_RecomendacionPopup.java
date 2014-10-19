@@ -114,7 +114,7 @@ public class Jugador_RecomendacionPopup extends VentanaTheGrid {
 					if(!global.jugador_seleccionado.yaExisteAmigo(nuevo_amigo)) {
 						IOrden orden = new OrdenNuevoJugador();
 						((OrdenNuevoJugador) orden).setAdmin(global.administrador);
-						global.jugador_seleccionado.setPropocicion(orden);
+						global.jugador_seleccionado.setProposicion(orden);
 						global.jugador_seleccionado.proponer_jugador(nuevo_amigo, partido);
 						global.pantalla_anterior.terminate();
 						dispose();

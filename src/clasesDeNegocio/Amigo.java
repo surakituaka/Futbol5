@@ -1,9 +1,23 @@
 package clasesDeNegocio;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "T_AMIGO")
 public class Amigo {
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "AMIGO_ID", nullable = false)
+	private Long id;	//TODO Cambiar la DB para añadir esta columna
+	
+	@Column(name = "AMIGO_NOMBRE", length = 20, nullable = false)
 	private String nombre;
+	
+	@Column(name = "AMIGO_APELLIDO", length = 20, nullable = false)
 	private String apellido;
+	
+	@Column(name = "AMIGO_EMAIL", length = 20, nullable = false)
 	private String email;
 	
 	public String getNombre() {
@@ -12,6 +26,14 @@ public class Amigo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -19,16 +41,12 @@ public class Amigo {
 		this.email = email;
 	}
 	
+	public Amigo() {}
+	
 	public Amigo(String nombre, String apellido, String email) {
 		this.setNombre(nombre);
 		this.setApellido(apellido);
 		this.setEmail(email);
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 	
 	public boolean concuerdoCon(Amigo amigo){

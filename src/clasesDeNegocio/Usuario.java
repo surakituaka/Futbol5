@@ -1,16 +1,8 @@
 package clasesDeNegocio;
 
 public abstract class Usuario {
-	private String usuario;
-	private String password = "";
-	private String email;
-	
-	public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+	private String password;
+	private String email;	
 	public String getPassword() {
 		return password;
 	}
