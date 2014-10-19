@@ -3,7 +3,6 @@ package GUI;
 import java.awt.Color;
 import java.text.DateFormat;
 import java.util.Date;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
@@ -14,7 +13,7 @@ import clasesDeNegocio.Jugador;
 public abstract class VentanaTheGrid extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static Global global_init;
-	GlobalParameters global;
+	public GlobalParameters global;
 	VentanaTheGrid yo;
     private DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
 	
@@ -38,7 +37,7 @@ public abstract class VentanaTheGrid extends JFrame {
 		else
 			return Color.BLACK;
 	}
-	
+
     public void setDate(JTextField textField, JCalendarButton boton, Date date)
     {
         String dateString = "";
@@ -48,3 +47,4 @@ public abstract class VentanaTheGrid extends JFrame {
         boton.setTargetDate(date);
     }
 }
+

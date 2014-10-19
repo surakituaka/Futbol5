@@ -168,8 +168,11 @@ public class Admin_Jugadores extends VentanaTheGrid {
 			String id_usuario = (String) comboUsuarios.getSelectedItem();
 			Jugador jugador = global.getJugadorByUsuario(id_usuario);
 			campoNombre.setText(jugador.getNombre());
+			campoNombre.setForeground(this.colorJugador(jugador));
 			campoApellido.setText(jugador.getApellido());
+			campoApellido.setForeground(this.colorJugador(jugador));
 			campoEmail.setText(jugador.getEmail());
+			campoEmail.setForeground(this.colorJugador(jugador));
 			handicap.setSelectedIndex(jugador.getHandicap() -1);
 			for(int i=0;i<jugador.getPenalizaciones().size();i++){
 				modelo_lista.addElement(jugador.getPenalizaciones().get(i));

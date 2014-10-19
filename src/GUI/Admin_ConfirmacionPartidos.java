@@ -17,6 +17,8 @@ import clasesDeNegocio.Partido;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	private static final long serialVersionUID = -8202945325005603430L;
@@ -94,43 +96,143 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 		//Creemos las checkBox
 		
 		e1_j1 = new JCheckBox();
+		e1_j1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		e1_j1.setBounds(6, 29, 130, 23);
 		panel.add(e1_j1);
 		
 		e2_j1 = new JCheckBox();
 		e2_j1.setBounds(156, 29, 130, 23);
+		e2_j1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e2_j1);
 		
 		e1_j2 = new JCheckBox();
 		e1_j2.setBounds(6, 55, 130, 23);
+		e1_j2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e1_j2);
 		
 		e1_j3 = new JCheckBox();
 		e1_j3.setBounds(6, 81, 130, 23);
+		e1_j3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e1_j3);
 		
 		e1_j4 = new JCheckBox();
 		e1_j4.setBounds(6, 107, 130, 23);
+		e1_j4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e1_j4);
 		
 		e1_j5 = new JCheckBox();
 		e1_j5.setBounds(6, 133, 130, 23);
+		e1_j5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e1_j5);
 		
 		e2_j2 = new JCheckBox();
 		e2_j2.setBounds(156, 55, 130, 23);
+		e2_j2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e2_j2);
 		
 		e2_j3 = new JCheckBox();
 		e2_j3.setBounds(156, 81, 130, 23);
+		e2_j3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e2_j3);
 		
 		e2_j4 = new JCheckBox();
 		e2_j4.setBounds(156, 107, 130, 23);
+		e2_j4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e2_j4);
 		
 		e2_j5 = new JCheckBox();
 		e2_j5.setBounds(156, 133, 130, 23);
+		e2_j5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(arg0.getClickCount() == 2){
+					JCheckBox source = (JCheckBox) arg0.getSource();
+					if(!source.getText().matches(""))
+						mostrarDetalleJugador(source.getText());
+				}
+			}
+		});
 		panel.add(e2_j5);
 		
 		//Creemos la combo y los botones 
@@ -218,25 +320,35 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	public void setearCheckBoxes(Partido partido){
 		e1_j1.setSelected(false);
 		e1_j1.setText(partido.getEquipo1().getJugadores().get(0).getUsuario());
+		e1_j1.setForeground(this.colorJugador(partido.getEquipo1().getJugadores().get(0)));
 		e1_j2.setSelected(false);
 		e1_j2.setText(partido.getEquipo1().getJugadores().get(1).getUsuario());
+		e1_j2.setForeground(this.colorJugador(partido.getEquipo1().getJugadores().get(1)));
 		e1_j3.setSelected(false);
 		e1_j3.setText(partido.getEquipo1().getJugadores().get(2).getUsuario());
+		e1_j3.setForeground(this.colorJugador(partido.getEquipo1().getJugadores().get(2)));
 		e1_j4.setSelected(false);		
 		e1_j4.setText(partido.getEquipo1().getJugadores().get(3).getUsuario());
+		e1_j4.setForeground(this.colorJugador(partido.getEquipo1().getJugadores().get(3)));
 		e1_j5.setSelected(false);
 		e1_j5.setText(partido.getEquipo1().getJugadores().get(4).getUsuario());
+		e1_j5.setForeground(this.colorJugador(partido.getEquipo1().getJugadores().get(4)));
 
 		e2_j1.setSelected(false);
 		e2_j1.setText(partido.getEquipo2().getJugadores().get(0).getUsuario());
+		e2_j1.setForeground(this.colorJugador(partido.getEquipo2().getJugadores().get(0)));
 		e2_j2.setSelected(false);
 		e2_j2.setText(partido.getEquipo2().getJugadores().get(1).getUsuario());
+		e2_j2.setForeground(this.colorJugador(partido.getEquipo2().getJugadores().get(1)));
 		e2_j3.setSelected(false);
 		e2_j3.setText(partido.getEquipo2().getJugadores().get(2).getUsuario());
+		e2_j3.setForeground(this.colorJugador(partido.getEquipo2().getJugadores().get(2)));
 		e2_j4.setSelected(false);
 		e2_j4.setText(partido.getEquipo2().getJugadores().get(3).getUsuario());
+		e2_j4.setForeground(this.colorJugador(partido.getEquipo2().getJugadores().get(3)));
 		e2_j5.setSelected(false);
 		e2_j5.setText(partido.getEquipo2().getJugadores().get(4).getUsuario());
+		e2_j5.setForeground(this.colorJugador(partido.getEquipo2().getJugadores().get(4)));
 	}
 	public void darBajaYPenalizarNoAsistentes(Partido partido){
 		if(!e1_j1.isSelected())
@@ -262,5 +374,12 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	}
 	private void bajaPenalizada(Jugador jugador, Partido partido){
 		jugador.bajarse_de(partido);
+	}
+	
+	protected void mostrarDetalleJugador(String nombre) {
+		Visualizacion_Jugadores datos_pantalla = new Visualizacion_Jugadores(new GlobalParameters(global,global.getJugadorByUsuario(nombre), yo));
+		habilitarPantalla(datos_pantalla);
+		// TODO Auto-generated method stub
+		
 	}
 }

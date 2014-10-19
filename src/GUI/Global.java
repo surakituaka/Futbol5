@@ -74,6 +74,7 @@ public class Global {
 			amigo.setApellido("Apellido"+numero);
 			amigo.setEmail("j"+numero+"@gmail.com");
 			amigo.setUsuario("j"+numero);
+			amigo.setHandicap(9);
 			this.jugadores.add(amigo);
 		}
 		for(int i = 0; i<10;i++){
