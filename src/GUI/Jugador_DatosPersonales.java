@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import org.jbundle.thin.base.screen.jcalendarbutton.JCalendarButton;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,6 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 	private JLabel lblUsuario;
 	private JLabel lblPassword;
 	private JLabel lblPasswordConfirmacion;
-	private JLabel lblFormatoDate;
 
 	//Componentes modificables
 	
@@ -43,6 +44,7 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 
 	//Atributos
 	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
+    private JCalendarButton calendario;
 	
 	//Constructor
 	public Jugador_DatosPersonales(GlobalParameters caller) {
@@ -95,6 +97,7 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		campoApellido = new JTextField();
 		campoEmail = new JTextField();
 		campoNacimiento = new JTextField();
+		campoNacimiento.setEditable(false);
 		campoUsuario = new JTextField();
 
 		campoNombre.setColumns(10);
@@ -126,7 +129,6 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		lblUsuario = new JLabel("Usuario");
 		lblPassword = new JLabel("Contrase\u00F1a");
 		lblPasswordConfirmacion = new JLabel("Repita Contrase\u00F1a");
-		lblFormatoDate = new JLabel("Formato: DD/MM/YY");
 
 		
 		lblNombre.setBounds(10, 25, 46, 14);
@@ -136,21 +138,16 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		lblUsuario.setBounds(10, 11, 93, 14);
 		lblPassword.setBounds(10, 36, 126, 14);
 		lblPasswordConfirmacion.setBounds(10, 61, 126, 14);
-		lblFormatoDate.setBounds(163, 124, 139, 14);
 
 
 		getContentPane().add(lblNombre);		
 		getContentPane().add(lblApellido);
 		getContentPane().add(lblEmail);
 		getContentPane().add(lblNacimiento);
-		getContentPane().add(lblFormatoDate);
 
 		panel.add(lblUsuario);
 		panel.add(lblPassword);
 		panel.add(lblPasswordConfirmacion);
-		
-		lblFormatoDate.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblFormatoDate.setHorizontalAlignment(SwingConstants.CENTER);
 
 		//Carguemos los datos en los campos de text
 		
@@ -160,6 +157,16 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		if(global.jugador_seleccionado.getFecha_nacimiento() != null)
 			campoNacimiento.setText(formato_fecha.format(global.jugador_seleccionado.getFecha_nacimiento()));
 		campoUsuario.setText(global.jugador_seleccionado.getUsuario());
+		
+		calendario = new JCalendarButton();
+		calendario.setBounds(256, 117, 46, 23);
+		getContentPane().add(calendario);
+        calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                if (evt.getNewValue() instanceof Date)
+                    setDate(campoNacimiento, calendario, (Date)evt.getNewValue());
+            }
+        });
 		
 		//Comportamiento de los botones
 		

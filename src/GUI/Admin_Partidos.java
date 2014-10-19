@@ -202,36 +202,19 @@ public class Admin_Partidos extends VentanaTheGrid {
 		
 		accionNuevoPartido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Partido partido_nuevo = new Partido(global.administrador.getMensajero());
-				String nombre_partido = JOptionPane.showInputDialog(null, "Ingrese un nombre para el Partido", "Crear Partido", JOptionPane.PLAIN_MESSAGE);
-				String lugar = JOptionPane.showInputDialog(null, "Ingrese el lugar del Partido", "Crear Partido", JOptionPane.PLAIN_MESSAGE);			
-				String fecha_string = JOptionPane.showInputDialog(null, "Ingrese la fecha del Partido (dd/MM/yy)", "Crear Partido", JOptionPane.PLAIN_MESSAGE);
-				Date fecha;
-				if((nombre_partido != null) && (lugar != null) && (fecha_string != null))	{
-					try {
-						fecha = formato_fecha.parse(fecha_string);
-					} catch (ParseException e) {
-						JOptionPane.showMessageDialog(null, "Fecha Ingresada Erronea", "Error al Crear Partido", JOptionPane.ERROR_MESSAGE);
-						return;
-					}
-					partido_nuevo.setFecha(fecha);
-					partido_nuevo.setPartido_nombre(nombre_partido);
-					partido_nuevo.setLugar(lugar);
-					partido_nuevo.setMensajero(global.mensajero);
-					global.agregarPartido(partido_nuevo);
-					comboPartidos.addItem(partido_nuevo.getPartido_nombre());
-				}
-				else
-					JOptionPane.showMessageDialog(null, "Datos Ingresados Erroneos", "Error al Crear Partido", JOptionPane.ERROR_MESSAGE);					
+				Admin_NuevoPartido ventana_nuevo_partido = new Admin_NuevoPartido(new GlobalParameters(global,null, yo));
+				habilitarPantalla(ventana_nuevo_partido);
 			}
 		});
 		
 		accionEliminarPartido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(global.eliminarPartido(partido_seleccionado)){
-					comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
-					llenarDatosPartido();
-				}
+				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el partido?", "Eliminar Partido", JOptionPane.YES_NO_OPTION);
+				if(response == JOptionPane.YES_OPTION)
+					if(global.eliminarPartido(partido_seleccionado)){
+						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
+						llenarDatosPartido();
+					}
 			}
 		});
 		
@@ -245,7 +228,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar los cambios?", "Guardar Partido", JOptionPane.WARNING_MESSAGE);
+				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar los cambios?", "Guardar Partido", JOptionPane.PLAIN_MESSAGE);
 				if(response == JOptionPane.OK_OPTION) {
 					Date fecha;
 					try {
@@ -312,6 +295,10 @@ public class Admin_Partidos extends VentanaTheGrid {
 		if(partido.getSigEstado().matches(" "))
 			return " ";
 		return gen_equipos;
+	}
+	public void addPartido(Partido partido_nuevo)
+	{
+		comboPartidos.addItem(partido_nuevo.getPartido_nombre());
 	}
 	
 }

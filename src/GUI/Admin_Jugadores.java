@@ -154,7 +154,7 @@ public class Admin_Jugadores extends VentanaTheGrid {
 					if(!campoEmail.getText().equals(jugador.getEmail()))
 						jugador.setEmail(campoEmail.getText());//En alguna iteracion posterior se validara el formato
 					jugador.setHandicap((Integer) handicap.getSelectedItem());
-					JOptionPane.showMessageDialog(null, "SE han guardado los datos.", "Datos Guardados", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se han guardado los datos.", "Datos Guardados", JOptionPane.PLAIN_MESSAGE);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Elija un jugador valido.", "Error Guardado", JOptionPane.ERROR_MESSAGE);
