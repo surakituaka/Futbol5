@@ -3,11 +3,11 @@ package clasesDeNegocio;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "T_JUGADOR")
+@Table(name = "T_PROPUESTA")
 public class Propuesta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "PROPUESTA_ID", nullable = false)
 	public Long id;
 	
@@ -17,23 +17,20 @@ public class Propuesta {
 	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = false)
 	public String razon_rechazo;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "AMIGO_ID", nullable = false)
 	private Amigo amigo;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumns( {
-        @JoinColumn(name = "PARTIDO_ID", referencedColumnName = "PARTIDO_ID"),
-        @JoinColumn(name = "AMIGO_ID", referencedColumnName = "JUGADOR_ID"),	//TODO DEBERIA DIFERENCIARSE EL AMIGO DEL JUGADOR
-	})
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	
 	public Amigo getAmigo() {

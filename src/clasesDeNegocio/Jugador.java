@@ -37,23 +37,20 @@ public class Jugador extends Usuario{
 	@Column(name = "JUGADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="JUGADOR_ID")
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	
-	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@IndexColumn(name="IDX")
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	
-	@Transient
-	//@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	
-	@Transient
-	//@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 	
-	//TODO FALTA ESTO
 	@Transient
 	private IOrden proposicion;
 	

@@ -12,7 +12,7 @@ import ServiciosExternos.IMensajero;
 public class Admin extends Usuario {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ADMINISTADOR_ID", nullable = false)
 	private Long id;
 	
@@ -22,7 +22,8 @@ public class Admin extends Usuario {
 	@Column(name = "ADMINISTRADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "admin";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="ADMINISTRADOR_ID")
 	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	
 	@Transient

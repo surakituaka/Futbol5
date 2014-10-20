@@ -27,13 +27,17 @@
   		<!-- Creation/Update of DB -->
   		<property name="hbm2ddl.auto">create</property>
   		
-  		<!--mapping class= "clasesDeNegocio.Admin"/-->
+  		<mapping class= "clasesDeNegocio.Admin"/>
   		<mapping class= "clasesDeNegocio.Amigo"/>
   		<mapping class= "clasesDeNegocio.Jugador"/>
+  		<mapping class= "clasesDeNegocio.Propuesta"/>
+  		<mapping class= "clasesDeNegocio.Partido"/>
+  		<mapping class= "clasesDeNegocio.Equipo"/>
+  		<mapping class= "clasesDeNegocio.Inscripcion"/>
   		<mapping class= "clasesDeNegocio.Penalizacion"/>
-  		<!--mapping class= "clasesDeNegocio.Propuesta"/-->
-  		<!--mapping class= "clasesDeNegocio.Partido"/-->
-  		<mapping resource="clasesDeNegocio/IEstadoEquipo.hbm.xml"/> 
+  		<mapping class= "clasesDeNegocio.Calificacion"/>
+  		<mapping resource="clasesDeNegocio/IEstadoEquipo.hbm.xml"/>
+  		<mapping resource="clasesDeNegocio/IModalidad.hbm.xml"/> 
   		
  </session-factory> 
 </hibernate-configuration>

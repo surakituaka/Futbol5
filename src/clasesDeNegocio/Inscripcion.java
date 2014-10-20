@@ -1,10 +1,30 @@
 package clasesDeNegocio;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "T_INSCRIPCION")
 public class Inscripcion {
 	
-	private IModalidad modalidad;
+	@Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "INSCRIPCION_ID", nullable = false)
+	private long id;	//TODO Cambiar la DB para añadir esta columna
+	
+	@Column(name = "INSCRIPCION_EQUIPO", nullable = true)
+	public int equipo; 		//TODO Atributo agregado, para saber a que equipo pertenece el inscripto.
+		
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido_inscripto;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador_inscripto;
+
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
+	private IModalidad modalidad;
 	
 	public IModalidad getModalidad() {
 		return modalidad;

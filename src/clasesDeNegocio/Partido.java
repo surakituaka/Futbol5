@@ -8,9 +8,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.IndexColumn;
+
 import clasesDeNegocio.OrdenadorJugadoresTipo;
 import ServiciosExternos.IMensajero;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "T_PARTIDO")
 public class Partido implements Serializable{
@@ -22,7 +25,7 @@ public class Partido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "PARTIDO_ID", nullable = false)
 	private long id;	//TODO Cambiar la DB para añadir esta columna
 	
@@ -42,22 +45,19 @@ public class Partido implements Serializable{
 	
 	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
-	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY) 
+		
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "EQUIPO_ID_1", nullable = false)
 	private Equipo equipo1 = new Equipo();
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "EQUIPO_ID_2", nullable = false)
 	private Equipo equipo2 = new Equipo();
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Jugador>jugadores_equipo1 = new ArrayList<Jugador>();
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Jugador>jugadores_equipo2 = new ArrayList<Jugador>();
 	
 	@Transient
 	private IMensajero mensajero;
 	
+	@Transient
 	@Deprecated
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	
@@ -121,15 +121,6 @@ public class Partido implements Serializable{
 	public void setMensajero(IMensajero mensajero) {
 		this.mensajero = mensajero;
 	}
-
-
-	public List<Jugador> getJugadores_Equipo1() { return jugadores_equipo1;	}
-	public void setJugadores_Equipo1(List<Jugador> jugadores) { this.jugadores_equipo1 = jugadores;	}
-	public void addJugador_Equipo1(Jugador player){ jugadores_equipo1.add(player); }
-
-	public List<Jugador> getJugadores_Equipo2() { return jugadores_equipo2;	}
-	public void setJugadores_Equipo2(List<Jugador> jugadores) { this.jugadores_equipo2 = jugadores;	}
-	public void addJugador_Equipo2(Jugador player){ jugadores_equipo2.add(player); }
 	
 	public Equipo getEquipo1() {
 		return equipo1;

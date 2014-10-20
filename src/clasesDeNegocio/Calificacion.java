@@ -9,26 +9,31 @@ import javax.persistence.*;
 public class Calificacion {
 	
 	@Id
-	
-	private Long id;	//TODO Agregar dato en tabla
-	
-	
-	private Jugador calificador;
-	
-	
-	private Jugador calificado;
-	
-	@Column(name = "ADMINISTADOR_ID", length = 20, nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "CALIFICACION_ID", nullable = false)
+	private Long id;	//TODO Agregar dato en tabla.	
+
+	@Column(name = "CALIFICACION_NUMERO", nullable = false)
 	private Integer calificacion;
 	
-	@Column(name = "ADMINISTADOR_ID", length = 20, nullable = false)
-	private String critica;
+	@Column(name = "CALIFICACION_CRITICA", length = 20, nullable = false)
+	private String critica;	
 	
-	
-	private Partido partido;
-	
-	
+	@Column(name = "CALIFICACION_FECHA", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date fecha;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "JUGADOR_ID_CALIFICADOR", nullable = false)
+	private Jugador calificador;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = false)
+	private Jugador calificado;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "PARTIDO_ID", nullable = false)
+	private Partido partido;
 	
 	public Long getId() {
 		return id;

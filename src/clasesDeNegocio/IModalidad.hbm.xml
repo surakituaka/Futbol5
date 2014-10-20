@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26/09/2014 13:15:27 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+
+
+    <class name="clasesDeNegocio.IModalidad" table="T_MODALIDAD" >
+    
+    
+        <id name="id" type="java.lang.Long">
+            <column name="MODALIDAD_ID" />
+            <generator class="sequence">
+    			<param name="sequence">S_MODALIDAD_ID</param>
+   			</generator>
+        </id>
+        
+        
+        <discriminator column="DTYPE" type="java.lang.String"/>
+
+        
+        <subclass name="clasesDeNegocio.Standar" discriminator-value="ME">
+       
+        <property name="inscripcion" type="java.lang.String" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_DESCRIPCION" />
+        </property>
+                
+        <property name="fecha" type="java.util.Date" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_FECHA" />
+        </property>
+        
+        </subclass>
+        
+        <subclass name="clasesDeNegocio.Solidaria" discriminator-value="MS">
+       
+        <property name="inscripcion" type="java.lang.String" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_DESCRIPCION" />
+        </property>
+                
+        <property name="fecha" type="java.util.Date" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_FECHA" />
+        </property>
+        
+        </subclass>
+        
+        <subclass name="clasesDeNegocio.Condicional" discriminator-value="MC">
+       
+        <property name="inscripcion" type="java.lang.String" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_DESCRIPCION" />
+        </property>
+                
+        <property name="fecha" type="java.util.Date" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_FECHA" />
+        </property>
+        
+        <property name="condicion" type="java.lang.String" insert="true" update="true" unique="false">
+        	<column name="MODALIDAD_CONDICION" />
+        </property>
+        
+        </subclass>
+      
+        
+        
+    </class>
+</hibernate-mapping>

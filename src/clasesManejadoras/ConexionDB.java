@@ -40,7 +40,7 @@ public final class ConexionDB {
 				System.out.println("Superada la cantidad de reintentos. Ejecucion finalizada.");
 				System.exit(0); 
 			}
-			System.out.println("Error al inicar conexion con DB, reintentando..");
+			System.out.println("Error al inicar conexion con DB, reintentando..  " + "(" + e.getLocalizedMessage() + ")");
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e1) {
