@@ -13,7 +13,7 @@ import org.hibernate.annotations.IndexColumn;
 import clasesDeNegocio.OrdenadorJugadoresTipo;
 import ServiciosExternos.IMensajero;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({ "deprecation", "unused" })
 @Entity
 @Table(name = "T_PARTIDO")
 public class Partido implements Serializable{
@@ -25,7 +25,8 @@ public class Partido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idPartido", sequenceName="seq7", allocationSize = 1, initialValue = 100)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPartido")
 	@Column(name = "PARTIDO_ID", nullable = false)
 	private long id;	//TODO Cambiar la DB para añadir esta columna
 	

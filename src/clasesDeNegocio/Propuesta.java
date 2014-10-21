@@ -7,14 +7,15 @@ import javax.persistence.*;
 public class Propuesta {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idPropuesta", sequenceName="seq9", allocationSize = 1, initialValue = 100)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPropuesta")
 	@Column(name = "PROPUESTA_ID", nullable = false)
 	public Long id;
 	
-	@Column(name = "PROPUESTA_ESTADO", length = 20, nullable = false)	
+	@Column(name = "PROPUESTA_ESTADO", length = 20, nullable = true)	
 	public String estado_propuesta;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
-	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = false)
+	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = true)
 	public String razon_rechazo;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)

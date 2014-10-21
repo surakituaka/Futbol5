@@ -12,7 +12,8 @@ import ServiciosExternos.IMensajero;
 public class Admin extends Usuario {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idAdmin", sequenceName="seq1", allocationSize = 1, initialValue = 10)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idAdmin")
 	@Column(name = "ADMINISTADOR_ID", nullable = false)
 	private Long id;
 	

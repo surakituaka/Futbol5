@@ -17,21 +17,16 @@ public class EstadoPendiente implements IEstadoEquipo {
 	/**
 	 * 
 	 */
-	//@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "ESTADO_ID", nullable = false)
 	private Long id;
 	
-	//@Column(name = "ESTADO_DESCRIPCION", length = 20, nullable = false)
-	private String descripcion;
+	private String descripcion = "Pendiente";
 	
-	//@Transient
 	private String estado_base;
-	//@Transient
+	
 	private String estado_equipos;
-	//@Transient
+	
 	private IEstadoEquipo siguiente;
-	//@Transient
+	
 	private String estado_vencido;
 	
 	public EstadoPendiente(){

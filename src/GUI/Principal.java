@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import clasesDeNegocio.*;
+import clasesManejadoras.*;
 
 
 public class Principal extends VentanaTheGrid {
@@ -44,6 +45,8 @@ public class Principal extends VentanaTheGrid {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					new ConexionDB();
+					CargadoDeDatos.cargarAutomaticaDB();
 					global_init = new Global();					
 					principal = new Principal();
 					principal.setVisible(true);

@@ -9,14 +9,15 @@ import javax.persistence.*;
 public class Calificacion {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idCalificacion", sequenceName="seq3", allocationSize = 1, initialValue = 1000)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idCalificacion")
 	@Column(name = "CALIFICACION_ID", nullable = false)
 	private Long id;	//TODO Agregar dato en tabla.	
 
 	@Column(name = "CALIFICACION_NUMERO", nullable = false)
 	private Integer calificacion;
 	
-	@Column(name = "CALIFICACION_CRITICA", length = 20, nullable = false)
+	@Column(name = "CALIFICACION_CRITICA", length = 50, nullable = false)
 	private String critica;	
 	
 	@Column(name = "CALIFICACION_FECHA", nullable = true)

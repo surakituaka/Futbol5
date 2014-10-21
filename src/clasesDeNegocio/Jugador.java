@@ -11,7 +11,8 @@ import org.hibernate.annotations.IndexColumn;
 @Table(name = "T_JUGADOR")
 public class Jugador extends Usuario{	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idJugador", sequenceName="seq6", allocationSize = 1, initialValue = 10000)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idJugador")
 	@Column(name = "JUGADOR_ID", nullable = false)
 	private Long id;	//TODO Cambiar la DB para añadir esta columna
 	
@@ -228,8 +229,10 @@ public class Jugador extends Usuario{
 		this.proposicion.orden(amigo,partido,this);
 	}
 	
-	public void calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
-		this.agregar_calificacion(new Calificacion(this, calificado, calificacion, critica, partido,new Date()));
+	public Calificacion calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
+		Calificacion temp = new Calificacion(this, calificado, calificacion, critica, partido,new Date());
+		this.agregar_calificacion(temp);
+		return temp;
 	}
 	
 	public boolean estoyInscripto(Partido partido) {

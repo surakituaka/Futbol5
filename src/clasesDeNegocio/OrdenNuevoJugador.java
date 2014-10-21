@@ -15,6 +15,7 @@ public class OrdenNuevoJugador implements IOrden{
 	
 	public void orden(Amigo amigo, Partido partido, Jugador jugador) {
 		Propuesta propuesta = new Propuesta();
+		propuesta.setModalidad(new Standar());
 		propuesta.setAmigo(amigo);
 		propuesta.setPartido(partido);
 		propuesta.setJugador(jugador);

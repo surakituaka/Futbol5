@@ -78,6 +78,7 @@ public class TestSobrePersistencia {
 		penal2.setJugador(nuevo2);
 		
 		ConexionDB.guardar(nuevo2);
+		ConexionDB.guardar(penal);
 		
 		
 		assertTrue(true);

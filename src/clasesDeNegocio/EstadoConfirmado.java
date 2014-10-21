@@ -5,24 +5,21 @@ import java.util.Calendar;
 
 import javax.persistence.*;
 
-//@Entity
-//@DiscriminatorValue(value="EC")
+
 public class EstadoConfirmado implements IEstadoEquipo {
 	
 	/**
 	 * 
 	 */
-	//@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "ESTADO_ID", nullable = false)
+	
 	private Long id;
 	
-	//@Column(name = "ESTADO_DESCRIPCION", length = 20, nullable = false)
+	
 	private String descripcion = "Confirmado";
 	
-	//@Transient
+	
 	private String estado;
-	//@Transient
+	
 	private String estado_vencido;
 	
 	public EstadoConfirmado(){

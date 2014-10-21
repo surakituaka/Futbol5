@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,11 +21,12 @@ import javax.persistence.TemporalType;
 public class Penalizacion {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idPenalizacion", sequenceName="seq8", allocationSize = 1, initialValue = 1000)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPenalizacion")
 	@Column(name = "PENALIZACION_ID", nullable = false)
 	private Long id;
 	
-	@Column(name = "PENALIZACION_MOTIVO", length = 30, nullable = false)
+	@Column(name = "PENALIZACION_MOTIVO", length = 50, nullable = false)
 	private String motivo;
 	
 	@Column(name = "PENALIZACION_FECHA", nullable = true)

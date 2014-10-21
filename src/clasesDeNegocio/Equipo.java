@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.IndexColumn;
@@ -21,9 +22,13 @@ import org.hibernate.annotations.IndexColumn;
 public class Equipo {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idEquipo", sequenceName="seq4", allocationSize = 1, initialValue = 1000)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idEquipo")
 	@Column(name = "EQUIPO_ID", nullable = false)
 	private Long id;
+	
+	@Column(name = "EQUIPO_NOMBRE", length = 20, nullable = true)
+	public String nombre;
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@IndexColumn(name="IDX")
@@ -34,6 +39,7 @@ public class Equipo {
 	public void addJugador(Jugador player){ jugadores.add(player); }
 	public Long getId() { return id; }
 	public void setId(Long id) { this.id = id; }
-	
+	public String getNombre() { return nombre; }
+	public void setNombre(String texto) { this.nombre = texto; }	
 	
 }

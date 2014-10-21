@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Amigo {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="secuencia_idAmigo", sequenceName="seq2", allocationSize = 1, initialValue = 100)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idAmigo")
 	@Column(name = "AMIGO_ID", nullable = false)
 	private Long id;	//TODO Cambiar la DB para añadir esta columna
 	
@@ -17,7 +18,7 @@ public class Amigo {
 	@Column(name = "AMIGO_APELLIDO", length = 20, nullable = false)
 	private String apellido;
 	
-	@Column(name = "AMIGO_EMAIL", length = 20, nullable = false)
+	@Column(name = "AMIGO_EMAIL", length = 30, nullable = false)
 	private String email;
 	
 	public String getNombre() {
