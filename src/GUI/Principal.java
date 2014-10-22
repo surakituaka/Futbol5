@@ -45,11 +45,13 @@ public class Principal extends VentanaTheGrid {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new ConexionDB();
-					CargadoDeDatos.cargarAutomaticaDB();
-					global_init = new Global();					
-					principal = new Principal();
-					principal.setVisible(true);
+					
+					//new ConexionDB();
+					//CargadoDeDatos.cargarAutomaticaDB();
+					pruebas test = new pruebas();
+					//global_init = new Global();					
+					//principal = new Principal();
+					//principal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -447,6 +447,7 @@ public final class CargadoDeDatos {
 		match.setLugar("Base5");
 		calendario.set(2014, 11, 21);		
 		match.setFecha(calendario.getTime());
+		match.inicializarEquipos();
 		partidos.add(match);
 		
 		//Partido 2
@@ -456,6 +457,7 @@ public final class CargadoDeDatos {
 		match.setLugar("Alumni");
 		calendario.set(2015, 5, 13);		
 		match.setFecha(calendario.getTime());
+		match.inicializarEquipos();
 		partidos.add(match);
 		
 		//Partido 3
@@ -465,6 +467,7 @@ public final class CargadoDeDatos {
 		match.setLugar("Base5");
 		calendario.set(2015, 11, 14);		
 		match.setFecha(calendario.getTime());
+		match.inicializarEquipos();
 		partidos.add(match);
 		
 		//Partido 4
@@ -474,6 +477,7 @@ public final class CargadoDeDatos {
 		match.setLugar("Base5");
 		calendario.set(2014, 11, 21);		
 		match.setFecha(calendario.getTime());
+		match.inicializarEquipos();
 		partidos.add(match);
 		
 		//Partido 5
@@ -483,6 +487,7 @@ public final class CargadoDeDatos {
 		match.setLugar("OtroLugarNuevo");
 		calendario.set(2015, 1, 4);		
 		match.setFecha(calendario.getTime());
+		match.inicializarEquipos();
 		partidos.add(match);
 		
 		return partidos;		

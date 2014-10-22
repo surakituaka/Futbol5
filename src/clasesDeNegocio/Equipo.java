@@ -1,39 +1,49 @@
 package clasesDeNegocio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.IndexColumn;
 
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "T_EQUIPO")
-public class Equipo {
+public class Equipo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 866587641584392083L;
+
 	@Id
 	@SequenceGenerator(name="secuencia_idEquipo", sequenceName="seq4", allocationSize = 1, initialValue = 1000)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idEquipo")
 	@Column(name = "EQUIPO_ID", nullable = false)
 	private Long id;
 	
+	@Id
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	//@JoinColumns( {
+       // @JoinColumn(name = "EQUIPO_ID", referencedColumnName = "EQUIPO_ID"),
+        @JoinColumn(name = "PARTIDO_ID", referencedColumnName = "PARTIDO_ID")
+	//})
+	private Partido partido;
+	
 	@Column(name = "EQUIPO_NOMBRE", length = 20, nullable = true)
-	public String nombre;
+	public String nombre;	//TODO le agregue este atributo.
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@IndexColumn(name="IDX")
 	private List<Jugador>jugadores = new ArrayList<Jugador>();
 
+	public Equipo(){}
+	public Equipo(Partido match){
+		partido = match;
+	}
+	
 	public List<Jugador> getJugadores() { return jugadores;	}
 	public void setJugadores(List<Jugador> jugadores) { this.jugadores = jugadores;	}
 	public void addJugador(Jugador player){ jugadores.add(player); }

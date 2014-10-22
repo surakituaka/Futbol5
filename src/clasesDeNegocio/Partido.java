@@ -47,13 +47,12 @@ public class Partido implements Serializable{
 	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "EQUIPO_ID_1", nullable = false)
-	private Equipo equipo1 = new Equipo();
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Equipo> equipos;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "EQUIPO_ID_2", nullable = false)
-	private Equipo equipo2 = new Equipo();
+	//@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)	
+	//@JoinColumn(name = "EQUIPO_ID_2", nullable = false)
+	//private Equipo equipo2 = new Equipo(this);
 	
 	@Transient
 	private IMensajero mensajero;
@@ -123,20 +122,23 @@ public class Partido implements Serializable{
 		this.mensajero = mensajero;
 	}
 	
-	public Equipo getEquipo1() {
-		return equipo1;
+	public List<Equipo> getEquipos() {
+		return equipos;
 	}
-
-	public void setEquipo1(Equipo equipo1) {
-		this.equipo1 = equipo1;
+	public void setEquipos(List<Equipo> equipos) {
+		this.equipos = equipos;
 	}
-
-	public Equipo getEquipo2() {
-		return equipo2;
+	public void inicializarEquipos(){
+		equipos = new ArrayList<Equipo>(2);
+		equipos.add(new Equipo(this));
+		equipos.add(new Equipo(this));
 	}
-
-	public void setEquipo2(Equipo equipo2) {
-		this.equipo2 = equipo2;
+	
+	public Equipo getEquipo1(){
+		return equipos.get(0);
+	}
+	public Equipo getEquipo2(){
+		return equipos.get(1);
 	}
 	
 	public String getEstado() {
