@@ -59,7 +59,6 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		        global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Datos Personales");
 		setBounds(100, 100, 291, 400);

@@ -60,7 +60,6 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 		        global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Confirmar Partidos");
 		setBounds(100, 100, 318, 308);

@@ -12,6 +12,8 @@ import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Jugador_DatosPersonales extends VentanaTheGrid {
 	private static final long serialVersionUID = -7377006624212654507L;
@@ -55,7 +57,6 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		        global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Datos Personales");
 		setBounds(100, 100, 318, 344);
@@ -161,9 +162,24 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		setJMenuBar(menuBar);
 		
 		JMenu mnPenalizaciones = new JMenu("Penalizaciones");
-		menuBar.add(mnPenalizaciones);
+		mnPenalizaciones.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//Penalizaciones PopUp
+				Jugador_Penalizaciones ventana = new Jugador_Penalizaciones(new GlobalParameters(global, global.jugador_seleccionado, yo));
+				habilitarPantalla(ventana);
+			}
+		});
+	menuBar.add(mnPenalizaciones);
 		
-		JMenu mnCalificaciones = new JMenu("Calificaciones");
+		JMenu mnCalificaciones = new JMenu("Calificaciones Realizadas");
+		mnCalificaciones.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Jugador_PopUpCalificacionesRealizadas ventana = new Jugador_PopUpCalificacionesRealizadas(new GlobalParameters(global, global.jugador_seleccionado, yo));
+				habilitarPantalla(ventana);
+			}
+		});
 		menuBar.add(mnCalificaciones);
         calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -215,5 +231,10 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		if(pass_1.equals(pass_2))
 			return pass_1;
 		return null;
+	}
+	
+	public void habilitarPantalla(VentanaTheGrid ventana) {
+		ventana.setVisible(true);
+		this.setEnabled(false);
 	}
 }
