@@ -6,6 +6,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -16,6 +17,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JPanel;
 
 import clasesDeNegocio.Penalizacion;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ScrollPaneConstants;
+
 
 public class Visualizacion_Jugadores extends VentanaTheGrid {
 	//Componentes no cambiantes
@@ -55,7 +59,6 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		        global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Datos Personales");
 		setBounds(100, 100, 291, 400);
@@ -104,14 +107,40 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		});
 		
 		//Creemos la tabla de Penalizaciones
-		String[] columnas = {"Fecha", "Hora", "Motivo"};
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 176, 265, 151);
 		getContentPane().add(panel);
-		table = new JTable(obtenerPenalizaciones(), columnas);
+		//table = new JTable(obtenerPenalizaciones(), columnas);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+				obtenerPenalizaciones(),
+			new String[] {
+				"Fecha", "Hora", "Motivo"
+			}
+		) {
+			private static final long serialVersionUID = 1L;
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(54);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(120);
+		table.setCellSelectionEnabled(true);
 		table.setRowSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setPreferredScrollableViewportSize(new Dimension(265,100));
+		table.setPreferredScrollableViewportSize(new Dimension(240,100));
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		panel.add(scrollPane);
@@ -131,12 +160,14 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		if(global.jugador_seleccionado != null) {
 			
 			lblNombre.setText(gen_nombre + global.jugador_seleccionado.getNombre() + " " 	+ global.jugador_seleccionado.getApellido());
+			lblNombre.setForeground(colorJugador(global.jugador_seleccionado)); //Actualiza el color del nombre segun el jugador
 			lblHandicap.setText(gen_handicap + global.jugador_seleccionado.getHandicap().toString());
 			if(global.jugador_seleccionado.getFecha_nacimiento() != null)
 				lblFecha.setText(gen_fecha + formato_fecha.format(global.jugador_seleccionado.getFecha_nacimiento()));
 			lblPartidosJugados.setText(gen_partidos + global.jugador_seleccionado.getPartidos_jugados().size());		
 			//Promedios
-			
+			lblPromedioUltimo.setText(gen_promedioUltimo + global.jugador_seleccionado.promedioUltimoPartido());
+			lblPromedioTodos.setText(gen_promedioTodos + global.jugador_seleccionado.promedioGeneral());
 		}
 	}
 }

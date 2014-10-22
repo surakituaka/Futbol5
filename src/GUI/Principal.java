@@ -4,8 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 
@@ -22,7 +22,6 @@ import java.awt.event.MouseEvent;
 import clasesDeNegocio.*;
 import clasesManejadoras.*;
 
-
 public class Principal extends VentanaTheGrid {
 	private static final long serialVersionUID = 7554719727131540049L;
 	
@@ -31,25 +30,27 @@ public class Principal extends VentanaTheGrid {
 	
 	//Componentes Modificables
 	private JButton btnAcceder;
-	private JComboBox<String> comboUsuarios;
+	//private JComboBox<String> comboUsuarios;
+	private JTextField campoUsuario;
 	private JPasswordField campoPassword;
 	private JLabel lblRegistrarme;
 	private JLabel lblOlvidePassword;
 	
 	//Atributos
 	private Jugador jugador_seleccionado = null;
-	private static Principal principal;
+	//private static Principal principal;
+	private static Intro_TheGrid principal;
 
 	//Lanzamos la aplicacion
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					
+				try {	
 					//new ConexionDB();
 					//CargadoDeDatos.cargarAutomaticaDB();
-					global_init = new Global();					
-					principal = new Principal();
+					//global_init = new Global();					
+					//principal = new Principal();
+					principal = new Intro_TheGrid();
 					principal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,7 +72,7 @@ public class Principal extends VentanaTheGrid {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		//Creemos la comboBox
+		/*//Creemos la comboBox
 		
 		comboUsuarios = new JComboBox<String>();
 		comboUsuarios.setBounds(10, 12, 187, 20);
@@ -79,8 +80,13 @@ public class Principal extends VentanaTheGrid {
 		for(int i=0;i<global_init.jugadores.size();i++){
 			comboUsuarios.addItem(global_init.jugadores.get(i).getUsuario());
 		}
-		comboUsuarios.addItem(global_init.administrador.getUsuario());
+		comboUsuarios.addItem(global_init.administrador.getUsuario());*/
 
+		//Creemos la Textbox
+		campoUsuario = new JTextField();
+		campoUsuario.setBounds(10, 11, 187, 20);
+		contentPane.add(campoUsuario);
+		
 		//Creemos el campo de Password
 		
 		campoPassword = new JPasswordField();
@@ -106,7 +112,7 @@ public class Principal extends VentanaTheGrid {
 		contentPane.add(lblRegistrarme);
 		contentPane.add(lblOlvidePassword);
 		
-		//Comportamiento del comboBox
+		/*//Comportamiento del comboBox
 		
 		if(comboUsuarios.getSelectedIndex() > -1)
 			jugador_seleccionado = global_init.getJugadorByUsuario((String) comboUsuarios.getSelectedItem());
@@ -115,6 +121,15 @@ public class Principal extends VentanaTheGrid {
 				String nombreUsuario = (String) comboUsuarios.getSelectedItem();	
 				jugador_seleccionado = global_init.getJugadorByUsuario(nombreUsuario);	
 			}
+		});*/
+		campoUsuario.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+				if(e.getKeyChar()==KeyEvent.VK_ENTER){
+					btnAcceder.doClick();
+				}
+			} //Como esta por interfaz hay que poner todas
+			public void keyPressed(KeyEvent e) {} //No hacemos nada
+			public void keyReleased(KeyEvent e) {} //No hacemos nada
 		});
 		
 		//Comportamiento de la Label y campo Password
@@ -139,8 +154,10 @@ public class Principal extends VentanaTheGrid {
 		lblOlvidePassword.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(comboUsuarios.getSelectedIndex() > -1){
-					Jugador jugador_perdido =  global_init.getJugadorByUsuario((String) comboUsuarios.getSelectedItem());
+				//if(comboUsuarios.getSelectedIndex() > -1){
+				if(!campoUsuario.getText().matches("")) {
+					//Jugador jugador_perdido =  global_init.getJugadorByUsuario((String) comboUsuarios.getSelectedItem());
+					Jugador jugador_perdido =  global_init.getJugadorByUsuario(campoUsuario.getText());
 					global_init.administrador.getMensajero().enviar_mensaje(global_init.administrador.getEmail(),jugador_perdido.getEmail() , "Buen dia " + jugador_perdido.getNombre()+"\n" + "Su usuario es "+jugador_perdido.getUsuario()+" y su contrase\u00F1a es: "+jugador_perdido.getPassword());
 					JOptionPane.showMessageDialog(null, "Se ha enviado un email con sus datos. Por favor revise su correo.", "Olvide mi Contrase\u00F1a", JOptionPane.PLAIN_MESSAGE);					
 				}
@@ -148,35 +165,51 @@ public class Principal extends VentanaTheGrid {
 		});
 		
 		//Comportamiento del boton
-			
+		btnAcceder.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) {
+				if(e.getKeyChar()==KeyEvent.VK_ENTER){
+					btnAcceder.doClick();
+				}
+			} //Como esta por interfaz hay que poner todas
+			public void keyPressed(KeyEvent e) {} //No hacemos nada
+			public void keyReleased(KeyEvent e) {} //No hacemos nada
+		});
+		
 		btnAcceder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {		
-				if(comboUsuarios.getSelectedIndex() < 0){
-					JOptionPane.showMessageDialog(null, "Seleccione un Usuario.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
+				//if(comboUsuarios.getSelectedIndex() < 0){
+				if(campoUsuario.getText().matches("")) {
+					JOptionPane.showMessageDialog(null, "Ingrese un Usuario por favor.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
 					return;
 				}
 				String password = new String(campoPassword.getPassword());
-				//TODO: Implementar validacion de password
-				if(global_init.administrador.getUsuario().equals((String) comboUsuarios.getSelectedItem())){
+				//TODO: Implementar cifrado de password
+				//if(global_init.administrador.getUsuario().equals((String) comboUsuarios.getSelectedItem())){
+				if(global_init.administrador.getUsuario().equals(campoUsuario.getText())) {
 					if(!chequearPassword(global_init.administrador,password)){
 						JOptionPane.showMessageDialog(null, "Password Incorrecto, intente nuevamente.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
 						return;
 					}						
-					MainAdmin pantalla_administrador = new MainAdmin(new GlobalParameters(global_init, null, principal));
+					MainAdmin pantalla_administrador = new MainAdmin(new GlobalParameters(global_init, null, yo));
 					habilitarPantalla(pantalla_administrador);
 				}
 				else {
-					if(!chequearPassword(jugador_seleccionado,password)){
-						JOptionPane.showMessageDialog(null, "Password Incorrecto, intente nuevamente.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
-						return;
-					}	
-					MainJugador main_jugador = new MainJugador(new GlobalParameters(global_init, jugador_seleccionado, principal));
-					habilitarPantalla(main_jugador);			
+					jugador_seleccionado = global_init.getJugadorByUsuario(campoUsuario.getText());
+					if(jugador_seleccionado != null) {
+						if(!chequearPassword(jugador_seleccionado,password)){
+							JOptionPane.showMessageDialog(null, "Password Incorrecto, intente nuevamente.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
+							return;
+						}	
+						MainJugador main_jugador = new MainJugador(new GlobalParameters(global_init, jugador_seleccionado, yo));
+						habilitarPantalla(main_jugador);	
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Usuario Incorrecto, intente nuevamente.", "Error al Acceder", JOptionPane.ERROR_MESSAGE);					
 				}
 			}
 		});
 	}
-	//TODO: Hacer que cada vez que salga de admin refresque la combo
+
 	public boolean chequearPassword(Usuario usuario, String password) { //Recibe un usuario para que sirva para admin y jugador
 		campoPassword.setText("");
 		if(usuario.getPassword().matches(password))
@@ -184,10 +217,10 @@ public class Principal extends VentanaTheGrid {
 		return false;
 	}
 	public void refreshCombo() {
-		comboUsuarios.removeAllItems();
+		/*comboUsuarios.removeAllItems();
 		for(int i=0;i < global_init.jugadores.size();i++)
 			comboUsuarios.addItem(global_init.jugadores.get(i).getUsuario());
-		comboUsuarios.addItem(global_init.administrador.getUsuario());
+		comboUsuarios.addItem(global_init.administrador.getUsuario());*/
 	}	
 }
 

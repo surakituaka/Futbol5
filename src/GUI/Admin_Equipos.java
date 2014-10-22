@@ -19,12 +19,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
 
 import auxiliares.CriterioRenderer;
-import clasesDeNegocio.CriterioOrden;
-import clasesDeNegocio.IGeneradorEquipos;
-import clasesDeNegocio.Jugador;
-import clasesDeNegocio.Partido;
-import clasesDeNegocio.Promedio;
-
+import clasesDeNegocio.*;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;

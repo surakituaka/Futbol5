@@ -266,7 +266,7 @@ public class Jugador extends Usuario{
 	public List<Calificacion> getCalificacionesByPartido(Partido partido) {
 		List<Calificacion> calificaciones = new ArrayList<Calificacion>();
 		for(int i=0;i< this.getCalificaciones().size();i++){
-			if(this.getCalificaciones().get(i).getPartido().getId().equals(partido.getId()))
+			if(this.getCalificaciones().get(i).getPartido().getPartido_nombre().equals(partido.getPartido_nombre()))
 				calificaciones.add(this.getCalificaciones().get(i));
 		}
 		return calificaciones;
@@ -291,5 +291,46 @@ public class Jugador extends Usuario{
 			if(amigos.get(i).concuerdoCon(amigo))
 				return true;
 		return false;
+	}
+	
+	public boolean imBlue()
+	{
+		if(this.getHandicap() > 8)
+			return true;
+		else
+			return false;
+	}
+	public Partido getUltimoPartidoJugado()
+	{
+		Partido partido_base = null;
+		if(inscripciones.size() > 0)
+		{
+			for(int i = 0; i < inscripciones.size(); i++)
+			{
+				if(inscripciones.get(i).getPartido_inscripto().estaConfirmado())
+					if(partido_base == null)
+						partido_base = inscripciones.get(i).getPartido_inscripto();
+					else
+						if(inscripciones.get(i).getPartido_inscripto().getFecha().after(partido_base.getFecha()))
+							partido_base = inscripciones.get(i).getPartido_inscripto();	
+			}		
+		}
+		return partido_base;
+	}
+	
+	public int promedioUltimoPartido() {
+		int promedio = 0;
+		Partido ultimoPartido = getUltimoPartidoJugado();
+		if(ultimoPartido != null)
+			for(int i = 0; i < calificaciones.size(); i++)
+				if(calificaciones.get(i).getPartido().getId().equals(ultimoPartido.getId()))
+					promedio += calificaciones.get(i).getCalificacion();
+		return promedio;
+	}
+	public int promedioGeneral(){
+		int promedio = 0;
+		for(int i = 0; i< calificaciones.size(); i++)
+			promedio += calificaciones.get(i).getCalificacion();		
+		return promedio;
 	}
 }

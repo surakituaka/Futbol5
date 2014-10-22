@@ -45,7 +45,6 @@ public class Admin_Jugadores extends VentanaTheGrid {
 		        global.pantalla_anterior.setVisible(true); 
 		    }
 		});
-		setAlwaysOnTop(true);
 		setResizable(false);
 		setTitle("Datos Personales");
 		setBounds(100, 100, 318, 320);
@@ -154,7 +153,7 @@ public class Admin_Jugadores extends VentanaTheGrid {
 					if(!campoEmail.getText().equals(jugador.getEmail()))
 						jugador.setEmail(campoEmail.getText());//En alguna iteracion posterior se validara el formato
 					jugador.setHandicap((Integer) handicap.getSelectedItem());
-					JOptionPane.showMessageDialog(null, "SE han guardado los datos.", "Datos Guardados", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Se han guardado los datos.", "Datos Guardados", JOptionPane.PLAIN_MESSAGE);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Elija un jugador valido.", "Error Guardado", JOptionPane.ERROR_MESSAGE);
@@ -168,8 +167,11 @@ public class Admin_Jugadores extends VentanaTheGrid {
 			String id_usuario = (String) comboUsuarios.getSelectedItem();
 			Jugador jugador = global.getJugadorByUsuario(id_usuario);
 			campoNombre.setText(jugador.getNombre());
+			campoNombre.setForeground(this.colorJugador(jugador));
 			campoApellido.setText(jugador.getApellido());
+			campoApellido.setForeground(this.colorJugador(jugador));
 			campoEmail.setText(jugador.getEmail());
+			campoEmail.setForeground(this.colorJugador(jugador));
 			handicap.setSelectedIndex(jugador.getHandicap() -1);
 			for(int i=0;i<jugador.getPenalizaciones().size();i++){
 				modelo_lista.addElement(jugador.getPenalizaciones().get(i));

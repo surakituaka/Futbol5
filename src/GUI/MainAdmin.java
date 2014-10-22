@@ -25,6 +25,7 @@ public class MainAdmin extends VentanaTheGrid {
 	private JButton btnGestionJugadores;
 	private JButton btnCerrarSesion;
 	private JButton btnPropuestas;
+	private JButton btnFiltrarJugadores;
 	
 	//Constructor
 	public MainAdmin(GlobalParameters caller) {
@@ -36,7 +37,7 @@ public class MainAdmin extends VentanaTheGrid {
 		setResizable(false);
 		setTitle("The Grid");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 292, 307);
+		setBounds(100, 100, 292, 347);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -46,15 +47,15 @@ public class MainAdmin extends VentanaTheGrid {
 		
 		btnPartidos = new JButton("Partidos");
 		btnConfirmacion = new JButton("Confirmacion");
-		btnGestionJugadores = new JButton("Jugadores");
+		btnGestionJugadores = new JButton("Editar Jugadores");
 		btnCerrarSesion = new JButton("Cerrar Sesi\u00F3n");
 		btnPropuestas = new JButton("Propuestas de Jugadores");
 
 		btnPartidos.setBounds(48, 75, 178, 29);
 		btnConfirmacion.setBounds(48, 115, 178, 29);
 		btnGestionJugadores.setBounds(48, 155, 178, 29);
-		btnCerrarSesion.setBounds(48, 235, 178, 29);
-		btnPropuestas.setBounds(48, 195, 178, 29);
+		btnCerrarSesion.setBounds(48, 275, 178, 32);
+		btnPropuestas.setBounds(48, 235, 178, 29);
 
 		contentPane.add(btnPartidos);
 		contentPane.add(btnConfirmacion);
@@ -71,6 +72,16 @@ public class MainAdmin extends VentanaTheGrid {
 		titulo.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		titulo.setBounds(10, 11, 272, 53);
 		contentPane.add(titulo);
+		
+		btnFiltrarJugadores = new JButton("Filtrar Jugadores");
+		btnFiltrarJugadores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Busqueda_Jugadores pantalla_jugadores = new Busqueda_Jugadores(new GlobalParameters(global, null, yo));
+				habilitarPantalla(pantalla_jugadores);
+			}
+		});
+		btnFiltrarJugadores.setBounds(48, 195, 178, 29);
+		contentPane.add(btnFiltrarJugadores);
 		
 		//Comportamiento de los botones
 
