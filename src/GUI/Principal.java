@@ -48,10 +48,9 @@ public class Principal extends VentanaTheGrid {
 					
 					//new ConexionDB();
 					//CargadoDeDatos.cargarAutomaticaDB();
-					pruebas test = new pruebas();
-					//global_init = new Global();					
-					//principal = new Principal();
-					//principal.setVisible(true);
+					global_init = new Global();					
+					principal = new Principal();
+					principal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
