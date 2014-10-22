@@ -6,6 +6,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -16,6 +17,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JPanel;
 
 import clasesDeNegocio.Penalizacion;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ScrollPaneConstants;
+
 
 public class Visualizacion_Jugadores extends VentanaTheGrid {
 	//Componentes no cambiantes
@@ -104,14 +108,40 @@ public class Visualizacion_Jugadores extends VentanaTheGrid {
 		});
 		
 		//Creemos la tabla de Penalizaciones
-		String[] columnas = {"Fecha", "Hora", "Motivo"};
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 176, 265, 151);
 		getContentPane().add(panel);
-		table = new JTable(obtenerPenalizaciones(), columnas);
+		//table = new JTable(obtenerPenalizaciones(), columnas);
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+				obtenerPenalizaciones(),
+			new String[] {
+				"Fecha", "Hora", "Motivo"
+			}
+		) {
+			private static final long serialVersionUID = 1L;
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(54);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(120);
+		table.setCellSelectionEnabled(true);
 		table.setRowSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setPreferredScrollableViewportSize(new Dimension(265,100));
+		table.setPreferredScrollableViewportSize(new Dimension(240,100));
 		table.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		panel.add(scrollPane);

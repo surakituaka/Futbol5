@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
-import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +30,6 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 	
 	private JButton btnGuardar;
 	private JButton btnCancelar;
-	private JButton btnPenalizaciones;
 	
 	private JTextField campoNombre;
 	private JTextField campoNacimiento;
@@ -64,7 +62,7 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		getContentPane().setLayout(null);		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(10, 180, 292, 91);
+		panel.setBounds(10, 157, 292, 91);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -72,15 +70,12 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 
 		btnGuardar = new JButton("Guardar");
 		btnCancelar = new JButton("Cancelar");
-		btnPenalizaciones = new JButton("Penalizaciones");
 
-		btnGuardar.setBounds(10, 282, 89, 23);
-		btnCancelar.setBounds(212, 282, 89, 23);
-		btnPenalizaciones.setBounds(163, 149, 139, 20);
+		btnGuardar.setBounds(10, 259, 89, 23);
+		btnCancelar.setBounds(212, 259, 89, 23);
 
 		getContentPane().add(btnGuardar);
 		getContentPane().add(btnCancelar);
-		getContentPane().add(btnPenalizaciones);
 		
 		//Creemos los campos de texto
 		
@@ -106,10 +101,10 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		campoNacimiento.setColumns(10);
 		campoUsuario.setColumns(10);
 
-		campoNombre.setBounds(163, 22, 139, 20);
-		campoApellido.setBounds(163, 47, 139, 20);
-		campoEmail.setBounds(163, 72, 139, 20);
-		campoNacimiento.setBounds(163, 97, 139, 20);
+		campoNombre.setBounds(163, 11, 139, 20);
+		campoApellido.setBounds(163, 36, 139, 20);
+		campoEmail.setBounds(163, 61, 139, 20);
+		campoNacimiento.setBounds(163, 92, 139, 20);
 		campoUsuario.setBounds(143, 8, 139, 20);
 
 		getContentPane().add(campoNombre);
@@ -131,10 +126,10 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		lblPasswordConfirmacion = new JLabel("Repita Contrase\u00F1a");
 
 		
-		lblNombre.setBounds(10, 25, 46, 14);
-		lblApellido.setBounds(10, 50, 126, 14);
-		lblEmail.setBounds(10, 75, 46, 14);
-		lblNacimiento.setBounds(10, 100, 126, 14);
+		lblNombre.setBounds(10, 14, 46, 14);
+		lblApellido.setBounds(10, 39, 126, 14);
+		lblEmail.setBounds(10, 64, 46, 14);
+		lblNacimiento.setBounds(10, 95, 126, 14);
 		lblUsuario.setBounds(10, 11, 93, 14);
 		lblPassword.setBounds(10, 36, 126, 14);
 		lblPasswordConfirmacion.setBounds(10, 61, 126, 14);
@@ -159,8 +154,17 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		campoUsuario.setText(global.jugador_seleccionado.getUsuario());
 		
 		calendario = new JCalendarButton();
-		calendario.setBounds(256, 117, 46, 23);
+		calendario.setBounds(163, 123, 139, 23);
 		getContentPane().add(calendario);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnPenalizaciones = new JMenu("Penalizaciones");
+		menuBar.add(mnPenalizaciones);
+		
+		JMenu mnCalificaciones = new JMenu("Calificaciones");
+		menuBar.add(mnCalificaciones);
         calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 if (evt.getNewValue() instanceof Date)
@@ -200,12 +204,6 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				terminate();
-			}
-		});
-		
-		btnPenalizaciones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
 			}
 		});
 		

@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
@@ -24,7 +22,6 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.SwingConstants;
@@ -209,13 +206,38 @@ public class Busqueda_Jugadores extends VentanaTheGrid {
 			private static final long serialVersionUID = 1L;
 			public boolean isCellEditable(int row, int column) { return false;}
 		};
+		table.setCellSelectionEnabled(true);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Usuario", "Nombre", "Handicap", "Promedio"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, Integer.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(0).setPreferredWidth(78);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(1).setPreferredWidth(120);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(54);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.getColumnModel().getColumn(3).setPreferredWidth(54);
 		TableCellRenderer base =  table.getDefaultRenderer(String.class);
-		TableCellRenderer nuevo_renderer = new RenderizarConAzul(yo,base);			
-		((DefaultTableModel) table.getModel()).addColumn("Usuario");
-		((DefaultTableModel) table.getModel()).addColumn("Nombre");
-		table.getColumnModel().getColumn(1).setCellRenderer(nuevo_renderer);
-		((DefaultTableModel) table.getModel()).addColumn("Handicap");
-		((DefaultTableModel) table.getModel()).addColumn("Promedio");		
+		TableCellRenderer nuevo_renderer = new RenderizarConAzul(yo,base);	
+		table.setDefaultRenderer(String.class, nuevo_renderer);
 		table.setRowSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setPreferredScrollableViewportSize(new Dimension(440,100));

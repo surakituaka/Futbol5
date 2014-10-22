@@ -87,18 +87,20 @@ public class Global {
 				jugadores.get(i).inscribirse_a(partido_criticas, new Standar());
 			}
 		}
-		Penalizacion penalizacion_prueba = new Penalizacion();
-		penalizacion_prueba.setJugador(jugadores.get(0));
-		penalizacion_prueba.setMotivo("Por Puto");
-		Date fecha_1 = new Date();
-		try {
-			fecha_1 = formato_fecha.parse("15/10/14");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i = 0; i < 7; i++) {
+			Penalizacion penalizacion_prueba = new Penalizacion();
+			penalizacion_prueba.setJugador(jugadores.get(0));
+			penalizacion_prueba.setMotivo("Prueba Largaaaaaaaaaaaaaaa");
+			Date fecha_1 = new Date();
+			try {
+				fecha_1 = formato_fecha.parse("15/10/14");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			penalizacion_prueba.setFecha(fecha_1);
+			jugadores.get(0).agregar_penalizacion(penalizacion_prueba);
 		}
-		penalizacion_prueba.setFecha(fecha_1);
-		jugadores.get(0).agregar_penalizacion(penalizacion_prueba);
 		//Seteamos CRITIAS
 		CriterioOrden[] criterios_partido_prueba = new CriterioOrden[criterios.size()];
 		administrador.organizar_equipo(partido_criticas, criterios.toArray(criterios_partido_prueba));
