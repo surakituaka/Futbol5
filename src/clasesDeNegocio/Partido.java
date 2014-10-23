@@ -64,6 +64,7 @@ public class Partido implements Serializable{
 		
 	public Partido(){
 		super();
+		inicializarEquipos();
 	}
 	
 	public Long getId() {
@@ -84,6 +85,7 @@ public class Partido implements Serializable{
 
 	public Partido(IMensajero emailInterface){
 		setMensajero(emailInterface);
+		inicializarEquipos();
 	}
 	
 	@Deprecated
