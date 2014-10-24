@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.Session;
 
+import clasesDeNegocio.Admin;
 import clasesDeNegocio.Calificacion;
 import clasesDeNegocio.IEstadoEquipo;
 import clasesDeNegocio.Jugador;
@@ -65,6 +66,21 @@ public final class ConexionDB {
 			e.printStackTrace();
 		}
 	}	
+	
+	@SuppressWarnings("unchecked")
+	public static Admin noListaAdmin() {
+		
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			List<Admin> result = (List<Admin>) session.createQuery("from Admin as admin").list();
+			tx.commit();
+			session.close();
+			return result.get(0);
+		} catch (HibernateException e) {
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public static List<Jugador> listaJugadores() {

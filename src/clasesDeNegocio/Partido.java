@@ -1,5 +1,7 @@
 package clasesDeNegocio;
 
+import static org.mockito.Mockito.mock;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,7 @@ import org.hibernate.annotations.IndexColumn;
 
 import clasesDeNegocio.OrdenadorJugadoresTipo;
 import ServiciosExternos.IMensajero;
+import ServiciosExternos.MockMensajero;
 
 @SuppressWarnings({ "deprecation", "unused" })
 @Entity
@@ -65,6 +68,7 @@ public class Partido implements Serializable{
 	public Partido(){
 		super();
 		inicializarEquipos();
+		setMensajero(new MockMensajero());
 	}
 	
 	public Long getId() {

@@ -26,13 +26,15 @@ public class Global {
 	
 	public Global(){
 		
+		/*
 		//Cargamos al Admin.
 		administrador = new Admin();
 		administrador.setUsuario("Admin");
 		administrador.setEmail("system@thegrid.com");
 		administrador.setMensajero(new MockMensajero());
 		administrador.setPassword("TheGrid");
-		
+		*/
+		administrador = ConexionDB.noListaAdmin();
 			
 		//Creamos los criterios de ordenamiento
 		criterios.add(new Handicap());
