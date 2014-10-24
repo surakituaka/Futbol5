@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 public class Penalizacion {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idPenalizacion", sequenceName="seq8", allocationSize = 1, initialValue = 1000)
+	@SequenceGenerator(name="secuencia_idPenalizacion", sequenceName="seq8", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPenalizacion")
 	@Column(name = "PENALIZACION_ID", nullable = false)
 	private Long id;

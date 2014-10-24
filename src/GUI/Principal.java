@@ -46,8 +46,8 @@ public class Principal extends VentanaTheGrid {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {	
-					//new ConexionDB();
-					//CargadoDeDatos.cargarAutomaticaDB();
+					new ConexionDB();
+					//CargadoDeDatos.cargarAutomaticaDB();	//CARGA LOS DATOS DE PRUEBA EN LA DB
 					//global_init = new Global();					
 					//principal = new Principal();
 					principal = new Intro_TheGrid();

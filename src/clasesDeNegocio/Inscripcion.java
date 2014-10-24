@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Inscripcion {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idInscripcion", sequenceName="seq5", allocationSize = 1, initialValue = 1000)
+	@SequenceGenerator(name="secuencia_idInscripcion", sequenceName="seq5", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idInscripcion")
 	@Column(name = "INSCRIPCION_ID", nullable = false)
 	private long id;	//TODO Cambiar la DB para añadir esta columna
@@ -15,15 +15,15 @@ public class Inscripcion {
 	//@Column(name = "INSCRIPCION_EQUIPO", nullable = true)
 	//public int equipo; 		//TODO Atributo agregado, para saber a que equipo pertenece el inscripto.
 		
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido_inscripto;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador_inscripto;
 
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	

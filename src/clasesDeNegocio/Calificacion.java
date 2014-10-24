@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Calificacion {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idCalificacion", sequenceName="seq3", allocationSize = 1, initialValue = 1000)
+	@SequenceGenerator(name="secuencia_idCalificacion", sequenceName="seq3", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idCalificacion")
 	@Column(name = "CALIFICACION_ID", nullable = false)
 	private Long id;	//TODO Agregar dato en tabla.	
@@ -24,15 +24,15 @@ public class Calificacion {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADOR", nullable = false)
 	private Jugador calificador;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = false)
 	private Jugador calificado;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido;
 	

@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import org.jbundle.thin.base.screen.jcalendarbutton.JCalendarButton;
 
 import clasesDeNegocio.Jugador;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public abstract class VentanaTheGrid extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,7 @@ public abstract class VentanaTheGrid extends JFrame {
 	public VentanaTheGrid(){
 		super();
 		yo = this;
+		getContentPane().setLayout(null);
 	}
 	
 	public void terminate(){

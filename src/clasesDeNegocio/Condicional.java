@@ -35,6 +35,10 @@ public class Condicional implements IModalidad{
 		this.condicion = condicion;
 	}
 	
+	public Condicional(){
+		super();
+		setCondicion("Condicion Estandar");
+	}
 	
 	public Condicional(String condicion){
 		

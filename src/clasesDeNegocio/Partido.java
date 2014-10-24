@@ -25,7 +25,7 @@ public class Partido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idPartido", sequenceName="seq7", allocationSize = 1, initialValue = 100)
+	@SequenceGenerator(name="secuencia_idPartido", sequenceName="seq7", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPartido")
 	@Column(name = "PARTIDO_ID", nullable = false)
 	private long id;	//TODO Cambiar la DB para añadir esta columna
@@ -40,14 +40,14 @@ public class Partido implements Serializable{
 	@Column(name = "PARTIDO_LUGAR", length = 20, nullable = true)
 	private String lugar;	
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "ESTADO_ID", nullable = false)
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
-	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Equipo> equipos;
 	
 	//@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)	

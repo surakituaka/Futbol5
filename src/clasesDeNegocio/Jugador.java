@@ -11,7 +11,7 @@ import org.hibernate.annotations.IndexColumn;
 @Table(name = "T_JUGADOR")
 public class Jugador extends Usuario{	
 	@Id
-	@SequenceGenerator(name="secuencia_idJugador", sequenceName="seq6", allocationSize = 1, initialValue = 10000)
+	@SequenceGenerator(name="secuencia_idJugador", sequenceName="seq6", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idJugador")
 	@Column(name = "JUGADOR_ID", nullable = false)
 	private Long id;	//TODO Cambiar la DB para añadir esta columna
@@ -38,18 +38,18 @@ public class Jugador extends Usuario{
 	@Column(name = "JUGADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="JUGADOR_ID")
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	
-	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@IndexColumn(name="IDX")
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	
-	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	
-	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 	
 	@Transient
@@ -237,10 +237,18 @@ public class Jugador extends Usuario{
 	
 	public boolean estoyInscripto(Partido partido) {
 		boolean respuesta = false;
-		for(int i=0;i<getInscripciones().size();i++){
-			if(getInscripciones().get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre()))
-				respuesta = true;
+		for(Inscripcion papel : getInscripciones()){
+			Partido partidoo = papel.getPartido_inscripto(); 
+			if(partidoo.equals(partido))
+				//respuesta = true;
+				return true;
 		}
+			
+		/*for(int i=0;i<getInscripciones().size();i++){
+			if(getInscripciones().get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre()))
+				//respuesta = true;
+				return true;
+		}*/
 		return respuesta;
 	}
 	
@@ -256,10 +264,16 @@ public class Jugador extends Usuario{
 
 	public List<Partido> getPartidos_jugados() {
 		List<Partido>partidos_jugados = new ArrayList<Partido>();
+		for(Inscripcion papel : getInscripciones()){
+			Partido partidoo = papel.getPartido_inscripto(); 
+			if(partidoo.estaConfirmado())
+				partidos_jugados.add(partidoo);
+		}
+		/*
 		for(int i=0;i< this.getInscripciones().size();i++){
 			if(this.getInscripciones().get(i).getPartido_inscripto().estaConfirmado())
 				partidos_jugados.add(this.getInscripciones().get(i).getPartido_inscripto());
-		}
+		}*/
 		return partidos_jugados;
 	}
 	

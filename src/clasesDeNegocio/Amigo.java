@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Amigo {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idAmigo", sequenceName="seq2", allocationSize = 1, initialValue = 100)
+	@SequenceGenerator(name="secuencia_idAmigo", sequenceName="seq2", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idAmigo")
 	@Column(name = "AMIGO_ID", nullable = false)
 	private Long id;	//TODO Cambiar la DB para añadir esta columna

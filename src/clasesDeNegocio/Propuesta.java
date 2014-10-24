@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Propuesta {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idPropuesta", sequenceName="seq9", allocationSize = 1, initialValue = 100)
+	@SequenceGenerator(name="secuencia_idPropuesta", sequenceName="seq9", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idPropuesta")
 	@Column(name = "PROPUESTA_ID", nullable = false)
 	public Long id;
@@ -18,19 +18,19 @@ public class Propuesta {
 	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = true)
 	public String razon_rechazo;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "AMIGO_ID", nullable = false)
 	private Amigo amigo;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	

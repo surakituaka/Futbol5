@@ -19,13 +19,13 @@ public class Equipo implements Serializable{
 	private static final long serialVersionUID = 866587641584392083L;
 
 	@Id
-	@SequenceGenerator(name="secuencia_idEquipo", sequenceName="seq4", allocationSize = 1, initialValue = 1000)
+	@SequenceGenerator(name="secuencia_idEquipo", sequenceName="seq4", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idEquipo")
 	@Column(name = "EQUIPO_ID", nullable = false)
 	private Long id;
 	
 	@Id
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	//@JoinColumns( {
        // @JoinColumn(name = "EQUIPO_ID", referencedColumnName = "EQUIPO_ID"),
         @JoinColumn(name = "PARTIDO_ID", referencedColumnName = "PARTIDO_ID")
@@ -35,7 +35,7 @@ public class Equipo implements Serializable{
 	@Column(name = "EQUIPO_NOMBRE", length = 20, nullable = true)
 	public String nombre;	//TODO le agregue este atributo.
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@IndexColumn(name="IDX")
 	private List<Jugador>jugadores = new ArrayList<Jugador>();
 

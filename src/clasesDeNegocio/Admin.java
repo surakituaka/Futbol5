@@ -12,7 +12,7 @@ import ServiciosExternos.IMensajero;
 public class Admin extends Usuario {
 	
 	@Id
-	@SequenceGenerator(name="secuencia_idAdmin", sequenceName="seq1", allocationSize = 1, initialValue = 10)
+	@SequenceGenerator(name="secuencia_idAdmin", sequenceName="seq1", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="secuencia_idAdmin")
 	@Column(name = "ADMINISTADOR_ID", nullable = false)
 	private Long id;
@@ -23,7 +23,7 @@ public class Admin extends Usuario {
 	@Column(name = "ADMINISTRADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "admin";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="ADMINISTRADOR_ID")
 	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	

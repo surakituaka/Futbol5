@@ -8,8 +8,8 @@ import java.util.List;
 
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
-
 import clasesDeNegocio.*;
+import clasesManejadoras.ConexionDB;
 
 //Aca se cargan TODOS los harcodeos de la DB dinamica.
 //Esta estructura aconsejo pasarla por parametro cada vez que se cargue una nueva ventana.
@@ -31,6 +31,8 @@ public class Global {
 		administrador.setUsuario("Admin");
 		administrador.setEmail("system@thegrid.com");
 		administrador.setMensajero(new MockMensajero());
+		administrador.setPassword("TheGrid");
+		
 			
 		//Creamos los criterios de ordenamiento
 		criterios.add(new Handicap());
@@ -65,6 +67,11 @@ public class Global {
 			e.printStackTrace();
 		}
 		partidos.add(partido_criticas);	
+		
+		//Levantamos de la DB
+		//for ( Partido temporal :  ConexionDB.listaPartidos()) agregarPartido(temporal);		
+		partidos.addAll(ConexionDB.listaPartidos());
+		jugadores.addAll(ConexionDB.listaJugadores());
 		
 		//Creamos 10 amigos inscriptos a partidito
 		for(int i = 1;i<12;i++){
