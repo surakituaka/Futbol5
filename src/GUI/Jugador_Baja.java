@@ -145,13 +145,15 @@ public class Jugador_Baja extends VentanaTheGrid {
 					if(reemplazo != null) {
 						global.jugador_seleccionado.bajarse_de(partido_a_baja, reemplazo);
 						partido_a_baja.enviar_mensaje("partido "+partido_a_baja.getPartido_nombre(),global.administrador.getEmail(), "ya no hay 10 jugadores");	
+						lista_partido.removeItem(partido_a_baja.getPartido_nombre());
 					}
 					else {
 						int response = JOptionPane.showConfirmDialog(null, "Será Penalizado si no Selecciona un reemplazo", "Baja de un Partido", JOptionPane.WARNING_MESSAGE);
-						if(response == JOptionPane.OK_OPTION)
-							global.jugador_seleccionado.bajarse_de(partido_a_baja);			
+						if(response == JOptionPane.OK_OPTION) {
+							global.jugador_seleccionado.bajarse_de(partido_a_baja);		
+							lista_partido.removeItem(partido_a_baja.getPartido_nombre());
+						}
 					}
-					lista_partido.removeItem(partido_a_baja.getPartido_nombre());
 					cargarDatos();
 				}
 			}

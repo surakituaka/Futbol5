@@ -29,7 +29,7 @@ public class Admin extends Usuario {
 	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	
 	@Transient
-	private IMensajero mensajero = new MockMensajero();;
+	private IMensajero mensajero = new MockMensajero();
 	
 	public Long getId() { return id; }
 	public void setId(Long id) { this.id = id; }

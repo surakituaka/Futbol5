@@ -47,7 +47,7 @@ public class Principal extends VentanaTheGrid {
 			public void run() {
 				try {	
 					new ConexionDB();
-					CargadoDeDatos.cargarAutomaticaDB();	//CARGA LOS DATOS DE PRUEBA EN LA DB
+					//CargadoDeDatos.cargarAutomaticaDB();	//CARGA LOS DATOS DE PRUEBA EN LA DB
 					//global_init = new Global();					
 					//principal = new Principal();
 					principal = new Intro_TheGrid();
