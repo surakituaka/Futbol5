@@ -121,7 +121,7 @@ public class Admin_Jugadores extends VentanaTheGrid {
 		getContentPane().add(lista_penalizaciones);
 		lista_penalizaciones.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lista_penalizaciones.setCellRenderer(new PenalizacionesRenderer());
-		scroll_lista = new JScrollPane();
+		scroll_lista = new JScrollPane(lista_penalizaciones);
 		scroll_lista.setBounds(10, 177, 291, 69);
 		getContentPane().add(scroll_lista);
 		
