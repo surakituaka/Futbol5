@@ -10,13 +10,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clasesDeNegocio.Partido;
+import clasesManejadoras.ConexionDB;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.jbundle.thin.base.screen.jcalendarbutton.JCalendarButton;
+
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -116,6 +119,7 @@ public class Admin_NuevoPartido extends VentanaTheGrid {
 					partido_nuevo.setLugar(textLugar.getText());
 					global.agregarPartido(partido_nuevo);
 					((Admin_Partidos)global.pantalla_anterior).addPartido(partido_nuevo);
+					ConexionDB.guardar(partido_nuevo);
 					terminate();
 				}
 				else

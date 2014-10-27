@@ -5,6 +5,7 @@ import javax.swing.*;
 import auxiliares.PenalizacionesRenderer;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Penalizacion;
+import clasesManejadoras.ConexionDB;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -153,6 +154,7 @@ public class Admin_Jugadores extends VentanaTheGrid {
 					if(!campoEmail.getText().equals(jugador.getEmail()))
 						jugador.setEmail(campoEmail.getText());//En alguna iteracion posterior se validara el formato
 					jugador.setHandicap((Integer) handicap.getSelectedItem());
+					ConexionDB.guardar(jugador);
 					JOptionPane.showMessageDialog(null, "Se han guardado los datos.", "Datos Guardados", JOptionPane.PLAIN_MESSAGE);
 				}
 				else

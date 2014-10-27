@@ -18,6 +18,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import clasesDeNegocio.*;
+import clasesManejadoras.ConexionDB;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -240,6 +241,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 					partido_seleccionado.setPartido_nombre(campoId.getText());
 					partido_seleccionado.setFecha(fecha);
 					partido_seleccionado.setLugar(campoLugar.getText());
+					ConexionDB.guardar(partido_seleccionado);//Actualiza el partido en la DB
 					llenarDatosPartido();
 				}
 			}

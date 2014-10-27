@@ -14,6 +14,7 @@ import javax.swing.border.BevelBorder;
 
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
+import clasesManejadoras.ConexionDB;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -278,6 +279,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 					if(response == JOptionPane.OK_OPTION) {
 						darBajaYPenalizarNoAsistentes(partido_seleccionado);
 						partido_seleccionado.confirmar();
+						ConexionDB.guardar(partido_seleccionado);
 						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 					}				
 					return;
@@ -373,6 +375,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	}
 	private void bajaPenalizada(Jugador jugador, Partido partido){
 		jugador.bajarse_de(partido);
+		ConexionDB.guardar(jugador);
 	}
 	
 	protected void mostrarDetalleJugador(String nombre) {

@@ -3,6 +3,7 @@ package clasesManejadoras;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,8 +45,8 @@ public final class CargadoDeDatos {
         propuestas = admin.getNuevas_propuestas();
 		
 		//Actualizamos las listas
-		System.out.println("\n Guardando Administrador\n"); ConexionDB.guardar(admin);
-		//System.out.println("\n Guardando Jugadores\n"); for ( Jugador temporal : jugadores ){ ConexionDB.guardar(temporal); }
+        System.out.println("\n Guardando Administrador\n"); ConexionDB.guardar(admin);
+        //System.out.println("\n Guardando Jugadores\n"); for ( Jugador temporal : jugadores ){ ConexionDB.guardar(temporal); }
 		System.out.println("\n Guardando Partidos\n"); for ( Partido temporal : partidos ){ ConexionDB.guardar(temporal); }
 		//System.out.println("\n Guardando Inscripciones\n");for ( Inscripcion temporal : inscripciones ){ ConexionDB.guardar(temporal); }
 		//System.out.println("\n Guardando Amigos\n"); for ( Amigo temporal : amigos ){ ConexionDB.guardar(temporal); }

@@ -17,6 +17,7 @@ import clasesDeNegocio.Amigo;
 import clasesDeNegocio.IModalidad;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Propuesta;
+import clasesManejadoras.ConexionDB;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -85,10 +86,16 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 							global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);							
 							pantalla_admin.refreshComboJugadores();
 							pantalla_admin.setEnabled(true);
+							//ConexionDB.guardar(nuevo_jugador);
+							//ConexionDB.guardar(jugador_yaInscripto);
+							//ConexionDB.guardar(propuesta_seleccionada.getPartido());
+							//ConexionDB.guardar(propuesta_seleccionada);
 							dispose();
 						}
+						else JOptionPane.showMessageDialog(null, "Nombre de Usuario Inválido o Existente.", "Error", JOptionPane.ERROR_MESSAGE);
+						
 					}
-					JOptionPane.showMessageDialog(null, "Nombre de Usuario Inválido o Existente.", "Error", JOptionPane.ERROR_MESSAGE);
+					else JOptionPane.showMessageDialog(null, "Nombre de Usuario Inválido o Existente.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleccione una propuesta.", "Error", JOptionPane.WARNING_MESSAGE);
