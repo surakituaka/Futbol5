@@ -27,6 +27,8 @@ import javax.swing.JLabel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
 
+import org.jbundle.thin.base.screen.jcalendarbutton.JCalendarButton;
+
 public class Admin_Partidos extends VentanaTheGrid {
 	private static final long serialVersionUID = 6057447328239256306L;
 	
@@ -67,6 +69,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 	private String gen_EstadoActual = "Estado Actual: ";
 	private String gen_equipos = "Generar Equipos Tentativos";
 	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
+    private JCalendarButton calendario;
 	
 
 	//Constructor
@@ -113,7 +116,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 
 		lblPartido.setBounds(10, 35, 139, 14);
 		lblId.setBounds(10, 11, 137, 14);
-		lblFecha.setBounds(10, 36, 137, 14);
+		lblFecha.setBounds(10, 36, 100, 14);
 		lblLugar.setBounds(10, 61, 137, 14);
 		lblCantInscriptos.setBounds(10, 91, 287, 14);
 		lblJugadores.setBounds(10, 116, 137, 14);
@@ -131,6 +134,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		
 		campoId = new JTextField();
 		campoFecha = new JTextField();
+		campoFecha.setEditable(false);
 		campoLugar = new JTextField();
 		
 		campoId.setBounds(157, 8, 140, 20);
@@ -158,7 +162,17 @@ public class Admin_Partidos extends VentanaTheGrid {
 		getContentPane().add(btnCambiarEstado);
 		panel.add(btnGuardarCambios);
 		getContentPane().add(btnVolver);
-				
+		
+		calendario = new JCalendarButton();
+		calendario.setBounds(120, 33, 30, 20);
+		panel.add(calendario);
+		calendario.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+		    public void propertyChange(java.beans.PropertyChangeEvent evt) {
+		        if (evt.getNewValue() instanceof Date)
+		            setDate(campoFecha, calendario, (Date)evt.getNewValue());
+		    }
+		});
+		
 		//Creemos las comboBox
 
 		comboPartidos = new JComboBox<String>();

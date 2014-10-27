@@ -30,7 +30,7 @@ public class Admin_NuevoPartido extends VentanaTheGrid {
 	private JTextField textLugar;
 
 	//Atributos
-	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yy");
+	private SimpleDateFormat formato_fecha = new SimpleDateFormat("dd/MM/yyyy");
     private JCalendarButton calendario;
     private JButton btnVolver;
     private JButton btnCrear;
@@ -41,7 +41,7 @@ public class Admin_NuevoPartido extends VentanaTheGrid {
 		
 		//Creemos la JFrame principal y los paneles
 		setResizable(false);
-		setTitle("Gestionar Partidos");
+		setTitle("Nuevo Partidos");
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
