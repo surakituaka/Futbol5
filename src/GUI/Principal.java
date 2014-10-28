@@ -38,8 +38,8 @@ public class Principal extends VentanaTheGrid {
 	
 	//Atributos
 	private Jugador jugador_seleccionado = null;
-	//private static Principal principal;
-	private static Intro_TheGrid principal;
+	private static Principal principal;
+	//private static Intro_TheGrid principal;
 
 	//Lanzamos la aplicacion
 	public static void main(String[] args) {
@@ -47,10 +47,11 @@ public class Principal extends VentanaTheGrid {
 			public void run() {
 				try {	
 					new ConexionDB();
+
 					CargadoDeDatos.cargarAutomaticaDB();	//CARGA LOS DATOS DE PRUEBA EN LA DB
 					//global_init = new Global();					
 					//principal = new Principal();
-					principal = new Intro_TheGrid();
+					//principal = new Intro_TheGrid();
 					principal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
