@@ -1,5 +1,7 @@
 package clasesDeNegocio;
 
+import clasesManejadoras.ConexionDB;
+
 public class OrdenNuevoJugador implements IOrden{
 	
 	private Admin admin;
@@ -18,9 +20,9 @@ public class OrdenNuevoJugador implements IOrden{
 		propuesta.setModalidad(new Standar());
 		propuesta.setAmigo(amigo);
 		propuesta.setPartido(partido);
-		propuesta.setJugador(jugador);
-		
+		propuesta.setJugador(jugador);		
 		this.admin.agregar_propuesta(propuesta);
+		ConexionDB.guardar(propuesta);
 	}
 
 }

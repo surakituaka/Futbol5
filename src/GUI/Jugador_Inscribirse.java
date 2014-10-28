@@ -22,6 +22,7 @@ import clasesDeNegocio.IModalidad;
 import clasesDeNegocio.Inscripcion;
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
+import clasesManejadoras.ConexionDB;
 
 public class Jugador_Inscribirse extends VentanaTheGrid {
 	private static final long serialVersionUID = 4024067139818249946L;
@@ -194,13 +195,18 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 					}
 					IModalidad modalidad = global.jugador_seleccionado.getTipofromString(label_inscripcion, campoCondicion.getText());
 					Inscripcion inscripcion = global.jugador_seleccionado.inscribirse_a(partido_actual,modalidad);	
+					
 					if(inscripcion != null){
+						//ConexionDB.guardar(inscripcion);
+						ConexionDB.guardar(global.jugador_seleccionado);
+						//ConexionDB.guardar(partido_actual);						
 						if(partido_actual.validar10())
 							partido_actual.enviar_mensaje("partido "+partido_actual.getPartido_nombre(),global.administrador.getEmail(), "Hay 10 jugadores"); //Enviamos el email
 						if(recomendarAmigo.isSelected()) {
 							Jugador_RecomendacionPopup pantalla_recomendacion = new Jugador_RecomendacionPopup(new GlobalParameters(global, global.jugador_seleccionado, yo), partido_actual);
-							pantalla_recomendacion.setVisible(true);
+							pantalla_recomendacion.setVisible(true);							
 							yo.setEnabled(false);
+							
 						}
 						else 
 							terminate();

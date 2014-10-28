@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import clasesDeNegocio.*;
+import clasesManejadoras.ConexionDB;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -116,9 +117,15 @@ public class Jugador_RecomendacionPopup extends VentanaTheGrid {
 						((OrdenNuevoJugador) orden).setAdmin(global.administrador);
 						global.jugador_seleccionado.setProposicion(orden);
 						global.jugador_seleccionado.proponer_jugador(nuevo_amigo, partido);
+						global.jugador_seleccionado.agregar_amigo(nuevo_amigo);
+						//ConexionDB.guardar(nuevo_amigo);
+						//ConexionDB.guardar(global.jugador_seleccionado);
+						//ConexionDB.guardar(partido);
+						//ConexionDB.guardar(global.jugador_seleccionado.getProposicion());
 						global.pantalla_anterior.terminate();
 						dispose();
 					}
+					else
 					JOptionPane.showMessageDialog(null, "El amigo ingresado ya existe en el sistema!", "Error al Recomendar Amigo", JOptionPane.ERROR_MESSAGE);					
 				}
 				else

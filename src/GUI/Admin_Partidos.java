@@ -213,6 +213,17 @@ public class Admin_Partidos extends VentanaTheGrid {
 				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea eliminar el partido?", "Eliminar Partido", JOptionPane.YES_NO_OPTION);
 				if(response == JOptionPane.YES_OPTION)
 					if(global.eliminarPartido(partido_seleccionado)){
+						/*for(Jugador jugador : partido_seleccionado.getEquipo1().getJugadores()){
+							jugador.getCalificacionesByPartido(partido_seleccionado);
+							for(Calificacion calificacion :jugador.getCalificacionesByPartido(partido_seleccionado)) ConexionDB.borrar(calificacion);
+						}
+						for(Jugador jugador : partido_seleccionado.getEquipo2().getJugadores()){
+							jugador.getCalificacionesByPartido(partido_seleccionado);
+							for(Calificacion calificacion :jugador.getCalificacionesByPartido(partido_seleccionado)) ConexionDB.borrar(calificacion);
+						}
+						ConexionDB.borrar(partido_seleccionado.getEquipo1());
+						ConexionDB.borrar(partido_seleccionado.getEquipo2());*/
+						ConexionDB.borrar(partido_seleccionado);
 						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 						llenarDatosPartido();
 					}

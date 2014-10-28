@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import clasesManejadoras.ConexionDB;
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
 
@@ -45,7 +46,7 @@ public class Admin extends Usuario {
 
 	public List<Propuesta> getNuevas_propuestas() { return nuevas_propuestas; }
 	public void setNuevas_propuestas(List<Propuesta> nuevas_propuestas) { this.nuevas_propuestas = nuevas_propuestas; }
-	public void agregar_propuesta(Propuesta propuesta){ this.nuevas_propuestas.add(propuesta); }
+	public void agregar_propuesta(Propuesta propuesta){  this.nuevas_propuestas.add(propuesta);/*ConexionDB.guardar(this);*/ }
 	
 	public void aprobar_propuesta(Propuesta propuesta, Jugador nuevo_jugador, IModalidad modalidad){
 		propuesta.getJugador().agregar_amigo(propuesta.getAmigo());		

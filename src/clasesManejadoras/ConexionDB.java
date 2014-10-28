@@ -2,6 +2,8 @@ package clasesManejadoras;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -62,6 +64,19 @@ public final class ConexionDB {
 			session.saveOrUpdate(objeto);
 			tx.commit();
 			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void borrar(Object objeto) {
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			session.delete(objeto);
+			tx.commit();
+			session.close();
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}

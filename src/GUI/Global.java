@@ -47,7 +47,7 @@ public class Global {
 		generadores_equipo.add(new EquipoSuma11());
 
 		//Creemos 1 partido
-		Partido partidito = new Partido(administrador.getMensajero());
+		/*Partido partidito = new Partido(administrador.getMensajero());
 		partidito.setPartido_nombre("partidito");
 		partidito.setLugar("Lugano");
 		try {
@@ -56,10 +56,10 @@ public class Global {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		partidos.add(partidito);
+		partidos.add(partidito);*/
 		
 		//Partido para chequear criticas - NO USAR PARA NADA MAS
-		Partido partido_criticas = new Partido(administrador.getMensajero());
+		/*Partido partido_criticas = new Partido(administrador.getMensajero());
 		partido_criticas.setPartido_nombre("Critias");
 		partido_criticas.setLugar("Lugano");
 		try {
@@ -68,7 +68,7 @@ public class Global {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		partidos.add(partido_criticas);	
+		partidos.add(partido_criticas);	*/
 		
 		//Levantamos de la DB
 		//for ( Partido temporal :  ConexionDB.listaPartidos()) agregarPartido(temporal);		
@@ -76,7 +76,7 @@ public class Global {
 		jugadores.addAll(ConexionDB.listaJugadores());
 		
 		//Creamos 10 amigos inscriptos a partidito
-		for(int i = 1;i<12;i++){
+		/*for(int i = 1;i<12;i++){
 			String numero = Integer.toString(i);
 			Jugador amigo = new Jugador();
 			amigo.setNombre("Jugador"+numero);
@@ -114,7 +114,7 @@ public class Global {
 		CriterioOrden[] criterios_partido_prueba = new CriterioOrden[criterios.size()];
 		administrador.organizar_equipo(partido_criticas, criterios.toArray(criterios_partido_prueba));
 		administrador.dividir_equipos(partido_criticas, new EquipoParImpar());
-		administrador.confirmarPartido(partido_criticas);
+		administrador.confirmarPartido(partido_criticas);*/
 		
 	}
 	
