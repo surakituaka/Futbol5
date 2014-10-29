@@ -16,6 +16,8 @@ import clasesDeNegocio.OrdenadorJugadoresTipo;
 import clasesManejadoras.ConexionDB;
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @SuppressWarnings({ "deprecation", "unused" })
 @Entity
@@ -44,14 +46,17 @@ public class Partido implements Serializable{
 	@Column(name = "PARTIDO_LUGAR", length = 20, nullable = true)
 	private String lugar;	
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.ALL})
 	@JoinColumn(name = "ESTADO_ID", nullable = false)
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
-	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy="partido_inscripto", fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	private List<Equipo> equipos;
 	
 	//@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)	

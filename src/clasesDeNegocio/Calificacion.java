@@ -1,7 +1,8 @@
 package clasesDeNegocio;
 
 import java.util.Date;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 
 @Entity
@@ -24,15 +25,18 @@ public class Calificacion {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADOR", nullable = false)
 	private Jugador calificador;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = true)
 	private Jugador calificado;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "PARTIDO_ID", nullable = true)
 	private Partido partido;
 	

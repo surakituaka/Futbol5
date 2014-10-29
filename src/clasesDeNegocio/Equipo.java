@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.IndexColumn;
 
 @SuppressWarnings("deprecation")
@@ -25,7 +26,8 @@ public class Equipo implements Serializable{
 	private Long id;
 	
 	@Id
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	//@JoinColumns( {
        // @JoinColumn(name = "EQUIPO_ID", referencedColumnName = "EQUIPO_ID"),
         @JoinColumn(name = "PARTIDO_ID", referencedColumnName = "PARTIDO_ID")
@@ -35,7 +37,8 @@ public class Equipo implements Serializable{
 	@Column(name = "EQUIPO_NOMBRE", length = 20, nullable = true)
 	public String nombre;	//TODO le agregue este atributo.
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@IndexColumn(name="IDX")
 	private List<Jugador>jugadores = new ArrayList<Jugador>();
 

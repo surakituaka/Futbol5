@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
-import clasesManejadoras.ConexionDB;
 
 public class Jugador_Baja extends VentanaTheGrid {
 	private static final long serialVersionUID = 2710989898521557695L;

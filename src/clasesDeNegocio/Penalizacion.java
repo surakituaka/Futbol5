@@ -1,8 +1,6 @@
 package clasesDeNegocio;
 
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "T_PENALIZACION")
@@ -33,7 +33,8 @@ public class Penalizacion {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 		
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador;
 	

@@ -1,6 +1,8 @@
 package clasesDeNegocio;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "T_PROPUESTA")
@@ -18,19 +20,23 @@ public class Propuesta {
 	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = true)
 	public String razon_rechazo;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
-	@OneToOne(cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "AMIGO_ID", nullable = false)
 	private Amigo amigo;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	

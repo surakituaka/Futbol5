@@ -2,6 +2,8 @@ package clasesDeNegocio;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 @Entity
 @Table(name = "T_INSCRIPCION")
 public class Inscripcion {
@@ -15,15 +17,18 @@ public class Inscripcion {
 	//@Column(name = "INSCRIPCION_EQUIPO", nullable = true)
 	//public int equipo; 		//TODO Atributo agregado, para saber a que equipo pertenece el inscripto.
 		
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido_inscripto;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador_inscripto;
 
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	

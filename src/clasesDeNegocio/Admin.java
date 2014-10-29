@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import clasesManejadoras.ConexionDB;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
 
@@ -25,7 +26,8 @@ public class Admin extends Usuario {
 	@Column(name = "ADMINISTRADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "admin";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
+	@Cascade({CascadeType.ALL})
 	@JoinColumn(name="ADMINISTRADOR_ID")
 	private List<Propuesta>nuevas_propuestas = new ArrayList<Propuesta>();
 	

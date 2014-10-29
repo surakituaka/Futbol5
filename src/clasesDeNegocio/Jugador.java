@@ -5,7 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 
 import org.hibernate.annotations.IndexColumn;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import clasesManejadoras.ConexionDB;
 
 @SuppressWarnings("deprecation")
@@ -40,18 +41,22 @@ public class Jugador extends Usuario{
 	@Column(name = "JUGADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	@JoinColumn(name="JUGADOR_ID")
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	
-	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy = "jugador", fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	@IndexColumn(name="IDX")
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	
-	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy = "jugador_inscripto", fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	
-	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
+	@OneToMany(mappedBy = "calificador", fetch=FetchType.EAGER,orphanRemoval=true)
+	@Cascade({CascadeType.ALL})
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 	
 	@Transient

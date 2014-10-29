@@ -238,12 +238,12 @@ public class Admin_Partidos extends VentanaTheGrid {
 						ConexionDB.borrar(partido_seleccionado.getEquipo1());
 						ConexionDB.borrar(partido_seleccionado.getEquipo2());*/
 						
-						for (Inscripcion inc :partido_seleccionado.getInscripciones()){
+						//for (Inscripcion inc :partido_seleccionado.getInscripciones()){
 							//partido_seleccionado.getInscripciones().remove(inc);
-							ConexionDB.borrar(inc);
-						}
+							//ConexionDB.borrar(inc);
+						//}
 						//ConexionDB.guardar(partido_seleccionado);
-						//ConexionDB.borrar(partido_seleccionado);
+						ConexionDB.borrar(partido_seleccionado);
 						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 						llenarDatosPartido();
 					}
