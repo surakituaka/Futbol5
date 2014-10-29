@@ -188,8 +188,8 @@ public class Partido implements Serializable{
 		for(int i=0;i<inscripciones.size();i++)
 			if(this.inscripciones.get(i).getJugador_inscripto().getUsuario().matches(jugador.getUsuario()))
 			{
-				//ConexionDB.borrar(this.inscripciones.get(i));
-				return this.inscripciones.remove(i);
+				Inscripcion insc = this.inscripciones.remove(i);
+				return insc;
 			}
 				return null;
 	}

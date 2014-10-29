@@ -28,7 +28,7 @@ public class Inscripcion {
 	private Jugador jugador_inscripto;
 
 	@OneToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	@Cascade({CascadeType.ALL})
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	

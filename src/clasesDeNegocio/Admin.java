@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+
+import clasesManejadoras.ConexionDB;
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
 
@@ -51,16 +53,20 @@ public class Admin extends Usuario {
 	public void agregar_propuesta(Propuesta propuesta){  this.nuevas_propuestas.add(propuesta);/*ConexionDB.guardar(this);*/ }
 	
 	public void aprobar_propuesta(Propuesta propuesta, Jugador nuevo_jugador, IModalidad modalidad){
+		propuesta.estado_propuesta = "aprobada";
+		ConexionDB.guardar(propuesta);
 		propuesta.getJugador().agregar_amigo(propuesta.getAmigo());		
 		nuevo_jugador.agregar_amigo(new Amigo(propuesta.getJugador().getNombre(),propuesta.getJugador().getApellido(),propuesta.getJugador().getEmail()));
 		nuevo_jugador.inscribirse_a(propuesta.getPartido(), modalidad);
 	}
 	
 	public Respuesta rechazar_propuesta(Propuesta propuesta, String razon){
+		propuesta.estado_propuesta = "rechazada";
+		propuesta.razon_rechazo = razon;
+		ConexionDB.guardar(propuesta);
 		Respuesta rta = new Respuesta();
 		rta.setEsta_inscripto(false);
 		rta.setMensaje(razon);
-		this.nuevas_propuestas.remove(propuesta);
 		return rta;
 	}
 	

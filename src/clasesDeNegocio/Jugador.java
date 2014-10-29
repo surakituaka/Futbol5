@@ -203,6 +203,7 @@ public class Jugador extends Usuario{
 		for(int i=0;i<inscripciones.size();i++)
 			if(this.inscripciones.get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre())){
 				ConexionDB.borrar(this.inscripciones.get(i));
+				//ConexionDB.guardar(this);
 				return this.inscripciones.remove(i);
 			}
 		return null;

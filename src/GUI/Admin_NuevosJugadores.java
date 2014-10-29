@@ -32,7 +32,6 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 	private static final long serialVersionUID = -3585753395902584681L;
 
 	private final JPanel contentPanel = new JPanel();
-	private static MainAdmin pantalla_admin;
 	private final JButton btnAceptar;
 	private final JComboBox<String> comboJugadores;
 	private final JComboBox<String> comboInscripcion;
@@ -53,14 +52,14 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 	private JTextField nombreUsuario;
 
 
-	public Admin_NuevosJugadores(final GlobalParameters global) {
+	public Admin_NuevosJugadores(final GlobalParameters caller) {
 		setResizable(false);
 		setTitle("Gestionar Propuestas");
-		pantalla_admin = (MainAdmin) global.pantalla_anterior;
+		global = caller;
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		addWindowListener(new java.awt.event.WindowAdapter() {
 		    public void windowClosing(WindowEvent winEvt) {
-				pantalla_admin.setVisible(true);
+				global.pantalla_anterior.setVisible(true);
 		    }
 		});
 		setBounds(100, 100, 410, 365);
@@ -85,14 +84,12 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 							nuevo_jugador.agregar_amigo(nuevo_amigo);
 							global.administrador.aprobar_propuesta(propuesta_seleccionada, nuevo_jugador, modalidad);
 							global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);							
-							pantalla_admin.refreshComboJugadores();
-							pantalla_admin.setEnabled(true);
 							ConexionDB.guardar(nuevo_jugador);
 							//ConexionDB.guardar(jugador_yaInscripto);
 							//ConexionDB.guardar(propuesta_seleccionada.getPartido());
 							ConexionDB.borrar(propuesta_seleccionada.getAmigo());
 							//ConexionDB.borrar(propuesta_seleccionada);
-							dispose();
+							terminate();
 						}
 						else JOptionPane.showMessageDialog(null, "Nombre de Usuario Inválido o Existente.", "Error", JOptionPane.ERROR_MESSAGE);
 						
@@ -115,20 +112,20 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 					global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);
 					String razon = JOptionPane.showInputDialog(null, "Ingrese una Razón", "Rechazar una Propuesta", JOptionPane.PLAIN_MESSAGE);
 					global.administrador.rechazar_propuesta(propuesta_seleccionada,razon);					
-					pantalla_admin.setEnabled(true);
-					dispose();
+					terminate();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Seleccione una propuesta.", "Error", JOptionPane.WARNING_MESSAGE);
-
-
 				//TODO TERMINAR
 			}
 		});
 		
 		comboJugadores = new JComboBox<String>();
-		for(int i = 0;i < global.administrador.getNuevas_propuestas().size();i++) 
-			comboJugadores.addItem(global.administrador.getNuevas_propuestas().get(i).getAmigo().getNombre());
+		for(int i = 0;i < global.administrador.getNuevas_propuestas().size();i++) {
+
+			if(global.administrador.getNuevas_propuestas().get(i).estado_propuesta.matches("pendiente"))
+				comboJugadores.addItem(global.administrador.getNuevas_propuestas().get(i).getAmigo().getNombre());
+		}
 		
 		comboJugadores.setBounds(161, 50, 233, 20);
 		getContentPane().add(comboJugadores);
@@ -202,9 +199,11 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre_amigo = (String) comboJugadores.getSelectedItem();
 				for(int i=0;i < global.administrador.getNuevas_propuestas().size();i++){
-					Amigo amigo = global.administrador.getNuevas_propuestas().get(i).getAmigo();
-					if(amigo.getNombre().equals(nombre_amigo)) 
-						setearLabels(global.administrador, i);
+					if(global.administrador.getNuevas_propuestas().get(i).estado_propuesta.matches("pendiente")){
+						Amigo amigo = global.administrador.getNuevas_propuestas().get(i).getAmigo();
+						if(amigo.getNombre().equals(nombre_amigo)) 
+							setearLabels(global.administrador, i);
+					}
 				}
 			}
 		});

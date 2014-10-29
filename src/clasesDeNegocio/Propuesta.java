@@ -40,6 +40,10 @@ public class Propuesta {
 	@JoinColumn(name = "MODALIDAD_ID", nullable = false)
 	private IModalidad modalidad;
 	
+	public Propuesta() {
+		estado_propuesta = "pendiente";
+	}
+	
 	public Amigo getAmigo() {
 		return amigo;
 	}
