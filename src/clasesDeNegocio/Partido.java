@@ -52,7 +52,7 @@ public class Partido implements Serializable{
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
 	@OneToMany(mappedBy="partido_inscripto", fetch=FetchType.EAGER,orphanRemoval=true)
-	@Cascade({CascadeType.ALL})
+	//@Cascade({CascadeType.ALL})
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		
 	@OneToMany(fetch=FetchType.EAGER,orphanRemoval=true)

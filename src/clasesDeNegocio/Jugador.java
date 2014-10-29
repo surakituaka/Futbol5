@@ -52,11 +52,11 @@ public class Jugador extends Usuario{
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	
 	@OneToMany(mappedBy = "jugador_inscripto", fetch=FetchType.EAGER,orphanRemoval=true)
-	@Cascade({CascadeType.ALL})
+	//@Cascade({CascadeType.ALL})
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	
 	@OneToMany(mappedBy = "calificador", fetch=FetchType.EAGER,orphanRemoval=true)
-	@Cascade({CascadeType.ALL})
+	//@Cascade({CascadeType.ALL})
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 	
 	@Transient
@@ -242,7 +242,7 @@ public class Jugador extends Usuario{
 	public Calificacion calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
 		Calificacion temp = new Calificacion(this, calificado, calificacion, critica, partido,new Date());
 		this.agregar_calificacion(temp);
-		//ConexionDB.merge(temp);
+		ConexionDB.guardar(temp);
 		return temp;
 	}
 	

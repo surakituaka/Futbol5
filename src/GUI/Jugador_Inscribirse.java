@@ -197,8 +197,8 @@ public class Jugador_Inscribirse extends VentanaTheGrid {
 					Inscripcion inscripcion = global.jugador_seleccionado.inscribirse_a(partido_actual,modalidad);	
 					
 					if(inscripcion != null){
-						//ConexionDB.guardar(inscripcion);
-						ConexionDB.guardar(global.jugador_seleccionado);
+						ConexionDB.guardar(inscripcion);
+						//ConexionDB.guardar(global.jugador_seleccionado);
 						//ConexionDB.guardar(partido_actual);						
 						if(partido_actual.validar10())
 							partido_actual.enviar_mensaje("partido "+partido_actual.getPartido_nombre(),global.administrador.getEmail(), "Hay 10 jugadores"); //Enviamos el email

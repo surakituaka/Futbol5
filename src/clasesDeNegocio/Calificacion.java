@@ -26,17 +26,17 @@ public class Calificacion {
 	private Date fecha;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	//@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADOR", nullable = false)
 	private Jugador calificador;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	//@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = true)
 	private Jugador calificado;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	//@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "PARTIDO_ID", nullable = true)
 	private Partido partido;
 	

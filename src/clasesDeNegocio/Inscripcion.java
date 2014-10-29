@@ -18,12 +18,12 @@ public class Inscripcion {
 	//public int equipo; 		//TODO Atributo agregado, para saber a que equipo pertenece el inscripto.
 		
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	//@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "PARTIDO_ID", nullable = false)
 	private Partido partido_inscripto;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@Cascade({CascadeType.SAVE_UPDATE})
+	//@Cascade({CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "JUGADOR_ID", nullable = false)
 	private Jugador jugador_inscripto;
 
