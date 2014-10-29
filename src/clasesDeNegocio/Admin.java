@@ -28,6 +28,9 @@ public class Admin extends Usuario {
 	@Column(name = "ADMINISTRADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "admin";
 	
+	@Column(name = "ADMINISTRADOR_EMAIL", length = 20, nullable = false)
+	private String email = "admin@thegrid.com";
+	
 	@OneToMany(fetch=FetchType.EAGER)
 	@Cascade({CascadeType.ALL})
 	@JoinColumn(name="ADMINISTRADOR_ID")
@@ -45,6 +48,10 @@ public class Admin extends Usuario {
 	public String getPassword() { return password; }
 	public void setPassword(String password) { this.password = password; }
 
+	public String getEmail() { return email;}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public IMensajero getMensajero() { return mensajero; }
 	public void setMensajero(IMensajero mensajero) { this.mensajero = mensajero; }
 

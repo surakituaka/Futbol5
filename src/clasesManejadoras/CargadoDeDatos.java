@@ -29,7 +29,7 @@ public final class CargadoDeDatos {
 		Admin admin = new Admin();
         admin.setUsuario("TheADMIN");
         admin.setPassword("unrecheable");
-        admin.setEmail("elMejor@Ubuntu.com");
+        admin.setEmail("admin@thegrid.com");
         //List<Admin> admines = new ArrayList<Admin>();
         //admines.add(admin);
 		

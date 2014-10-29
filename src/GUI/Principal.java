@@ -159,8 +159,12 @@ public class Principal extends VentanaTheGrid {
 				if(!campoUsuario.getText().matches("")) {
 					//Jugador jugador_perdido =  global_init.getJugadorByUsuario((String) comboUsuarios.getSelectedItem());
 					Jugador jugador_perdido =  global_init.getJugadorByUsuario(campoUsuario.getText());
-					global_init.administrador.getMensajero().enviar_mensaje(global_init.administrador.getEmail(),jugador_perdido.getEmail() , "Buen dia " + jugador_perdido.getNombre()+"\n" + "Su usuario es "+jugador_perdido.getUsuario()+" y su contrase\u00F1a es: "+jugador_perdido.getPassword());
-					JOptionPane.showMessageDialog(null, "Se ha enviado un email con sus datos. Por favor revise su correo.", "Olvide mi Contrase\u00F1a", JOptionPane.PLAIN_MESSAGE);					
+					if(jugador_perdido != null){
+						global_init.administrador.getMensajero().enviar_mensaje(global_init.administrador.getEmail(),jugador_perdido.getEmail() , "Buen dia " + jugador_perdido.getNombre()+"\n" + "Su usuario es "+jugador_perdido.getUsuario()+" y su contrase\u00F1a es: "+jugador_perdido.getPassword());
+						JOptionPane.showMessageDialog(null, "Se ha enviado un email con sus datos. Por favor revise su correo.", "Olvide mi Contrase\u00F1a", JOptionPane.PLAIN_MESSAGE);					
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Usuario desconocido, no es posible recuperar password", "Error", JOptionPane.PLAIN_MESSAGE);					
 				}
 			}
 		});
