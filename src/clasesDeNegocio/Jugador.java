@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.IndexColumn;
 
+import clasesManejadoras.ConexionDB;
+
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "T_JUGADOR")
@@ -194,8 +196,10 @@ public class Jugador extends Usuario{
 
 	public Inscripcion quitar_inscripcion(Partido partido){
 		for(int i=0;i<inscripciones.size();i++)
-			if(this.inscripciones.get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre()))
+			if(this.inscripciones.get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre())){
+				//ConexionDB.borrar(this.inscripciones.get(i));
 				return this.inscripciones.remove(i);
+			}
 		return null;
 	}
 
@@ -232,6 +236,7 @@ public class Jugador extends Usuario{
 	public Calificacion calificar(Jugador calificado, Integer calificacion, String critica, Partido partido){
 		Calificacion temp = new Calificacion(this, calificado, calificacion, critica, partido,new Date());
 		this.agregar_calificacion(temp);
+		//ConexionDB.merge(temp);
 		return temp;
 	}
 	

@@ -13,6 +13,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.IndexColumn;
 
 import clasesDeNegocio.OrdenadorJugadoresTipo;
+import clasesManejadoras.ConexionDB;
 import ServiciosExternos.IMensajero;
 import ServiciosExternos.MockMensajero;
 
@@ -181,8 +182,11 @@ public class Partido implements Serializable{
 	public Inscripcion quitar_inscripcion(Jugador jugador){
 		for(int i=0;i<inscripciones.size();i++)
 			if(this.inscripciones.get(i).getJugador_inscripto().getUsuario().matches(jugador.getUsuario()))
+			{
+				//ConexionDB.borrar(this.inscripciones.get(i));
 				return this.inscripciones.remove(i);
-		return null;
+			}
+				return null;
 	}
 	
 	public String enviar_mensaje(String emisor,String receptor,String mensaje){

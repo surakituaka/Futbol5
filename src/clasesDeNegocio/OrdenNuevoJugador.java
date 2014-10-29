@@ -22,7 +22,7 @@ public class OrdenNuevoJugador implements IOrden{
 		propuesta.setPartido(partido);
 		propuesta.setJugador(jugador);		
 		this.admin.agregar_propuesta(propuesta);
-		ConexionDB.guardar(propuesta);
+		//ConexionDB.guardar(propuesta);
 	}
 
 }

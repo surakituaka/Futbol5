@@ -17,6 +17,7 @@ import java.util.List;
 
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
+import clasesManejadoras.ConexionDB;
 
 
 public class Jugador_Calificaciones extends VentanaTheGrid {
@@ -167,6 +168,8 @@ public class Jugador_Calificaciones extends VentanaTheGrid {
 				int response = JOptionPane.showConfirmDialog(null, "Una vez confirmada la Critica, no será modificable. Continuar?", "Guardar Critica", JOptionPane.WARNING_MESSAGE);
 				if(response == JOptionPane.OK_OPTION) {
 					global.jugador_seleccionado.calificar(jugador_sin_calificacion, Integer.parseInt((String) calificacion.getSelectedItem()), campoCritica.getText(), partido_seleccionado);
+					
+					//ConexionDB.merge(jugador_sin_calificacion);
 					mostrarJugadoresPendientes(partido_seleccionado);
 				}
 			}

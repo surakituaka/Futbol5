@@ -5,6 +5,8 @@ import javax.swing.border.*;
 
 import org.jbundle.thin.base.screen.jcalendarbutton.JCalendarButton;
 
+import clasesManejadoras.ConexionDB;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -213,6 +215,7 @@ public class Jugador_DatosPersonales extends VentanaTheGrid {
 					global.jugador_seleccionado.setApellido(campoApellido.getText());
 				if(!campoEmail.getText().equals(""))
 					global.jugador_seleccionado.setEmail(campoEmail.getText());//En alguna iteracion posterior se validara el formato
+				ConexionDB.guardar(global.jugador_seleccionado);
 				terminate();				
 			}
 		});

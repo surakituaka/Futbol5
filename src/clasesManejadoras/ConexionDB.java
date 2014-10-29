@@ -69,6 +69,19 @@ public final class ConexionDB {
 		}
 	}
 	
+	public static void merge(Object objeto) {
+		try {
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			//session.evict(objeto);
+			session.merge(objeto);
+			tx.commit();
+			session.close();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void borrar(Object objeto) {
 		try {
 			Session session = sessionFactory.openSession();

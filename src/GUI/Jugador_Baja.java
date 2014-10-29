@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 
 import clasesDeNegocio.Jugador;
 import clasesDeNegocio.Partido;
+import clasesManejadoras.ConexionDB;
 
 public class Jugador_Baja extends VentanaTheGrid {
 	private static final long serialVersionUID = 2710989898521557695L;
@@ -151,6 +152,7 @@ public class Jugador_Baja extends VentanaTheGrid {
 						int response = JOptionPane.showConfirmDialog(null, "Será Penalizado si no Selecciona un reemplazo", "Baja de un Partido", JOptionPane.WARNING_MESSAGE);
 						if(response == JOptionPane.OK_OPTION) {
 							global.jugador_seleccionado.bajarse_de(partido_a_baja);		
+							//ConexionDB.guardar(global.jugador_seleccionado);
 							lista_partido.removeItem(partido_a_baja.getPartido_nombre());
 						}
 					}
