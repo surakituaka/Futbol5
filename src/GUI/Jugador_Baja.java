@@ -193,7 +193,7 @@ public class Jugador_Baja extends VentanaTheGrid {
 	
 	private void actualizarLabels(Partido partido){
 		id.setText(gen_id + partido.getId());
-		fecha.setText(gen_fecha + (new SimpleDateFormat("dd-MM.yyyy")).format(partido.getFecha()));
+		fecha.setText(gen_fecha + (new SimpleDateFormat("dd/MM/yyyy")).format(partido.getFecha()));
 		lugar.setText(gen_lugar + partido.getLugar());			
 	}
 }
