@@ -18,7 +18,7 @@ public class Propuesta {
 	@Column(name = "PROPUESTA_RAZON_RECHAZO", length = 20, nullable = true)
 	public String razon_rechazo;		//TODO SE LO AGREGUE --CRISTIAN-- FALTA DARLE UTILIDAD
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
 	@JoinColumn(name = "AMIGO_ID", nullable = false)
 	private Amigo amigo;
 	

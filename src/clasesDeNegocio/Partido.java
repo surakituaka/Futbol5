@@ -48,10 +48,10 @@ public class Partido implements Serializable{
 	@JoinColumn(name = "ESTADO_ID", nullable = false)
 	private IEstadoEquipo estado = new EstadoPendiente();
 	
-	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="partido_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	private List<Equipo> equipos;
 	
 	//@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)	

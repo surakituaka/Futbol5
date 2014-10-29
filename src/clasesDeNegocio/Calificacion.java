@@ -29,11 +29,11 @@ public class Calificacion {
 	private Jugador calificador;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = false)
+	@JoinColumn(name = "JUGADOR_ID_CALIFICADO", nullable = true)
 	private Jugador calificado;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name = "PARTIDO_ID", nullable = false)
+	@JoinColumn(name = "PARTIDO_ID", nullable = true)
 	private Partido partido;
 	
 	public Long getId() {

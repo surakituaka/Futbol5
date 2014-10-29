@@ -40,18 +40,18 @@ public class Jugador extends Usuario{
 	@Column(name = "JUGADOR_PASSWORD", length = 20, nullable = false)
 	private String password = "";
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	@JoinColumn(name="JUGADOR_ID")
 	private List<Amigo> amigos = new ArrayList<Amigo>();
 	
-	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "jugador", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	@IndexColumn(name="IDX")
 	private List<Penalizacion> penalizaciones = new ArrayList<Penalizacion>();
 	
-	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "jugador_inscripto", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	
-	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "calificador", cascade=CascadeType.ALL, fetch=FetchType.EAGER,orphanRemoval=true)
 	private List<Calificacion>calificaciones = new ArrayList<Calificacion>();
 	
 	@Transient
@@ -197,7 +197,7 @@ public class Jugador extends Usuario{
 	public Inscripcion quitar_inscripcion(Partido partido){
 		for(int i=0;i<inscripciones.size();i++)
 			if(this.inscripciones.get(i).getPartido_inscripto().getPartido_nombre().equals(partido.getPartido_nombre())){
-				//ConexionDB.borrar(this.inscripciones.get(i));
+				ConexionDB.borrar(this.inscripciones.get(i));
 				return this.inscripciones.remove(i);
 			}
 		return null;

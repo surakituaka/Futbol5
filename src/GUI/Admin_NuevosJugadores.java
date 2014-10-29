@@ -78,6 +78,7 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 							nuevo_jugador.setNombre(propuesta_seleccionada.getAmigo().getNombre());
 							nuevo_jugador.setApellido(propuesta_seleccionada.getAmigo().getApellido());
 							nuevo_jugador.setEmail(propuesta_seleccionada.getAmigo().getEmail());
+							nuevo_jugador.setPassword("1234");
 							IModalidad modalidad = nuevo_jugador.getTipofromString(tipo_inscripcion_seleccionada, t_condicion.getText());
 							Jugador jugador_yaInscripto = propuesta_seleccionada.getJugador();
 							Amigo nuevo_amigo = new Amigo(jugador_yaInscripto.getNombre(),jugador_yaInscripto.getApellido(),jugador_yaInscripto.getEmail());
@@ -86,10 +87,11 @@ public class Admin_NuevosJugadores extends VentanaTheGrid {
 							global.administrador.getNuevas_propuestas().remove(propuesta_seleccionada);							
 							pantalla_admin.refreshComboJugadores();
 							pantalla_admin.setEnabled(true);
-							//ConexionDB.guardar(nuevo_jugador);
+							ConexionDB.guardar(nuevo_jugador);
 							//ConexionDB.guardar(jugador_yaInscripto);
 							//ConexionDB.guardar(propuesta_seleccionada.getPartido());
-							//ConexionDB.guardar(propuesta_seleccionada);
+							ConexionDB.borrar(propuesta_seleccionada.getAmigo());
+							//ConexionDB.borrar(propuesta_seleccionada);
 							dispose();
 						}
 						else JOptionPane.showMessageDialog(null, "Nombre de Usuario Inválido o Existente.", "Error", JOptionPane.ERROR_MESSAGE);
