@@ -279,7 +279,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 					if(response == JOptionPane.OK_OPTION) {
 						darBajaYPenalizarNoAsistentes(partido_seleccionado);
 						partido_seleccionado.confirmar();
-						ConexionDB.guardar(partido_seleccionado);
+						//ConexionDB.guardar(partido_seleccionado);
 						comboPartidos.removeItem(partido_seleccionado.getPartido_nombre());
 					}				
 					return;
@@ -375,7 +375,7 @@ public class Admin_ConfirmacionPartidos extends VentanaTheGrid {
 	}
 	private void bajaPenalizada(Jugador jugador, Partido partido){
 		jugador.bajarse_de(partido);
-		ConexionDB.guardar(jugador);
+		//ConexionDB.guardar(jugador);
 	}
 	
 	protected void mostrarDetalleJugador(String nombre) {

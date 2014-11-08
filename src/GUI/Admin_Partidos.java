@@ -260,7 +260,7 @@ public class Admin_Partidos extends VentanaTheGrid {
 		
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar los cambios?", "Guardar Partido", JOptionPane.PLAIN_MESSAGE);
+				int response = JOptionPane.showConfirmDialog(null, "Esta seguro que desea guardar los cambios?", "Guardar Partido", JOptionPane.OK_CANCEL_OPTION);
 				if(response == JOptionPane.OK_OPTION) {
 					Date fecha;
 					try {
